@@ -5,5 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :user_name, presence: true, length: { minimum: 4, maximum: 16 }
 
+  has_many :projects
+
   validates_uniqueness_of :user_name
 end
