@@ -3,6 +3,19 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_host_name => 's3-eu-west-1.amazonaws.com',
+    :path => '/:class/:attachment/:id_partition/:style/:filename',
+    :url => ':s3_domain_url',
+    :s3_permissions => 'public-read',
+    :s3_region => 'eu-west-1',
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :s3_credentials => {
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
