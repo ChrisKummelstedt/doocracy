@@ -587,6 +587,7 @@
         1,
         null,
         1,
+        null,
         null
       ],
       "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/app/helpers/application_helper.rb": [
@@ -609,20 +610,40 @@
         null,
         null,
         1,
-        6,
-        6,
-        6,
-        6,
-        6,
-        6,
-        6,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
         null,
         null,
         1,
-        0,
+        1,
         null
       ],
       "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/features/add_a_project_spec.rb": [
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
         null
       ],
       "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/features/logging_in_out_spec.rb": [
@@ -724,6 +745,9 @@
         1,
         1,
         null,
+        1,
+        1,
+        null,
         null
       ],
       "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/models/user_spec.rb": [
@@ -739,7 +763,28 @@
       ],
       "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/app/controllers/projects_controller.rb": [
         1,
+        null,
         1,
+        18,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
         null,
         null,
         null
@@ -757,7 +802,7 @@
         1,
         null,
         1,
-        6,
+        7,
         null,
         null,
         1,
@@ -766,6 +811,6 @@
         null
       ]
     },
-    "timestamp": 1465896414
+    "timestamp": 1465900626
   }
 }
