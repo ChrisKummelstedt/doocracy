@@ -1,10 +1,13 @@
 class SkillsController < ApplicationController
   def index
-    @skills = Skill.all
+    @user = current_user
+    @skills = @user.skills.all
   end
 
   def create
+    @user = current_user
     @skill = Skill.create(skill_params)
+    @user.skills << @skill
     respond_to do |format|
       format.html { redirect_to skills_path }
       format.js { }
