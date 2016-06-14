@@ -33,11 +33,8 @@ ActiveRecord::Schema.define(version: 20160614105527) do
     t.datetime "updated_at",  null: false
   end
 
-<<<<<<< HEAD
   create_table "skills_users", id: false, force: :cascade do |t|
-=======
-  create_table "skills_users", force: :cascade do |t|
->>>>>>> 799809d0850815831c9320d972488b47325a87e5
+
     t.integer "skill_id"
     t.integer "user_id"
   end
