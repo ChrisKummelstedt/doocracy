@@ -9,4 +9,5 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :user_name
 
+  has_and_belongs_to_many :skills
 end

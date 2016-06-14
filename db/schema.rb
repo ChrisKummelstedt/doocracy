@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160614093902) do
+
+ActiveRecord::Schema.define(version: 20160614144840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "skilllists", force: :cascade do |t|
+    t.string   "skill"
+    t.string   "skilllevel"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "skill"
+    t.string   "skilllevel"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "skills_users", id: false, force: :cascade do |t|
+    t.integer "skill_id"
+    t.integer "user_id"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
