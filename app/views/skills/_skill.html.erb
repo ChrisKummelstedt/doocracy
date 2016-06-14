@@ -1,6 +1,6 @@
-<li>
+ <li id="<%= skill.id %>">
   <%= skill.skill %>
   <%= skill.skilllevel %>
   <%= skill.description %>
-  <%= link_to "Delete skill", skill_path(skill), method: 'delete' %>
+  <%= link_to "Delete skill", skill_path(skill), method: 'delete', remote: true %>
 </li>

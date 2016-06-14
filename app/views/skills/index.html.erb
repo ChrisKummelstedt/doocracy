@@ -1,6 +1,10 @@
 <h1>My Skills</h1>
 
-<%= form_for Skill.new do |f| %>
+<ul class="skilllist">
+  <%= render @skills %>
+</ul>
+
+<%= form_for Skill.new, remote:true do |f| %>
   <div class="form-group">
     <%= f.text_field :skill, placeholder:
     "What are you good at?" %>
@@ -19,7 +23,3 @@
   <%= f.submit %>
   </div>
 <% end %>
-
-<ul class="skilllist">
-  <%= render @skills %>
-</ul>
