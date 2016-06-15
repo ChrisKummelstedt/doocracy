@@ -5,7 +5,7 @@ feature "Delete a project" do
   end
 
   scenario "removing a project correctly" do
-    create_project_1
+    create_project
     click_link "My Projects"
     click_link "Edit"
     click_button "Delete"
