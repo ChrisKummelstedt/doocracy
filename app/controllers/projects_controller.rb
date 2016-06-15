@@ -13,7 +13,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @my_project = Project.all
+    @my_project = Project.find(params[:id])
+    @my_project.update(project_params)
     redirect_to projects_path
   end
 
