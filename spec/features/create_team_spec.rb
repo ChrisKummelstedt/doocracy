@@ -3,7 +3,6 @@ feature "Create a Team" do
     remove_uploaded_file
   end
   scenario "Creating a team correctly" do
-    sign_up
     create_project
     click_link 'awesome project title'
     click_link "Create a Team"

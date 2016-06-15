@@ -28,6 +28,7 @@ def create_skill
 end
 
 def create_project
+	sign_up
 	click_link "Add a Project"
 	fill_in("Title", with: "awesome project title")
 	fill_in("Description", with: "Looks like an awesome")

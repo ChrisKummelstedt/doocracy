@@ -14,3 +14,4 @@
 /.env
 /coverage
 /public/system/projects/images/
+/db/schema.rb

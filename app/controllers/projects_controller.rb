@@ -8,6 +8,20 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def mine
+    @my_projects = current_user.projects
+  end
+
+  def edit
+    @project = Project.find(params[:id])
+  end
+
+  def update
+    @my_project = Project.find(params[:id])
+    @my_project.update(project_params)
+    redirect_to projects_path
+  end
+
   def new
     @project = current_user.projects.build
   end
@@ -19,6 +33,9 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
+  def user_projects_path
+    @projects = current_user.projects(project_params)
+  end
 
   private
 
