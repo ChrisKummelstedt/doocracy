@@ -10,8 +10,14 @@
             <%= f.error_notification %>
             <div class="panel-body">
               <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'input-lg' } %>
+            </br>
+            </br>
               <%= f.input :password, required: true, label: false, placeholder: 'Password', input_html: { class: 'input-lg' } %>
+            </br>
+            </br>
               <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            </br>
+            </br>
               <%= f.button :submit, "Log in", class: 'btn-lg btn-info btn-block' %>
             </div>
           <% end %>
