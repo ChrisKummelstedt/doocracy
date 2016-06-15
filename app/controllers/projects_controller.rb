@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @projects = Project.all
@@ -16,16 +17,16 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def update
+    @my_project = Project.find(params[:id])
+    @my_project.update(project_params)
+    redirect_to projects_path
+  end
+
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
     flash[:notice] = "Project deleted successfully."
-    redirect_to projects_path
-  end
-
-  def update
-    @my_project = Project.find(params[:id])
-    @my_project.update(project_params)
     redirect_to projects_path
   end
 
