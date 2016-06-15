@@ -11,11 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20160614144840) do
+ActiveRecord::Schema.define(version: 20160615094331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "total_budget"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "user_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "skilllists", force: :cascade do |t|
     t.string   "skill"
@@ -38,20 +52,20 @@ ActiveRecord::Schema.define(version: 20160614144840) do
     t.integer "user_id"
   end
 
-  create_table "projects", force: :cascade do |t|
+  create_table "teams", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.integer  "total_budget"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "user_id"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "project_id"
   end
 
-  add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+  add_index "teams", ["project_id"], name: "index_teams_on_project_id", using: :btree
+
+  create_table "teams_users", id: false, force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -73,4 +87,5 @@ ActiveRecord::Schema.define(version: 20160614144840) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "projects", "users"
+  add_foreign_key "teams", "projects"
 end
