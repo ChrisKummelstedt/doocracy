@@ -1,7 +1,9 @@
 class TeamsController < ApplicationController
+  before_action :set_project
+  before_action :set_team, except: [:new, :create]
+  # before_action :authenticate_user!, except: [:index]
 
   def new
-    @project = Project.find(params[:project_id])
     @team = @project.teams.build
   end
 
@@ -11,7 +13,6 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @project = Project.find(params[:project_id])
     @team = @project.teams.build(team_params)
     current_user.teams << @team
     if @team.save
@@ -23,7 +24,32 @@ class TeamsController < ApplicationController
     end
   end
 
+  def show
+  end
+
+  def destroy
+    flash[:notice] = "Team deleted successfully."
+    redirect_to project_path(@project)
+  end
+
+  def edit
+  end
+
+  def update
+    @team.update(team_params)
+    redirect_to project_team_path(@project, @team)
+  end
+
+
   private
+
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
+
+  def set_team
+    @team = Team.find(params[:id])
+  end
 
   def team_params
     params.require(:team).permit(:title, :description)
