@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/rails_helper.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -64,14 +64,14 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/environment.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/application.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/application.rb": [
         1,
         null,
         1,
@@ -108,12 +108,12 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/boot.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/boot.rb": [
         1,
         null,
         1
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/environments/test.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/environments/test.rb": [
         1,
         null,
         null,
@@ -157,7 +157,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/assets.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -170,7 +170,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/backtrace_silencers.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -179,12 +179,12 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/cookies_serializer.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/cookies_serializer.rb": [
         null,
         null,
         1
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/devise.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/devise.rb": [
         null,
         null,
         1,
@@ -454,13 +454,13 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/filter_parameter_logging.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/inflections.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -478,18 +478,18 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/mime_types.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/session_store.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/session_store.rb": [
         null,
         null,
         1
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/simple_form.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/simple_form.rb": [
         null,
         1,
         null,
@@ -656,7 +656,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/initializers/wrap_parameters.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -672,7 +672,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/factories/user.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/factories/user.rb": [
         1,
         1,
         1,
@@ -682,7 +682,8 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/config/routes.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/config/routes.rb": [
+        1,
         1,
         1,
         1,
@@ -744,7 +745,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/app/models/user.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/models/user.rb": [
         1,
         null,
         null,
@@ -756,35 +757,57 @@
         null,
         1,
         null,
-        null
-      ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/app/helpers/projects_helper.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/web_helper.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/helpers/projects_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/helpers/skill_and_users_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/helpers/skilllists_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/helpers/skills_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/web_helper.rb": [
         1,
         null,
         1,
-        4,
-        4,
-        4,
-        4,
-        4,
+        7,
+        7,
+        7,
+        7,
+        7,
         null,
         null,
         1,
-        8,
-        8,
-        8,
-        8,
-        8,
-        8,
-        8,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        null,
+        null,
+        1,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
         null,
         null,
         1,
@@ -801,7 +824,7 @@
         2,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/features/add_a_project_spec.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/features/add_a_project_spec.rb": [
         null,
         1,
         1,
@@ -824,7 +847,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/features/edit_project_spec.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/features/edit_project_spec.rb": [
         1,
         1,
         1,
@@ -846,7 +869,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/features/logging_in_out_spec.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/features/logging_in_out_spec.rb": [
         1,
         1,
         4,
@@ -883,7 +906,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/features/signing_in_spec.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/features/signing_in_spec.rb": [
         1,
         1,
         1,
@@ -928,7 +951,34 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/models/projects_spec.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/features/skills_spec.rb": [
+        1,
+        1,
+        3,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/models/projects_spec.rb": [
         1,
         null,
         1,
@@ -939,7 +989,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/app/models/project.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/models/project.rb": [
         1,
         null,
         1,
@@ -950,7 +1000,7 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/spec/models/user_spec.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/spec/models/user_spec.rb": [
         1,
         null,
         1,
@@ -961,11 +1011,11 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/app/controllers/projects_controller.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/controllers/projects_controller.rb": [
         1,
         null,
         1,
-        23,
+        32,
         null,
         null,
         1,
@@ -1006,28 +1056,68 @@
         null,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/app/controllers/application_controller.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/controllers/application_controller.rb": [
         1,
         null,
         null,
         1,
         null
       ],
-      "/Users/rachelboakes/Desktop/makers/Final_Project/Camp_MVP/app/controllers/concerns/registrations_controller.rb": [
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/controllers/concerns/registrations_controller.rb": [
         1,
         null,
         1,
         null,
         1,
-        8,
+        9,
         null,
         null,
         1,
         0,
         null,
         null
+      ],
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/controllers/skills_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        8,
+        8,
+        null,
+        null,
+        1,
+        3,
+        3,
+        3,
+        3,
+        6,
+        3,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        2,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        3,
+        null,
+        null
+      ],
+      "/Users/Fluff/aCamp/merge/Camp_MVP/app/models/skill.rb": [
+        1,
+        1,
+        null
       ]
     },
-    "timestamp": 1465981551
+    "timestamp": 1465982468
   }
 }
