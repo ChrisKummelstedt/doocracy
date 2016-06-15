@@ -14,6 +14,7 @@ feature "Add a project" do
     attach_file('Image', "spec/files/images/project-puzzle.jpg")
     click_button "Create Project"
     expect(current_path).to eq(projects_path)
+    expect(page).to have_content("Your project has been created.")
     expect(page).to have_content("awesome project title")
     expect(page).to have_content("Looks like an awesome")
     expect(page).to have_css("img[src*='project-puzzle.jpg']")
