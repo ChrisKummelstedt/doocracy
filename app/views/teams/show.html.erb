@@ -2,3 +2,4 @@
 <p><%= @team.description %></p>
 
 <%= link_to "Edit", edit_project_team_path(@project, @team) %>
+<%= link_to "Delete", project_team_path(@project, @team), method: :delete %>
