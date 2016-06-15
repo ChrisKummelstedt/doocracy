@@ -8,7 +8,7 @@
  <%= @project.description %>
 </p>
 <% @project.teams.each do |team| %>
-  <p> <%= team.title %> </p>
+  <p> <%= link_to team.title, project_team_path(@project, team) %> </p>
   <p> <%= team.description %> </p>
 <% end %>
 <%= link_to "Create a Team", new_project_team_path(@project) %>

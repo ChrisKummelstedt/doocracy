@@ -40,3 +40,11 @@ end
 def remove_uploaded_file
 	FileUtils.rm_rf(Rails.root + "public/system")
 end
+
+def create_team
+	click_link 'awesome project title'
+	click_link "Create a Team"
+	fill_in("Title", with: "Coding Team")
+	fill_in("Description", with: "Code Stuff")
+	click_button "Create Team"
+end

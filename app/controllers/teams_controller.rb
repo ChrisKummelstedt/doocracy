@@ -5,6 +5,11 @@ class TeamsController < ApplicationController
     @team = @project.teams.build
   end
 
+  def show
+    @team = Team.find(params[:id])
+    @users = @team.users.all
+  end
+
   def create
     @project = Project.find(params[:project_id])
     @team = @project.teams.build(team_params)
