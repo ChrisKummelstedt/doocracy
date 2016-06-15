@@ -12,7 +12,7 @@ feature "Delete a project" do
     expect(page).should_not have_content("awesome project title")
     expect(page).to have_content 'Project deleted successfully'
   end
-
+  # 
   # scenario "cant remove a project unless you are owner" do
   #   create_project_1
   #   click_link "Logout"
