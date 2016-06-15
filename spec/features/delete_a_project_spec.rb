@@ -16,7 +16,7 @@ feature "Delete a project" do
   # scenario "cant remove a project unless you are owner" do
   #   create_project_1
   #   click_link "Logout"
-  #   sign_up_2
+  #   sign_up(username :"myUsername2", email:"c@g.com")
   #   visit "/projects/2/edit"
   #   click_button "Delete"
   #   expect(page).to have_content("awesome project title")
