@@ -27,14 +27,14 @@ def create_skill
 	click_button "Create Skill"
 end
 
-def create_project_1
+def create_project
 	sign_up
 	click_link "Add a Project"
-    fill_in("Title", with: "awesome project title")
-    fill_in("Description", with: "Looks like an awesome")
-    fill_in("Total budget", with: 1000)
-    attach_file('Image', "spec/files/images/project-puzzle.jpg")
-    click_button "Create Project"
+	fill_in("Title", with: "awesome project title")
+	fill_in("Description", with: "Looks like an awesome")
+	fill_in("Total budget", with: 1000)
+	attach_file('Image', "spec/files/images/project-puzzle.jpg")
+	click_button "Create Project"
 end
 
 def remove_uploaded_file

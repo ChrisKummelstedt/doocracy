@@ -3,7 +3,7 @@ feature "Edit a project" do
     remove_uploaded_file
   end
   scenario "editing a project correctly" do
-    create_project_1
+    create_project
     click_link "My Projects"
     click_link "Edit"
     # expect(current_path).to eq(edit_project_path)
