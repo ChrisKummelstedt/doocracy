@@ -18,6 +18,7 @@ def sign_up(username = "myUsername")
 	click_button("Sign up")
 end
 
+<<<<<<< HEAD
 def create_skill
 	visit '/skills'
 	expect(current_path).to have_content('/skills')
@@ -25,6 +26,16 @@ def create_skill
 	select 'Advanced', from: 'Skilllevel'
 	fill_in("Description", with: 'BBQ')
 	click_button "Create Skill"
+=======
+def create_project_1
+	sign_up
+	click_link "Add a Project"
+    fill_in("Title", with: "awesome project title")
+    fill_in("Description", with: "Looks like an awesome")
+    fill_in("Total budget", with: 1000)
+    attach_file('Image', "spec/files/images/project-puzzle.jpg")
+    click_button "Create Project"
+>>>>>>> 38943ba14b1bab9133e7e51f316b0504076bf3de
 end
 
 def remove_uploaded_file
