@@ -1,27 +1,30 @@
 class SkillsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @user = current_user
-    @skills = @user.skills.all
+    @skills = Skills.all
+  end
+
+  def show
   end
 
   def create
     @user = current_user
-    @skill = Skill.create(skill_params)
-    @user.skills << @skill
+    @skill = @user.skills.create(skill_params)
     respond_to do |format|
-      format.html { redirect_to skills_path }
+      format.html { redirect_to edit_profile_path(@user.user_name) }
       format.js { }
     end
   end
 
   def destroy
-    @skill = Skill.find(params[:id])
+    @user = current_user
+    @skill = @user.skills.find(params[:id])
     @skill.destroy
 
     respond_to do |format|
-      format.html { redirect_to skills_path }
+      format.html { redirect_to edit_profile_path(@user.user_name) }
       format.js { }
     end
   end
