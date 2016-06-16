@@ -1,13 +1,21 @@
 class BudgetsController < ApplicationController
 
   def index
+    # @team = Team.find(params[:team_id])
     @budgets = Budget.all
   end
 
+  def new
+    @team = Team.find(params[:id])
+    @budget = @team.budgets.build
+  end
+
   def create
-    @budget = Budget.create(budget_params)
+    @team = Team.find(params[:team_id])
+    @budget = @team.budgets.build(budget_params)
+    # Budget.create(budget_params)
     respond_to do |format|
-      format.html { redirect_to budgets_path }
+      format.html { redirect_to project_team_budgets_path }
       format.js { }
     end
   end
@@ -16,7 +24,7 @@ class BudgetsController < ApplicationController
     @budget = Budget.find(params[:id])
     @budget.destroy
     respond_to do |format|
-    format.html { redirect_to budgets_path }
+    format.html { redirect_to project_team_budgets_path }
     format.js { }
     end
   end

@@ -1,7 +1,36 @@
 
 <h1><%= @team.title %></h1>
 <p><%= @team.description %></p>
+<ul class="budget_items">
+  <% @team.budgets.each do |budget| %>
+    <li id="<%= budget.id %>">
+     <%= budget.budget_item %>
+     <%= budget.quantity %>
+     <%= budget.cost_per_item %>
+     Total cost: <%= budget.quantity * budget.cost_per_item %>
+     <%= link_to "delete budget item", budget_path(budget), method: 'delete', remote: true %>
+   </li>
+  <% end %>
+</ul>
+
+<%= simple_form_for [@project = Project.find(params[:project_id]), @team = Team.find(params[:id]), @budget = @team.budgets.create], remote: true do |f| %>
+
+  <div class="form-group">
+    <%= f.input :budget_item %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :quantity %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :cost_per_item %>
+  </div>
+
+  <div class="form-group">
+  <%= f.submit "Add budget item" %>
+  </div>
+<% end %>
 
 <%= link_to "Edit", edit_project_team_path(@project, @team) %>
 <%= link_to "Delete", project_team_path(@project, @team), method: :delete %>
-

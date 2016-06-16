@@ -8,7 +8,6 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find(params[:id])
     @users = @team.users.all
   end
 
@@ -22,9 +21,6 @@ class TeamsController < ApplicationController
       flash[:notice] = 'Team not created'
       redirect_to request.referer
     end
-  end
-
-  def show
   end
 
   def destroy
