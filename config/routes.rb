@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   resources :skills
+  resources :budgets
   devise_for :users, :controllers => { registrations: 'registrations' }
   root 'projects#index'
 
   resources :projects do
     resources :teams
   end
+
+
 
   match "/my-projects" => "projects#mine", :via => :get, :as => :my_projects
 

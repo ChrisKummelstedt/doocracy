@@ -1,0 +1,24 @@
+<h1>My Estimated Budget</h1>
+
+<%= simple_form_for Budget.new, remote: true do |f| %>
+
+  <div class="form-group">
+    Budget item<%= f.input :budget_item %>
+  </div>
+
+  <div class="form-group">
+    quantity<%= f.input :quantity %>
+  </div>
+
+  <div class="form-group">
+    cost per item<%= f.input :cost_per_item %>
+  </div>
+
+  <div class="form-group">
+  <%= f.submit "Add budget item" %>
+  </div>
+<% end %>
+
+<ul class="budget_items">
+  <%= render @budgets %>
+</ul>

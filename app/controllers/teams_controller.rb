@@ -7,6 +7,11 @@ class TeamsController < ApplicationController
     @team = @project.teams.build
   end
 
+  def show
+    @team = Team.find(params[:id])
+    @users = @team.users.all
+  end
+
   def create
     @team = @project.teams.build(team_params)
     current_user.teams << @team
