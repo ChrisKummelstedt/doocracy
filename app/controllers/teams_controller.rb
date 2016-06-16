@@ -26,6 +26,7 @@ class TeamsController < ApplicationController
   end
 
   def destroy
+    @team.destroy
     flash[:notice] = "Team deleted successfully."
     redirect_to project_path(@project)
   end
