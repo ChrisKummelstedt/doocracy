@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
 
-  resources :skills
+
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   root 'projects#index'
@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     resources :teams do
       resources :budgets
     end
+  end
+
+  resources :users do
+    resources :skills
   end
 
   get 'profiles/show'

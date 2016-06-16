@@ -5,9 +5,13 @@ class ProfilesController < ApplicationController
 
   def show
     @projects = @user.projects
+    @skills = @user.skills.all
   end
 
   def edit
+    @user = current_user
+    @skills = current_user.skills.all
+    @skill = current_user.skills.new
   end
 
   def update
