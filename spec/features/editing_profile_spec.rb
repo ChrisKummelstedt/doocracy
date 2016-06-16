@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'editing user profiles' do
   background do
-    sign_up_with_Arnie
+    sign_up("Arnie")
   end
 
   scenario 'a user can change their own profile details' do

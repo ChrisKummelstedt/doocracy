@@ -7,12 +7,6 @@ class TeamsController < ApplicationController
     @team = @project.teams.build
   end
 
-  def show
-    @users = @team.users.all
-    @budget = @team.budgets.new
-    @budgets = @team.budgets.all
-  end
-
   def create
     @team = @project.teams.build(team_params)
     current_user.teams << @team
@@ -23,6 +17,18 @@ class TeamsController < ApplicationController
       flash[:notice] = 'Team not created'
       redirect_to request.referer
     end
+  end
+
+  def show
+    @users = @team.users.all
+    @budget = @team.budgets.new
+    @budgets = @team.budgets.all
+  end
+
+  def join_team
+    @team.users << current_user
+    flash[:notice] = "Successfully Join Team"
+    redirect_to project_team_path(@project, @team)
   end
 
   def destroy
