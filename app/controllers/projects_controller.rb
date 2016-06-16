@@ -18,16 +18,16 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @my_project = Project.find(params[:id])
-    @my_project.update(project_params)
-    redirect_to projects_path
+    @project = Project.find(params[:id])
+    @project.update(project_params)
+    redirect_to project_path(@project)
   end
 
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
     flash[:notice] = "Project deleted successfully."
-    redirect_to projects_path
+    redirect_to root_path
   end
 
   def new
@@ -38,7 +38,7 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.build(project_params)
     @project.save
     flash[:notice] = "Your project has been created."
-    redirect_to projects_path
+    redirect_to project_path(@project)
   end
 
   def user_projects_path

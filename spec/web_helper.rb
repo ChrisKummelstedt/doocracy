@@ -18,6 +18,16 @@ def sign_up(username = "myUsername")
 	click_button("Sign up")
 end
 
+def sign_up_with_Arnie(username = "Arnie")
+	visit("/")
+	click_link("Sign up")
+	fill_in("user_user_name", with: username)
+	fill_in("user_email", with: "test@example.com")
+	fill_in("user_password", with: "testtest")
+	fill_in("user_password_confirmation", with: "testtest")
+	click_button("Sign up")
+end
+
 def create_skill
 	visit '/skills'
 	expect(current_path).to have_content('/skills')
@@ -38,7 +48,6 @@ def create_project
 end
 
 def create_team
-	click_link 'awesome project title'
 	click_link "Create a Team"
 	fill_in("Title", with: "Coding Team")
 	fill_in("Description", with: "Code Stuff")
@@ -47,12 +56,4 @@ end
 
 def remove_uploaded_file
 	FileUtils.rm_rf(Rails.root + "public/system")
-end
-
-def create_team
-	click_link 'awesome project title'
-	click_link "Create a Team"
-	fill_in("Title", with: "Coding Team")
-	fill_in("Description", with: "Code Stuff")
-	click_button "Create Team"
 end
