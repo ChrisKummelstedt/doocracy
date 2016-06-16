@@ -9,6 +9,8 @@ class TeamsController < ApplicationController
 
   def show
     @users = @team.users.all
+    @budget = @team.budgets.new
+    @budgets = @team.budgets.all
   end
 
   def create
