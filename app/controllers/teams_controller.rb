@@ -8,8 +8,9 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find(params[:id])
     @users = @team.users.all
+    @budget = @team.budgets.new
+    @budgets = @team.budgets.all
   end
 
   def create
@@ -24,10 +25,8 @@ class TeamsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def destroy
+    @team.destroy
     flash[:notice] = "Team deleted successfully."
     redirect_to project_path(@project)
   end

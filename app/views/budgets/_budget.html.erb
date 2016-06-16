@@ -2,5 +2,6 @@
   <%= budget.budget_item %>
   <%= budget.quantity %>
   <%= budget.cost_per_item %>
-  <%= link_to "delete budget item", budget_path(budget), method: 'delete', remote: true %>
+  Total cost: <%= budget.quantity * budget.cost_per_item %>
+  <%= link_to "delete budget item", project_team_budget_path(@project, @team, budget), method: 'delete', remote: true %>
 </li>

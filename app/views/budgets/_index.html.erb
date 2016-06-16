@@ -1,0 +1,28 @@
+<h1>My Estimated Budget</h1>
+<h3>Total Budget: </h3>
+
+<%= form_for [@project, @team, @budget], remote: true do |f| %>
+
+  <div class="form-group">
+    <%= f.label :budget_item %>
+    <%= f.text_field :budget_item %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cost_per_item %>
+    <%= f.number_field :cost_per_item %>
+  </div>
+
+  <div class="form-group">
+  <%= f.submit "Create Budget Item"%>
+  </div>
+<% end %>
+
+<ul class="budget_items">
+  <%= render @budgets %>
+</ul>
