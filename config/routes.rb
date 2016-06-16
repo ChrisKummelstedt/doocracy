@@ -1,7 +1,18 @@
 Rails.application.routes.draw do
+
+
+
   resources :skills
   devise_for :users, :controllers => { registrations: 'registrations' }
+
   root 'projects#index'
+
+  match "/my-projects" => "projects#mine", :via => :get, :as => :my_projects
+
+  get ':user_name', to: 'profiles#show', as: :profile
+  get ':user_name/edit', to: 'profiles#edit', as: :edit_profile
+  patch ':user_name/edit', to: 'profiles#update', as: :update_profile
+
 
   resources :projects do
     resources :teams do
@@ -9,9 +20,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'profiles/show'
 
 
-  match "/my-projects" => "projects#mine", :via => :get, :as => :my_projects
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
