@@ -19,12 +19,14 @@ def sign_up(username = "myUsername", email = "test@example.com")
 end
 
 def create_skill
-	visit '/skills'
-	expect(current_path).to have_content('/skills')
+	sign_up("asdf")
+	click_link "asdf"
+	page.find("#edit-profile").click
 	fill_in("Skill", with: 'Cooking')
 	select 'Advanced', from: 'Skilllevel'
 	fill_in("Description", with: 'BBQ')
 	click_button "Create Skill"
+	click_button "Update Profile"
 end
 
 def create_project

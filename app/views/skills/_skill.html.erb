@@ -2,5 +2,5 @@
   <%= skill.skill %>
   <%= skill.skilllevel %>
   <%= skill.description %>
-  <%= link_to "Delete skill", skill_path(skill), method: 'delete', remote: true %>
+  <%= link_to "Delete skill", user_skill_path(@user, skill), method: 'delete', remote: true %>
 </li>
