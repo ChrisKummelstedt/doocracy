@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :skills
-  # resources :budgets
   devise_for :users, :controllers => { registrations: 'registrations' }
   root 'projects#index'
 
