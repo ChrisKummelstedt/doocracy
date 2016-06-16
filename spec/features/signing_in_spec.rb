@@ -14,21 +14,21 @@ feature "sign-up" do
       sign_up("pee")
       expect(page).not_to have_link "Logout"
       expect(page).to have_link "Login"
-      expect(page).to have_content "User name is too short (minimum is 4 characters)"
+      expect(page).to have_content "is too short (minimum is 4 characters)"
     end
 
     scenario "sign-up with long a user name" do
       sign_up("peeeeeeeeeeeeweeeeeeeeeeeeeeeeeeeeeeeeeeeee")
       expect(page).not_to have_link "Logout"
       expect(page).to have_link "Login"
-      expect(page).to have_content "User name is too long (maximum is 16 characters)"
+      expect(page).to have_content "is too long (maximum is 16 characters)"
     end
 
     scenario "sign-up without supplying a user name" do
       sign_up(nil)
       expect(page).not_to have_link "Logout"
       expect(page).to have_link "Login"
-      expect(page).to have_content "User name can't be blank"
+      expect(page).to have_content "can't be blank"
     end
 
     scenario "sign-up with a user name that already exists" do
@@ -37,7 +37,7 @@ feature "sign-up" do
       sign_up
       expect(page).not_to have_link "Logout"
       expect(page).to have_link "Login"
-      expect(page).to have_content "User name has already been taken"
+      expect(page).to have_content "has already been taken"
     end
   end
 end
