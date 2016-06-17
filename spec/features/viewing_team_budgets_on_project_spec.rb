@@ -10,7 +10,6 @@ feature "viewing pie chart of team budgets" do
     create_team_budget
     click_link "awesome project title"
     expect(page).to have_content("awesome project title")
-    expect(page).to have_content("Coding Team: 100.0%")
     expect(page).to have_content("1000")
     expect(page).to have_css("img[src*='project-puzzle.jpg']")
   end
