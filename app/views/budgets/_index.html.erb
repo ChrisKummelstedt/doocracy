@@ -1,5 +1,5 @@
 <h1>My Estimated Budget</h1>
-<h3>Total Budget: </h3>
+<h3>Total Budget: <%=@budgets.first.total(@budgets) %></h3>
 
 <%= form_for [@project, @team, @budget], remote: true do |f| %>
 
