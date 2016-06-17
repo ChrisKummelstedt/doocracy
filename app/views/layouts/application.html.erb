@@ -20,7 +20,7 @@
           <span class="icon-bar"></span>
         </button>
         <div class="navbar-brand">
-          <%= link_to "Camp", root_path %>
+          <%= link_to "Do/ocracy", root_path %>
         </div>
       </div>
       <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
@@ -29,7 +29,9 @@
           <li><%= link_to "My Projects", my_projects_path %></li>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
           <li><%= link_to "Add a Project", new_project_path %></li>
-          <li><%= link_to current_user.user_name, profile_path(current_user.user_name) %></li>
+          <li><%= link_to "<span class='glyphicon glyphicon-user'></span>".html_safe, profile_path(current_user.user_name), class: :some_class %> </li>
+          <li> <%= link_to current_user.user_name, profile_path(current_user.user_name) %></li>
+
           <% else %>
           <li><%= link_to "Login", new_user_session_path %></li>
           <li><%= link_to "Sign up", new_user_registration_path %></li>
@@ -40,10 +42,12 @@
   </nav>
 
   <div class="container">
-    <%= notice %>
-    <%= alert %>
-    <%= yield %>
+    <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: [:alert, alert_for(name)] %>
+    <% end %>
   </div>
+
+  <%= yield %>
 
 
 

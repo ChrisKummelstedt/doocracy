@@ -1,5 +1,15 @@
 <h1><%= @team.title %></h1>
 <p><%= @team.description %></p>
+<% @users.each do |user| %>
+  <p><%= user.user_name %></p>
+<% end %>
+<form method="get" action= "/projects/<%= @project.id %>/teams/<%= @team.id %>/join_team">
+  <input type="hidden" name="id" value="<%= @team.id %>" >
+  <input type="hidden" name="project_id" value="<%= @project.id %>">
+  <input type="submit" value="Join Team" class="button" >
+</form>
+
+
 <%= render "budgets/index" %>
 
 <%= link_to "Edit", edit_project_team_path(@project, @team) %>

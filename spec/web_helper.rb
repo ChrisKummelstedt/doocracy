@@ -8,33 +8,25 @@ def log_in(user = {email: "amy@gmail.com", password: "testtest"})
 	click_button("Log in")
 end
 
-def sign_up(username = "myUsername")
+def sign_up(username = "myUsername", email = "test@example.com")
 	visit("/")
 	click_link("Sign up")
 	fill_in("user_user_name", with: username)
-	fill_in("user_email", with: "test@example.com")
-	fill_in("user_password", with: "testtest")
-	fill_in("user_password_confirmation", with: "testtest")
-	click_button("Sign up")
-end
-
-def sign_up_with_Arnie(username = "Arnie")
-	visit("/")
-	click_link("Sign up")
-	fill_in("user_user_name", with: username)
-	fill_in("user_email", with: "test@example.com")
+	fill_in("user_email", with: email)
 	fill_in("user_password", with: "testtest")
 	fill_in("user_password_confirmation", with: "testtest")
 	click_button("Sign up")
 end
 
 def create_skill
-	visit '/skills'
-	expect(current_path).to have_content('/skills')
+	sign_up("asdf")
+	click_link "asdf"
+	page.find("#edit-profile").click
 	fill_in("Skill", with: 'Cooking')
 	select 'Advanced', from: 'Skilllevel'
 	fill_in("Description", with: 'BBQ')
 	click_button "Create Skill"
+	click_button "Update Profile"
 end
 
 def create_project
