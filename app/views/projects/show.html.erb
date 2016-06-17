@@ -9,6 +9,9 @@
 <p>
  <%= @project.description %>
 </p>
+<p>
+ <%= @project.total_budget %>
+</p>
 <% @project.teams.each do |team| %>
   <p> <%= link_to team.title, project_team_path(@project, team) %> </p>
   <p> <%= team.description %> </p>
