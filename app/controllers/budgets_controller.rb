@@ -6,6 +6,9 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = @team.budgets.create(budget_params)
+    @team = Team.where(params[:id]).first_or_initialize
+    @team.team_budget = @budgets.first.sum(@budgets).to_f
+    @team.save
     respond_to do |format|
       format.html { redirect_to project_team_path(@project, @team) }
       format.js { }
@@ -15,6 +18,8 @@ class BudgetsController < ApplicationController
   def destroy
     @budget = @team.budgets.find(params[:id])
     @budget.destroy
+    @team.team_budget = @budgets.first.sum(@budgets).to_f
+    @team.save
     respond_to do |format|
       format.html { redirect_to project_team_path(@project, @team) }
       format.js { }

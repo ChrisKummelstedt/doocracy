@@ -1,8 +1,8 @@
 <h1>My Estimated Budget</h1>
 <% if @budgets.any? %>
-<h3>Total Budget: <b id="budget_total"><%=@budgets.first.total(@budgets) %></b></h3>
+<h3>Total Budget: <b id="budget_total"><%=@budgets.first.sum(@budgets) %></b></h3>
 <% else %>
-<h3>Total Budget: $0.00
+<h3>Total Budget: <b id="budget_total">0.0</b></h3>
 <% end %>
 
 <%= form_for [@project, @team, @budget], remote: true do |f| %>
