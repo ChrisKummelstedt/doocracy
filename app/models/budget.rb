@@ -1,4 +1,5 @@
 class Budget < ActiveRecord::Base
+  validates :budget_item, :quantity, :cost_per_item, presence: true
   belongs_to :team, :foreign_key => "team_id"
 
   def sum(budgets)

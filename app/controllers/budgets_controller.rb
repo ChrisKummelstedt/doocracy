@@ -1,9 +1,6 @@
 class BudgetsController < ApplicationController
   before_action :set_project, :set_team, :set_budgets
 
-  def index
-  end
-
   def create
     @budget = @team.budgets.create(budget_params)
     @team = Team.where(params[:id]).first_or_initialize
@@ -18,7 +15,11 @@ class BudgetsController < ApplicationController
   def destroy
     @budget = @team.budgets.find(params[:id])
     @budget.destroy
-    @team.team_budget = @budgets.first.sum(@budgets).to_f
+    if @budgets.first == nil
+      @team.team_budget = 0.to_f
+    else
+      @team.team_budget = (@budgets.first.sum(@budgets).to_f)
+    end
     @team.save
     respond_to do |format|
       format.html { redirect_to project_team_path(@project, @team) }
@@ -29,6 +30,7 @@ class BudgetsController < ApplicationController
   private
 
   def set_budgets
+    @team = Team.find(params[:team_id])
     @budgets = @team.budgets.all
   end
 

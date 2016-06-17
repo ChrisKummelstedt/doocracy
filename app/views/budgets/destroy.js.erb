@@ -1,2 +1,4 @@
-$("li#<%= @budget.id %>").fadeOut();
+<% if @budgets.any? %>
+$("li#<%= @budget.id %>").slideUp();
 $('#budget_total').text("<%= @budgets.first.sum(@budgets) %>");
+<% end %>
