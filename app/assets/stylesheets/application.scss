@@ -51,8 +51,27 @@ body {
 }
 
 .navbar-container {
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
+}
+
+
+/* ## PAGE ## */
+.page-container {
+  width: 720px;
+  margin: 0 auto;
+}
+
+.page-wrapper {
+  background-color: #fff;
+  border-color: #edeeee;
+  padding: 12px;
+
+  border-style: solid;
+  border-radius: 3px;
+  border-width: 1px;
+  margin-bottom: 60px;
+  margin-top: 30px;
 }
 
 /* ## POST CUSTOMISATIONS ## */

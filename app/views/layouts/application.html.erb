@@ -26,12 +26,10 @@
       <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
-          <li><%= link_to "My Projects", my_projects_path %></li>
+          <li><%= link_to "<span class='glyphicon glyphicon-flag'></span>".html_safe, new_project_path, :title => "Create a new project" %> </li>
+          <li><%= link_to "<span class='glyphicon glyphicon-home'></span>".html_safe, my_projects_path, :title => "My projects"  %> </li>
+          <li><%= link_to "<span class='glyphicon glyphicon-user'></span>".html_safe, profile_path(current_user.user_name), :title => "My profile" %> </li>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-          <li><%= link_to "Add a Project", new_project_path %></li>
-          <li><%= link_to "<span class='glyphicon glyphicon-user'></span>".html_safe, profile_path(current_user.user_name), class: :some_class %> </li>
-          <li> <%= link_to current_user.user_name, profile_path(current_user.user_name) %></li>
-
           <% else %>
           <li><%= link_to "Login", new_user_session_path %></li>
           <li><%= link_to "Sign up", new_user_registration_path %></li>
