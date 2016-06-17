@@ -1,5 +1,9 @@
 <h1>My Estimated Budget</h1>
-<h3>Total Budget: </h3>
+<% if @budgets.any? %>
+<h3>Total Budget: <b id="budget_total"><%=@budgets.first.total(@budgets) %></b></h3>
+<% else %>
+<h3>Total Budget: $0.00
+<% end %>
 
 <%= form_for [@project, @team, @budget], remote: true do |f| %>
 
@@ -18,7 +22,7 @@
     <%= f.number_field :cost_per_item %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" id="add_item">
   <%= f.submit "Create Budget Item"%>
   </div>
 <% end %>

@@ -1,12 +1,10 @@
 class BudgetsController < ApplicationController
-  before_action :set_project
+  before_action :set_project, :set_team, :set_budgets
 
   def index
-    @budgets = Budget.all
   end
 
   def create
-    @team = Team.find(params[:team_id])
     @budget = @team.budgets.create(budget_params)
     respond_to do |format|
       format.html { redirect_to project_team_path(@project, @team) }
@@ -15,7 +13,6 @@ class BudgetsController < ApplicationController
   end
 
   def destroy
-    @team = Team.find(params[:team_id])
     @budget = @team.budgets.find(params[:id])
     @budget.destroy
     respond_to do |format|
@@ -25,6 +22,15 @@ class BudgetsController < ApplicationController
   end
 
   private
+
+  def set_budgets
+    @budgets = @team.budgets.all
+  end
+
+  def set_team
+    @team = Team.find(params[:team_id])
+  end
+
   def set_project
     @project = Project.find(params[:project_id])
   end
