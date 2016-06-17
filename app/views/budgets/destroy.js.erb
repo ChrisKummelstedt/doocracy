@@ -1,1 +1,2 @@
 $("li#<%= @budget.id %>").slideUp();
+$('#budget_total').text("<%= @budgets.first.total(@budgets) %>");
