@@ -46,6 +46,13 @@ def create_team
 	click_button "Create Team"
 end
 
+def create_team_budget
+	fill_in("Budget item", with: 'Hammer')
+	fill_in("Quantity", with: '10')
+	fill_in("Cost per item", with: '10')
+	click_button "Create Budget Item"
+end
+
 def remove_uploaded_file
 	FileUtils.rm_rf(Rails.root + "public/system")
 end
