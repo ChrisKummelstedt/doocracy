@@ -41,8 +41,8 @@ end
 
 def create_team
 	click_link "Create a Team"
-	fill_in("Title", with: "Coding Team")
-	fill_in("Description", with: "Code Stuff")
+	fill_in("team_title", with: "Coding Team")
+	fill_in("team_description", with: "Code Stuff")
 	click_button "Create Team"
 end
 
