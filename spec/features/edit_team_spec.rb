@@ -7,8 +7,8 @@ feature "Edit a Team" do
     create_team
     click_link("Coding Team")
     click_link("Edit")
-    fill_in("Title", with: "Coding Team2")
-    fill_in("Description", with: "Code Stuff2")
+    fill_in("team_title", with: "Coding Team2")
+    fill_in("team_description", with: "Code Stuff2")
     click_button("Update Team")
     expect(page).to have_content("Coding Team2")
     expect(page).to have_content("Code Stuff2")
