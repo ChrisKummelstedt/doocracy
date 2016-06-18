@@ -20,18 +20,18 @@ end
 
 def create_skill
 	sign_up("asdf")
-	click_link "asdf"
+	click_link "my-profile"
 	page.find("#edit-profile").click
 	fill_in("Skill", with: 'Cooking')
-	select 'Advanced', from: 'Skilllevel'
-	fill_in("Description", with: 'BBQ')
+	page.select 'Advanced', :from => 'skill_skilllevel'
+	fill_in("skill_description", with: 'BBQ')
 	click_button "Create Skill"
 	click_button "Update Profile"
 end
 
 def create_project
 	sign_up
-	click_link "Add a Project"
+	click_link "create-a-new-project"
 	fill_in("project_title", with: "awesome project title")
 	fill_in("project_description", with: "Looks like an awesome")
 	fill_in("project_total_budget", with: 1000)

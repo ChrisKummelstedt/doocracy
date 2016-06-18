@@ -6,7 +6,7 @@ feature 'editing user profiles' do
   end
 
   scenario 'a user can change their own profile details' do
-    click_link 'Arnie'
+    click_link 'my-profile'
     click_link 'Edit Profile'
     attach_file('user_avatar', 'spec/files/images/avatar.jpg')
     fill_in 'user_bio', with: 'Is this real life?'

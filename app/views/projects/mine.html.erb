@@ -1,14 +1,36 @@
-<% @my_projects.each do |project| %>
- <h2>
-  <%= link_to "Edit", edit_project_path(project) %>
- </h2>
- <h3>
-  <%= image_tag project.image.url(:thumb) %>
- </h3>
- <p>
-  <%= project.title %>
- </p>
- <p>
-  <%= project.description %>
- </p>
-<% end %>
+<div class="page-container">
+  <div class="page-wrapper">
+
+
+    <% if current_user.projects.size == 0 %>
+    <div class="jumbotron" id="index-jumbo">
+      <h3> <%= current_user.user_name %>'s projects</h3>
+      <p>You have not yet joined or added any projects. Click on the flag to get started! :)</p>
+    </div>
+    <% else %>
+    <div class="jumbotron" id="index-jumbo">
+      <h3> <%= current_user.user_name %>'s projects</h3>
+      <p>These are projects you are on.</p>
+    </div>
+
+    <% @my_projects.each do |project| %>
+    <div class="project-index-container">
+      <div class="project-index-wrapper">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="img-circle">
+              <%= profile_avatar_select(current_user) %>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <h3><%= link_to project.title, project_path(project) %>&nbsp&nbsp&nbsp<%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_project_path(project), :id => 'edit'%></h3>
+            <p><%= project.description %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+
+  </div>
+</div>

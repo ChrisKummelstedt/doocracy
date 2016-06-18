@@ -1,7 +1,9 @@
 feature "Add New Skill to User" do
+
   before do
     user = create :user
   end
+
   scenario "Create new Skill" do
         create_skill
         expect(page).to have_content("Cooking Advanced BBQ")

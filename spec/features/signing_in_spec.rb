@@ -4,8 +4,9 @@ feature "sign-up" do
       sign_up
       expect(page).not_to have_link "Login"
       expect(page).to have_link "Logout"
-      expect(page).to have_content "myUsername"
       expect(page).to have_content "Welcome! You have signed up successfully."
+      click_link('my-profile')
+      expect(page).to have_content "myUsername"
     end
   end
 
