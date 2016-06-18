@@ -6,8 +6,9 @@ feature "login and logout" do
     context "when correct credentials" do
       scenario "login correctly" do
         log_in
-        expect(page).to have_content("amynic")
         expect(page).to have_content("Signed in successfully.")
+        click_link('my-profile')
+        expect(page).to have_content("amynic")
       end
     end
 

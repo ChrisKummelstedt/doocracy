@@ -4,7 +4,7 @@ feature "Edit a project" do
   end
   scenario "editing a project correctly" do
     create_project
-    click_link "My Projects"
+    click_link "my-projects"
     click_link "Edit"
     # expect(current_path).to eq(edit_project_path)
     fill_in("Title", with: "awesome project title edited")
