@@ -3,5 +3,5 @@
   <td><%=skill.skill.capitalize %></td>
   <td><%=skill.skilllevel.capitalize %></td>
   <td><%=skill.description %></td>
-  <td>  <%= link_to "<span class='glyphicon glyphicon-minus-sign'></span>".html_safe,user_skill_path(@user, skill), method: 'delete', remote: true %></td>
+  <td>  <%= link_to "<span class='glyphicon glyphicon-minus-sign'></span>".html_safe, user_skill_path(@user, skill), method: 'delete', remote: true, id: "Delete skill" %></td>
 </tr>

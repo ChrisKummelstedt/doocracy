@@ -74,7 +74,45 @@ body {
   margin-top: 30px;
 }
 
-/* ## ID CUSTOMISATIONS ## */
+/* ## PROJECT CREATE ## */
+
+.form-group-project input {
+  width:100%;
+}
+
+.form-group-project textarea {
+  width:100%;
+  height: 100px;
+}
+
+/* ## PROJECT INDEX ## */
+#index-jumbo {
+  padding: 24px;
+}
+
+#index-jumbo h1 {
+  color: #125688;
+}
+
+
+.project-index-container {
+  width: 680px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.project-index-wrapper {
+  background-color: #F8F9F6;
+  border-color: #edeeee;
+  padding: 12px;
+
+  border-style: solid;
+  border-radius: 3px;
+  border-width: 1px;
+  margin-bottom: 20px;
+}
+
+/* ## PROFILE CUSTOMISATIONS ## */
 
 #profile-edit-button {
   width: 100%;

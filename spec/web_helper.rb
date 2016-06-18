@@ -23,8 +23,8 @@ def create_skill
 	click_link "my-profile"
 	page.find("#edit-profile").click
 	fill_in("Skill", with: 'Cooking')
-	page.select 'Advanced', :from => 'Skilllevel'
-	fill_in("Description", with: 'BBQ')
+	page.select 'Advanced', :from => 'skill_skilllevel'
+	fill_in("skill_description", with: 'BBQ')
 	click_button "Create Skill"
 	click_button "Update Profile"
 end
