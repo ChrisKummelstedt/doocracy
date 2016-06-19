@@ -115,6 +115,8 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashdiff (0.3.0)
+    highcharts-rails (4.2.5)
+      railties (>= 3.1)
     i18n (0.7.0)
     jbuilder (2.5.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -266,6 +268,7 @@ DEPENDENCIES
   devise
   dotenv-rails (~> 2.1.1)
   factory_girl_rails
+  highcharts-rails
   jbuilder (~> 2.0)
   jquery-rails
   kaminari (~> 0.16.3)

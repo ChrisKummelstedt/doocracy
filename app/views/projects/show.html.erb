@@ -6,11 +6,124 @@
 <h3>
  <%= image_tag @project.image.url(:thumb) %>
 </h3>
+<div id="container2" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 <p>
  <%= @project.description %>
+</p>
+<p>
+ <%= @project.total_budget %>
 </p>
 <% @project.teams.each do |team| %>
   <p> <%= link_to team.title, project_team_path(@project, team) %> </p>
   <p> <%= team.description %> </p>
 <% end %>
 <%= link_to "Create a Team", new_project_team_path(@project) %>
+<div id="container" style="width:100%; height:400px;"></div>
+<div id="container2" style="width:100%; height:400px;"></div>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Project budget breakdown between teams'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: "Team name",
+            colorByPoint: true,
+            data: [   <% @project.teams.each do |team| %> {
+                name: "<%=team.title%>",
+                y:10
+            }, <%end%>
+            ]
+        }]
+    });
+});
+</script>
+
+<script>
+$(function () {
+    $('#container2').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Project budget vs team budgets'
+        },
+        xAxis: {
+            categories: ['Team budgets', 'Project budget']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Estimated budgets'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        series: [ <% @project.teams.each do |team| %> {
+            name: "<%=team.title%>",
+            data: [5,0]
+        }, <%end%> {
+            name: "<%=@project.title%>",
+            data: [0, <%= @project.total_budget %>]
+        }
+        ]
+    });
+});
+
+</script>
