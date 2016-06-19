@@ -45,7 +45,7 @@
                     <% end %>
                   </tbody>
                 </table>
-                <%= link_to "Add team <span class='glyphicon glyphicon-plus-sign'></span>".html_safe, new_project_team_path(@project) %>
+                <%= link_to "Add team <span class='glyphicon glyphicon-plus-sign'></span>".html_safe, new_project_team_path(@project),  id: "Create a Team" %>
 
               </div>
             </div>
@@ -57,7 +57,7 @@
                 <tbody>
                   <% @project.teams.each do |team| %>
                   <tr>
-                    <td> <%= link_to team.title, project_team_path(@project, team) %> </td>
+                    <td> <%= team.title %></td>
                     <td> <%= team.users.each do |team_member| %>
                        <%=  team_member.user_name %>
                     <%  end %> </td>
