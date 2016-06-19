@@ -50,6 +50,6 @@ feature "Budget item" do
     fill_in("Cost per item", with: 3)
     click_button "Create Budget Item"
     click_link("delete budget item")
-    expect(page).to have_content("Total Budget: $0.00")
+    expect(page).to have_content("Total Budget: 0.0")
   end
 end

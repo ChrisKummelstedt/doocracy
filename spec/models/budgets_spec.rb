@@ -4,6 +4,6 @@ describe Budget, type: :model do
                   cost_per_item: "3")
   end
   it "adds total of budget items" do
-    expect(Budget.first.total(Budget.all)).to eq(9)
+    expect(Budget.first.sum(Budget.all)).to eq(9)
   end
 end

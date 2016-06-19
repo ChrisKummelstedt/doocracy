@@ -1,14 +1,6 @@
 class SkillsController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @user = current_user
-    @skills = Skills.all
-  end
-
-  def show
-  end
-
   def create
     @user = current_user
     @skill = @user.skills.create(skill_params)
