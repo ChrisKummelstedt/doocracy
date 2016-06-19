@@ -1,19 +1,49 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @inventory.name %>
-</p>
+  <h1>Inventory</h1>
 
-<p>
-  <strong>Title:</strong>
-  <%= @inventory.title %>
-</p>
+  <input type="hidden" id="inventoryID" value="<%= @inventory.id %>">
 
-<p>
-  <strong>Description:</strong>
-  <%= @inventory.description %>
-</p>
+  <p>
+    <b>Name: </b>
+    <%= @inventory.name %>
+  </p>
 
-<%= link_to 'Edit', edit_inventory_path(@inventory) %> |
-<%= link_to 'Back', inventories_path %>
+  <p>
+    <b>Description: </b>
+    <%= @inventory.description %>
+  </p>
+
+  <div class="form-actions">
+    <%= link_to 'Back', inventories_path, :class => 'btn btn-mini'  %>
+    <%= link_to 'Edit inventory', edit_inventory_path(@inventory), :class => 'btn btn-mini' %>
+    <%= link_to 'Delete inventory', inventory_path(@inventory), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
+  </div>
+
+<h2>Items</h2>
+
+
+<div class="row">
+  <ul class="thumbnails files">
+<% unless @items.empty? %>
+  <% @items.each do |pic| %>
+    <li class="span3" id="item_<%= pic.id %>">
+    <div class="thumbnail">
+      <%= image_tag pic.image.url %>
+      <div class="caption">
+        <p style="text-align: center;">
+        <%= link_to "Edit item", item_path(pic) %>
+
+        <%=
+          link_to "Delete item", pic,
+            :data => { :confirm => "Are you sure?" },
+            :method => :delete
+          %>
+
+        </p>
+      </div>
+    </div>
+    </li>
+  <% end %>
+<% end %>
+</ul>
+</div>

@@ -55,7 +55,7 @@ $(function () {
             colorByPoint: true,
             data: [   <% @project.teams.each do |team| %> {
                 name: "<%=team.title%>",
-                y:10
+                y: 20
             }, <%end%>
             ]
         }]
@@ -117,10 +117,10 @@ $(function () {
         },
         series: [ <% @project.teams.each do |team| %> {
             name: "<%=team.title%>",
-            data: [5,0]
+            data: [<%= team.team_budget%>,0]
         }, <%end%> {
             name: "<%=@project.title%>",
-            data: [0, <%= @project.total_budget %>]
+            data: [0, <%= @project.total_budget%>]
         }
         ]
     });
