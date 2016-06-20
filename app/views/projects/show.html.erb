@@ -65,7 +65,7 @@
                 <% @project.teams.each do |team| %>
                 <tr>
                   <td> <%= team.title %></td>
-                  <td> <%= team.users.each do |team_member| %>
+                  <td> <% team.users.each do |team_member| %>
                     <%=  team_member.user_name %>
                     <%  end %> </td>
                   </tr>
@@ -145,7 +145,7 @@ $(function () {
       colorByPoint: true,
       data: [   <% @project.teams.each do |team| %> {
         name: "<%=team.title%>",
-        y:10
+        y:<%=team.team_budget.to_i%>
       }, <%end%>
     ]
   }]
@@ -191,11 +191,11 @@ $(function () {
             textShadow: '0 0 3px black'
           }
         }
-      } 
+      }
     },
     series: [ <% @project.teams.each do |team| %> {
       name: "<%=team.title%>",
-      data: [5,0]
+      data: [<%=team.team_budget.to_i%>,0]
     }, <%end%> {
       name: "<%=@project.title%>",
       data: [0, <%= @project.total_budget %>]
