@@ -205,5 +205,30 @@ $(function () {
   ]
 });
 });
-
 </script>
+<h2> Budget Items </h2>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped">
+    <% @project.teams.each do |team| %>
+          <table class="table table-striped table-budget">
+            <h3><%= link_to team.title, project_team_path(@project, team) %></h3>
+            <thead>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Cost Per Item</th>
+            </thead>
+            <tbody>
+                <% team.budgets.each do |item| %>
+                  <tr>
+                    <td class="colA"><%=item.budget_item.capitalize %></td>
+                    <td class="colB"><%=item.quantity %></td>
+                    <td class="colC"><%=item.cost_per_item %></td>
+                  </tr>
+                <% end %>
+            </tbody>
+          </table>
+    <% end %>
+    </table>
+  </div>
+</div>
