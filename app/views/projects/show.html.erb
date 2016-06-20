@@ -53,7 +53,21 @@
               </tbody>
             </table>
             <%= link_to "Add team <span class='glyphicon glyphicon-plus-sign'></span>".html_safe, new_project_team_path(@project),  id: "Create a Team" %>
+          </div>
+        </div>
 
+        <p><b>Skills in the project</b></p>
+        <div class="panel panel-default">
+          <div class="panel-body">
+                <% skillarray = [] %>
+                <% @project.teams.each do |team| %>
+                  <% team.users.each do |member| %>
+                    <% member.skills.each do |talent| %>
+                    <% skillarray << talent.skill %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <%= skillarray.uniq.join(", ") %>
           </div>
         </div>
 
@@ -62,13 +76,16 @@
           <div class="panel-body">
             <table class="table table-striped">
               <tbody>
+
                 <% @project.teams.each do |team| %>
+                <% teamarray = [] %>
                 <tr>
                   <td> <%= team.title %></td>
                   <td>
                     <% team.users.each do |team_member| %>
-                    <%=  team_member.user_name %>
+                    <% teamarray << team_member.user_name %>
                   <% end %>
+                  <%= teamarray.uniq.join(", ") %>
                   </td>
                 </tr>
                 <% end %>

@@ -9,12 +9,12 @@ class TeamsController < ApplicationController
 
   def create
     @team = @project.teams.build(team_params)
-    current_user.teams << @team
     if @team.save
+      current_user.teams << @team
       flash[:notice] = 'Team created successfully'
       redirect_to project_path(@project)
     else
-      flash[:notice] = 'Team not created'
+      flash[:notice] = 'Team not created, it needs a title and a description first'
       redirect_to request.referer
     end
   end
