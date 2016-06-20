@@ -65,9 +65,9 @@
                 <% @project.teams.each do |team| %>
                 <tr>
                   <td> <%= team.title %></td>
-                  <td> <% team.users.each do |team_member| %>
-                        <%=  team_member.user_name %>
-                       <%  end %> </td>
+                  <td> <%= team.users.each do |team_member| %>
+                    <%=  team_member.user_name %>
+                    <%  end %> </td>
                   </tr>
                   <% end %>
                 </tbody>
@@ -145,7 +145,7 @@ $(function () {
       colorByPoint: true,
       data: [   <% @project.teams.each do |team| %> {
         name: "<%=team.title%>",
-        y:<%=team.team_budget.to_i%>
+        y:10
       }, <%end%>
     ]
   }]
@@ -195,7 +195,7 @@ $(function () {
     },
     series: [ <% @project.teams.each do |team| %> {
       name: "<%=team.title%>",
-      data: [<%=team.team_budget.to_i%>,0]
+      data: [5,0]
     }, <%end%> {
       name: "<%=@project.title%>",
       data: [0, <%= @project.total_budget %>]
@@ -203,5 +203,30 @@ $(function () {
   ]
 });
 });
-
 </script>
+<h2> Budget Items </h2>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped">
+    <% @project.teams.each do |team| %>
+          <table class="table table-striped table-budget">
+            <h3><%= link_to team.title, project_team_path(@project, team) %></h3>
+            <thead>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Cost Per Item</th>
+            </thead>
+            <tbody>
+                <% team.budgets.each do |item| %>
+                  <tr>
+                    <td class="colA"><%=item.budget_item.capitalize %></td>
+                    <td class="colB"><%=item.quantity %></td>
+                    <td class="colC"><%=item.cost_per_item %></td>
+                  </tr>
+                <% end %>
+            </tbody>
+          </table>
+    <% end %>
+    </table>
+  </div>
+</div>

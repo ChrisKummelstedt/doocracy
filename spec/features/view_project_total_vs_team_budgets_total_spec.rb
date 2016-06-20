@@ -6,7 +6,7 @@ feature "viewing graph of team budgets vs project budget" do
   scenario "Can see a graph of team budgets vs project budget" do
     create_project
     create_team
-    click_link "Coding Team"
+    first('.table').click_link "Coding Team"
     create_team_budget
     click_link "awesome project title"
     expect(page).to have_content("awesome project title")
