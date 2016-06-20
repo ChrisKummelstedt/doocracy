@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-
+  root 'projects#index'
   resources :items
   resources :inventories
-  devise_for :users, :controllers => { registrations: 'registrations' }
-
-  root 'projects#index'
-
+  devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
   match "/my-projects" => "projects#mine", :via => :get, :as => :my_projects
 
   get ':user_name', to: 'profiles#show', as: :profile
