@@ -1,32 +1,39 @@
 <div class="page-container">
   <div class="page-wrapper">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="jumbotron" id="index-jumbo">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="img-circle">
+                <%= profile_avatar_select(current_user) %>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <h3><%= @project.title %></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="col-md-9">
 
-    <div class="jumbotron" id="index-jumbo">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="img-circle">
-            <%= profile_avatar_select(current_user) %>
+            <h3>So what's this about?</h3>
+            <p><%= @project.description %></p>
           </div>
-        </div>
-        <div class="col-md-8">
-          <h3><%= @project.title %></h3>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-9">
-        <h3>So what's this about?</h3>
-        <p><%= @project.description %></p>
-      </div>
-      <div class="col-md-3">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4><span class="glyphicon glyphicon-piggy-bank"></span> <%= @project.total_budget %> $</h4>
-            <h4><span class="glyphicon glyphicon-heart"></span> <%= @project.teams.size %> teams</h4>
+
+          <div class="col-md-3">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h4><span class="glyphicon glyphicon-piggy-bank"></span> <%= @project.total_budget %> $</h4>
+                <h4><span class="glyphicon glyphicon-heart"></span> <%= @project.teams.size %> teams</h4>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     <div class="panel panel-default">
       <div class="panel-body">
         <h3>  <%= @project.title %> Teams</h3>
@@ -41,62 +48,62 @@
                   <td> <%= team.users.all.size %> </td>
                   <td> <%= team.description %> </td>
                   <td> <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, project_team_path(@project, team) %></td>
-                  </tr>
-                    <% end %>
-                  </tbody>
-                </table>
-                <%= link_to "Add team <span class='glyphicon glyphicon-plus-sign'></span>".html_safe, new_project_team_path(@project),  id: "Create a Team" %>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%= link_to "Add team <span class='glyphicon glyphicon-plus-sign'></span>".html_safe, new_project_team_path(@project),  id: "Create a Team" %>
 
-              </div>
-            </div>
+          </div>
+        </div>
 
-          <p><b>Team members</b></p>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <table class="table table-striped">
-                <tbody>
-                  <% @project.teams.each do |team| %>
-                  <tr>
-                    <td> <%= team.title %></td>
-                    <td> <%= team.users.each do |team_member| %>
-                       <%=  team_member.user_name %>
+        <p><b>Team members</b></p>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table table-striped">
+              <tbody>
+                <% @project.teams.each do |team| %>
+                <tr>
+                  <td> <%= team.title %></td>
+                  <td> <%= team.users.each do |team_member| %>
+                    <%=  team_member.user_name %>
                     <%  end %> </td>
-                    </tr>
+                  </tr>
                   <% end %>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
 
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h3> <%= @project.title.split.map(&:capitalize).join(' ') %> Budget</h3>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3> <%= @project.title.split.map(&:capitalize).join(' ') %> Budget</h3>
 
 
-            <p><b>Planned budget compared to current budget</b></p>
-            <p><%= @project.title %> is configured to display a suggested budget of <%= @project.total_budget %>. This value is compared below to give us a chance to see how the sum of all team budgets compare to the total budget anticipated for the project.</p>
-          </br>
+          <p><b>Planned budget compared to current budget</b></p>
+          <p><%= @project.title %> is configured to display a suggested budget of <%= @project.total_budget %>. This value is compared below to give us a chance to see how the sum of all team budgets compare to the total budget anticipated for the project.</p>
         </br>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div id="barchart" style="min-width: 310px; height: 400px; max-width: 620px; margin: 0 auto"></div>
-          </br>
+      </br>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div id="barchart" style="min-width: 310px; height: 400px; max-width: 620px; margin: 0 auto"></div>
         </br>
-      </div>
-    </div>
-    <p>The suggested total budget for <%= @project.title %> is <%= @project.total_budget %>. The sum of budget items from all teams is currently 100. This means that we are currently at <b><%= ((@project.total_budget.to_i)/5).to_f %>% </b> of the suggested total.</p>
-
-    <p><b>Budget breakdown by team</b></p>
-    <p><%= @project.title %> has <%= @project.teams.size %> teams. The total for all teams amount to <%= @project.total_budget %>.
-    </br>
-  </br>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div id="piechart" style="min-width: 310px; height: 400px; max-width: 620px; margin: 0 auto"></div>
+      </br>
     </div>
   </div>
+  <p>The suggested total budget for <%= @project.title %> is <%= @project.total_budget %>. The sum of budget items from all teams is currently 100. This means that we are currently at <b><%= ((@project.total_budget.to_i)/5).to_f %>% </b> of the suggested total.</p>
+
+  <p><b>Budget breakdown by team</b></p>
+  <p><%= @project.title %> has <%= @project.teams.size %> teams. The total for all teams amount to <%= @project.total_budget %>.
+  </br>
+</br>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div id="piechart" style="min-width: 310px; height: 400px; max-width: 620px; margin: 0 auto"></div>
+  </div>
+</div>
 </br>
 </br>
 </div>
