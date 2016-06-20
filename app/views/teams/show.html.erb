@@ -9,9 +9,8 @@
   <input type="hidden" name="project_id" value="<%= @project.id %>">
   <input type="submit" value="Join Team" class="button" >
 </form>
-
+<%= button_to "Leave Team", project_team_leave_team_path(@project, @team), method: :delete, class: 'btn-danger btn-block', data: { confirm: "Are you sure?" } %>
 
 <%= render "budgets/index" %>
 
 <%= link_to "Edit", edit_project_team_path(@project, @team) %>
-<%= link_to "Delete", project_team_path(@project, @team), method: :delete %>

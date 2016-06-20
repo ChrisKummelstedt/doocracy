@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :teams do
       get 'join_team' => 'teams#join_team'
+      delete 'leave_team' => 'teams#leave_team'
       resources :budgets
     end
   end

@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_project
-  before_action :set_team, except: [:new, :create]
+  before_action :set_team, except: [:new, :create, :leave_team]
   # before_action :authenticate_user!, except: [:index]
 
   def new
@@ -28,6 +28,14 @@ class TeamsController < ApplicationController
   def join_team
     @team.users << current_user
     flash[:notice] = "Successfully Join Team"
+    redirect_to project_team_path(@project, @team)
+  end
+
+  def leave_team
+    @team = Team.find params[:team_id]
+    current_user.team_ids = nil
+    current_user.save
+    flash[:notice] = "Successfully Left Team"
     redirect_to project_team_path(@project, @team)
   end
 
