@@ -14,10 +14,10 @@ class BudgetsController < ApplicationController
   def destroy
     @budget = @team.budgets.find(params[:id])
     @budget.destroy
-    if @budgets.first == nil
+    if @budget.nil?
       @team.team_budget = 0.to_f
     else
-      @team.team_budget = (@budgets.first.sum(@budgets).to_f)
+      @team.team_budget = (@budget.sum(@budgets).to_f)
     end
     @team.save
     respond_to do |format|
