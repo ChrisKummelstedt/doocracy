@@ -23,8 +23,10 @@
             </br>
             </br>
               <%= f.button :submit, "Sign up", class: 'btn-lg btn-info btn-block' %>
-            </div>
           <% end %>
+            
+            <%=link_to( image_tag(image_url('login_with_facebook.png')), user_facebook_omniauth_authorize_path) %>
+          </div>
         </div>
       </div>
     </div>
