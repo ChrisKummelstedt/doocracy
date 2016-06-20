@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :projects
 
 
-  validates_uniqueness_of :user_name
+  validates_uniqueness_of :email
 
   has_and_belongs_to_many :skills
 
@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
+      user.user_name = auth.info.first_name   # assuming the user model has a name
+      # user.image = auth.info.image # assuming the user model has an image
     end
   end
 
