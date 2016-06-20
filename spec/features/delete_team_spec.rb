@@ -5,7 +5,7 @@ feature "Delete a Team" do
   scenario "Deleting a team correctly" do
     create_project
     create_team
-    click_link("Coding Team")
+    first('.table').click_link("Coding Team")
     click_link("Delete")
     expect(page).should_not have_content("Coding Team")
     expect(page).should_not have_content("Code Stuff")

@@ -5,7 +5,7 @@ feature "Edit a Team" do
   scenario "Editing a team correctly" do
     create_project
     create_team
-    click_link("Coding Team")
+    first('.table').click_link("Coding Team")
     click_link("Edit")
     fill_in("team_title", with: "Coding Team2")
     fill_in("team_description", with: "Code Stuff2")

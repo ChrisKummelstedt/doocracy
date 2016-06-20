@@ -6,7 +6,7 @@ feature "Budget item" do
   scenario "adding a budget item" do
     create_project
     create_team
-    click_link "Coding Team"
+    first('.table').click_link "Coding Team"
     fill_in("Budget item", with: "Hammer")
     fill_in("Quantity", with: 1)
     fill_in("Cost per item", with: 3)
@@ -19,7 +19,7 @@ feature "Budget item" do
   scenario "delete a budget item" do
     create_project
     create_team
-    click_link "Coding Team"
+    first('.table').click_link "Coding Team"
     fill_in("Budget item", with: "Hammer")
     fill_in("Quantity", with: 1)
     fill_in("Cost per item", with: 3)
@@ -33,7 +33,7 @@ feature "Budget item" do
   scenario "adding a budget item updates team budget total" do
     create_project
     create_team
-    click_link "Coding Team"
+    first('.table').click_link "Coding Team"
     fill_in("Budget item", with: "Hammer")
     fill_in("Quantity", with: 1)
     fill_in("Cost per item", with: 3)
@@ -44,7 +44,7 @@ feature "Budget item" do
   scenario "delete a budget item" do
     create_project
     create_team
-    click_link "Coding Team"
+    first('.table').click_link "Coding Team"
     fill_in("Budget item", with: "Hammer")
     fill_in("Quantity", with: 1)
     fill_in("Cost per item", with: 3)
