@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :items
+  resources :inventories
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   root 'projects#index'
