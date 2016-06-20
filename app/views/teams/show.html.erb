@@ -4,14 +4,16 @@
 <% @users.each do |user| %>
   <p><%= user.user_name %></p>
 <% end %>
-<form method="get" action= "/projects/<%= @project.id %>/teams/<%= @team.id %>/join_team">
-  <input type="hidden" name="id" value="<%= @team.id %>" >
-  <input type="hidden" name="project_id" value="<%= @project.id %>">
-  <input type="submit" value="Join Team" class="button" >
-</form>
-
+<% if !Team.includes(:users).where(users: { id: current_user.id } ).any? %>
+  <form method="get" action= "/projects/<%= @project.id %>/teams/<%= @team.id %>/join_team">
+    <input type="hidden" name="id" value="<%= @team.id %>" >
+    <input type="hidden" name="project_id" value="<%= @project.id %>">
+    <input type="submit" value="Join Team" id="Join Team" class="btn-success btn-block" >
+  </form>
+<% else %>
+  <%= button_to "Leave Team", project_team_leave_team_path(@project, @team), method: :delete, class: 'btn-danger btn-block', data: { confirm: "Are you sure?" } %>
+<% end %>
 
 <%= render "budgets/index" %>
 
 <%= link_to "Edit", edit_project_team_path(@project, @team) %>
-<%= link_to "Delete", project_team_path(@project, @team), method: :delete %>

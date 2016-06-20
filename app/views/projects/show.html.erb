@@ -65,11 +65,13 @@
                 <% @project.teams.each do |team| %>
                 <tr>
                   <td> <%= team.title %></td>
-                  <td> <% team.users.each do |team_member| %>
+                  <td>
+                    <% team.users.each do |team_member| %>
                     <%=  team_member.user_name %>
-                    <%  end %> </td>
-                  </tr>
                   <% end %>
+                  </td>
+                </tr>
+                <% end %>
                 </tbody>
               </table>
             </div>
