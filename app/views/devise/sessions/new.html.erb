@@ -6,6 +6,7 @@
           <div class="panel-heading">
             <h2>Log in</h2>
           </div>
+          <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <%= f.error_notification %>
             <div class="panel-body">
