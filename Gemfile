@@ -28,7 +28,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
-gem 'aws-sdk', '>= 2.0.34'
+gem 'aws-sdk'
+gem 'aws-sdk-v1'
 
 
 # Use ActiveModel has_secure_password
