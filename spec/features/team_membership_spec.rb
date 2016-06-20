@@ -12,6 +12,17 @@ feature "Team Membership" do
     expect(page).to have_content("myUsername")
   end
 
+  scenario "Join team as not the creator" do
+    create_project
+    create_team
+    click_link ("Logout")
+    sign_up("asdf", "asdf@asdf.com")
+    click_link "awesome project title"
+    first('.table').click_link("Coding Team")
+    click_button("Join Team")
+    expect(page).to have_content("Successfully Join Team")
+  end
+
   scenario "leave a team correctly" do
     create_project
     create_team
