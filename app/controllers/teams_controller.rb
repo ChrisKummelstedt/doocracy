@@ -26,8 +26,12 @@ class TeamsController < ApplicationController
   end
 
   def join_team
-    @team.users << current_user
-    flash[:notice] = "Successfully Join Team"
+    if check_membership
+      flash[:alert] = "Already on team"
+    else
+      @team.users << current_user
+      flash[:notice] = "Successfully Join Team"
+    end
     redirect_to project_team_path(@project, @team)
   end
 
@@ -55,6 +59,10 @@ class TeamsController < ApplicationController
 
 
   private
+
+  def check_membership
+    Team.includes(:users).where(users: { id: current_user.id } ).any?
+  end
 
   def set_project
     @project = Project.find(params[:project_id])
