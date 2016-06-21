@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :tags
   resources :items
   resources :inventories
   devise_for :users, :controllers => { registrations: 'registrations' }

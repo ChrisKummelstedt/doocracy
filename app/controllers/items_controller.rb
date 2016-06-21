@@ -2,10 +2,13 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-
     @inventory = Inventory.find(params[:inventory_id])
 
-    @items = @inventory.items
+    if params[:tag]
+      @items = @inventory.items.tagged_with(params[:tag])
+    else
+      @items = @inventory.items
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -113,6 +116,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:description, :inventory_id, :image)
+    params.require(:item).permit(:description, :inventory_id, :image, :tag_list)
   end
 end

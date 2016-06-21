@@ -26,10 +26,17 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk'
 gem 'aws-sdk-v1'
+
+gem 'acts-as-taggable-on'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-chosen'
+end
+# Inventory
 
 
 # Use ActiveModel has_secure_password
