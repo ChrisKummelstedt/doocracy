@@ -30,6 +30,9 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
 gem 'aws-sdk', '>= 2.0.34'
 gem 'omniauth-facebook'
+
+#lets get it there
+
 gem 'omniauth-github'
 
 # Use ActiveModel has_secure_password
