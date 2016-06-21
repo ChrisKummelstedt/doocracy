@@ -1,4 +1,5 @@
-# // CAMP // 
+[![Coverage Status](https://coveralls.io/repos/github/ChrisKummelstedt/Camp_MVP/badge.svg?branch=master)](https://coveralls.io/github/ChrisKummelstedt/Camp_MVP?branch=master)
+# // CAMP //
 
 Purpose:
 
