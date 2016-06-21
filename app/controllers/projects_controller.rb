@@ -42,7 +42,6 @@ class ProjectsController < ApplicationController
   end
 
   def user_projects_path
-    @projects = current_user.projects(project_params)
   end
 
   private

@@ -26,9 +26,7 @@ class TeamsController < ApplicationController
   end
 
   def join_team
-    if check_membership
-      flash[:alert] = "Already on team"
-    else
+    if !check_membership
       @team.users << current_user
       flash[:notice] = "Successfully Join Team"
     end
