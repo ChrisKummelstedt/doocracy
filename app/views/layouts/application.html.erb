@@ -2,14 +2,12 @@
 <html>
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <title>CampMvp</title>
+  <title>Do/ocracy</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-
 
   <nav class="navbar navbar-default">
     <div class="navbar-container">
@@ -31,7 +29,6 @@
           <li><%= link_to "<span class='glyphicon glyphicon-user'></span>".html_safe, profile_path(current_user.user_name), :title => "My profile", :id => 'my-profile'  %> </li>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
           <% else %>
-          <li><%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></li>          
           <li><%= link_to "Login", new_user_session_path %></li>
           <li><%= link_to "Sign up", new_user_registration_path %></li>
           <% end %>
@@ -47,12 +44,6 @@
   </div>
 
   <%= yield %>
-
-
-
-
-
-
 
 </body>
 </html>
