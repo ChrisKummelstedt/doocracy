@@ -37,7 +37,7 @@
       <div class="project-index-wrapper">
         <div class="row">
           <div class="col-md-8">
-            <h3><%= link_to team.title, root_path %></h3>
+            <h3><%= link_to team.title, project_path(Project.find(team.project_id)) %></h3>
             <p><%= team.description %></p>
           </div>
         </div>
