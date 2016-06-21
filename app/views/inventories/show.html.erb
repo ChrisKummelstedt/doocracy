@@ -26,19 +26,23 @@
   <ul class="thumbnails files">
 <% unless @items.empty? %>
   <% @items.each do |pic| %>
+    Title:<%= pic.title %><br>
+    Description:<%= pic.description %>
     <li class="span3" id="item_<%= pic.id %>">
     <div class="thumbnail">
-      <%= image_tag pic.image.url %>
+      <%= image_tag pic.image.url(:medium) %>
       <div class="caption">
         <p style="text-align: center;">
-        <%= link_to "Edit item", item_path(pic) %>
+          <% @item = pic %>
+          <%= render 'items/form' %>
+        <%= link_to "Edit item", inventory_item_path(@inventory, pic) %>
 
         <%=
-          link_to "Delete item", pic,
+          link_to "Delete item", inventory_item_path(@inventory, pic),
             :data => { :confirm => "Are you sure?" },
             :method => :delete
           %>
- 
+
         </p>
       </div>
     </div>

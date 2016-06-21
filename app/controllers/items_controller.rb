@@ -16,7 +16,8 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-    @item = Item.find(params[:id])
+    @inventory = Inventory.find(params[:inventory_id])
+    @item = @inventory.items.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,9 +39,9 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
-    #@inventory = Inventory.find(params[:inventory_id])
+    @inventory = Inventory.find(params[:inventory_id])
 
-    @item = Item.find(params[:id])
+    @item = @inventory.items.find(params[:id])
     # @item = Item.find(params[:id])
   end
 
@@ -113,6 +114,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:description, :inventory_id, :image)
+    params.require(:item).permit(:title, :description, :inventory_id, :image)
   end
 end
