@@ -15,7 +15,7 @@ class InventoriesController < ApplicationController
   def show
     @inventory = Inventory.find(params[:id])
     @items = @inventory.items
-
+    tag_method
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @inventory }
@@ -100,5 +100,17 @@ class InventoriesController < ApplicationController
 
   def inventory_params
     params.require(:inventory).permit(:description, :name, :items)
+  end
+
+  def tag_method
+    @inventory = Inventory.find(params[:id])
+    @items = @inventory.items
+    @tags = []
+    @items.each do |item|
+      item.tags.each do |tag|
+        @tags << tag
+      end
+    end
+    @tags.uniq!.delete(nil)
   end
 end

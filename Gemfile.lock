@@ -51,6 +51,8 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.3.6.2)
       execjs
+    awesomplete (0.0.6)
+      rails (~> 4.0)
     aws-sdk (2.3.13)
       aws-sdk-resources (= 2.3.13)
     aws-sdk-core (2.3.13)
@@ -262,6 +264,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesomplete
   aws-sdk
   aws-sdk-v1
   bootstrap-sass (~> 3.3.6)

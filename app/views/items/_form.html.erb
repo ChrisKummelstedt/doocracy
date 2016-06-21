@@ -4,6 +4,7 @@
   <div class="form-inputs">
     <%= f.input :title %>
     <%= f.input :description %>
+    <%= f.awesomplete_field(:tags, collection: @tags) %>
   </div>
 
   <div class="form-actions">

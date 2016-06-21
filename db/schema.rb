@@ -38,8 +38,9 @@ ActiveRecord::Schema.define(version: 20160619183953) do
   create_table "items", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.text     "tags",               default: [],              array: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "inventory_id"
     t.string   "image_file_name"
     t.string   "image_content_type"

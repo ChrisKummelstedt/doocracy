@@ -30,6 +30,7 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
 gem 'aws-sdk'
 gem 'aws-sdk-v1'
+gem 'awesomplete'
 
 
 # Use ActiveModel has_secure_password

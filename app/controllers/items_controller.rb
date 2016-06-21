@@ -69,11 +69,13 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.json
   def update
-
+    p params
     @inventory = Inventory.find(params[:inventory_id])
-
     @item = @inventory.items.find(params[:id])
-
+    @item.update(item_params)
+    params[:tags].split(",").each do |tag|
+      @item.tags << tag.strip.capitalize
+    end
     respond_to do |format|
       if @item.update_attributes(item_params)
         format.html { redirect_to inventory_path(@inventory), notice: 'Item was successfully updated.' }
