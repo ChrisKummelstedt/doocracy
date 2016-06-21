@@ -13,4 +13,13 @@ feature "Sign in with Facebook" do
     expect(current_path).to eq('/')
     expect(page).to have_link"Logout"
   end
+
+  it "redirects to sign up page when facebook fails" do
+    OmniAuth.config.mock_auth[:facebook] = :invalid_credentials
+    visit '/'
+    click_link_or_button('Sign up')
+    find_link("Sign in with Facebook").click
+    expect(page).to have_content"Login"
+    expect(current_path).to eq('/users/sign_up')
+  end
 end
