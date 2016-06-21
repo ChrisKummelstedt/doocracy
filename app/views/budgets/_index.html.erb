@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <%= f.label :cost_per_item %>
-    <%= f.number_field :cost_per_item, required: true %>
+    <%= f.number_field :cost_per_item, required: true, step: "any" %>
   </div>
 
   <div class="form-group" id="add_item">

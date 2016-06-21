@@ -116,7 +116,7 @@
       </br>
     </div>
   </div>
-  <p>The suggested total budget for <%= @project.title %> is <%= @project.total_budget %>. The sum of budget items from all teams is currently <%=@project.teams.sum(:team_budget) %>. This means that we are currently at <b><%= ((@project.teams.sum(:team_budget).to_i)/(@project.total_budget.to_i)) * 100 %>% </b> of the suggested total.</p>
+  <p>The suggested total budget for <%= @project.title %> is <%= @project.total_budget %>. The sum of budget items from all teams is currently <%=@project.teams.sum(:team_budget) %>. This means that we are currently at <b><%= ((@project.teams.sum(:team_budget))/(@project.total_budget)) * 100 %>% </b> of the suggested total.</p>
 
   <p><b>Budget breakdown by team</b></p>
   <p><%= @project.title %> has <%= @project.teams.size %> teams. The total for all teams amount to <%= @project.total_budget %>.

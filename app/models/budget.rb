@@ -7,6 +7,6 @@ class Budget < ActiveRecord::Base
     budgets.each do |budget|
       sum += budget.quantity * budget.cost_per_item
     end
-    return sum
+    return sum.round(2)
   end
 end
