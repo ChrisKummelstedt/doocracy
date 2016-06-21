@@ -12,6 +12,7 @@ require 'shoulda-matchers'
 require 'webmock/rspec'
 require 'json'
 require "rails_helper"
+# require "support/omniauth"
 OmniAuth.config.test_mode = true
 omniauth_hash =
     {:provider => "facebook",
