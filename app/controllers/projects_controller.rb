@@ -11,6 +11,8 @@ class ProjectsController < ApplicationController
 
   def mine
     @my_projects = current_user.projects
+    @my_teams = current_user.teams
+    # @project = Project.find_by_team_id(@my_teams.id)
   end
 
   def edit
@@ -37,11 +39,12 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)
     if @project.save
-    flash[:notice] = "Your project has been created."
-    redirect_to project_path(@project)
+      flash[:notice] = "Your project has been created."
+      redirect_to project_path(@project)
+    else
+      flash[:notice] = "Your project has not been created, you left something blank."
+      redirect_to request.referer
     end
-    flash[:notice] = "Your project has not been created, you left something blank."
-    redirect_to request.referer
   end
 
   def user_projects_path

@@ -32,5 +32,20 @@
     <% end %>
     <% end %>
 
+      <% @my_teams.each do |team| %>
+    <div class="project-index-container">
+      <div class="project-index-wrapper">
+        <div class="row">
+          <div class="col-md-8">
+            <h3><%= link_to team.title, root_path %></h3>
+            <p><%= team.description %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+
   </div>
+</div>
 </div>
