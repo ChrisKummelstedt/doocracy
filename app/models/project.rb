@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
 
-  validates :user_id, :title, :description, presence: true
+  validates :user_id, :title, :description, :total_budget, presence: true
   belongs_to :user
   has_many :teams
 

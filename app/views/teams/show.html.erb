@@ -12,8 +12,10 @@
   </form>
 <% else %>
   <%= button_to "Leave Team", project_team_leave_team_path(@project, @team), method: :delete, class: 'btn-danger btn-block', data: { confirm: "Are you sure?" } %>
+  <%= render "budgets/index" %>
+  <%= link_to "Edit", edit_project_team_path(@project, @team) %>
 <% end %>
 
-<%= render "budgets/index" %>
 
-<%= link_to "Edit", edit_project_team_path(@project, @team) %>
+
+

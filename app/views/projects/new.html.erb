@@ -9,15 +9,15 @@
         <%= simple_form_for @project, html: { multipart: true } do |f| %>
         <h3>1. What is this glory called?</h3>
         <div class="form-group-project text-center">
-          <%= f.input :title,  label: false, placeholder: 'What is it called?' %>
+          <%= f.input :title, required: true, label: false, placeholder: 'What is it called?' %>
         </div>
         <h3>2. Tell us more!</h3>
         <div class="form-group-project text-center">
-          <%= f.input :description, label: false, placeholder: 'Describe this awesomness' %>
+          <%= f.input :description, required: true, label: false, placeholder: 'Describe this awesomness' %>
         </div>
         <h3>3. Do you have a vauge sense of the budget yet?</h3>
         <div class="form-group ">
-          <%= f.input :total_budget, label: false, placeholder: '0' %>
+          <%= f.input :total_budget, required: true, label: false, placeholder: '0' %>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">

@@ -36,9 +36,12 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(project_params)
-    @project.save
+    if @project.save
     flash[:notice] = "Your project has been created."
     redirect_to project_path(@project)
+    end
+    flash[:notice] = "Your project has not been created, you left something blank."
+    redirect_to request.referer
   end
 
   def user_projects_path
