@@ -32,5 +32,31 @@
     <% end %>
     <% end %>
 
+    <% if current_user.teams.size == 0 %>
+    <div class="jumbotron" id="index-jumbo">
+      <h3> <%= current_user.user_name %>'s team memberships</h3>
+      <p>You have not yet joined or added any teams.</p>
+    </div>
+    <% else %>
+    <div class="jumbotron" id="index-jumbo">
+      <h3> <%= current_user.user_name %>'s team membership</h3>
+      <p>These are teams you are on.</p>
+    </div>
+      <% @my_teams.each do |team| %>
+    <div class="project-index-container">
+      <div class="project-index-wrapper">
+        <div class="row">
+          <div class="col-md-8">
+            <h3><%= link_to team.title, project_path(Project.find(team.project_id)) %></h3>
+            <p><%= team.description %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+
+
   </div>
+</div>
 </div>

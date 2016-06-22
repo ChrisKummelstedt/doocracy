@@ -10,6 +10,5 @@ feature "Add a project" do
     expect(page).to have_content("awesome project title")
     expect(page).to have_content("Looks like an awesome")
     expect(page).to have_content("1000")
-    expect(page).to have_css("img[src*='project-puzzle.jpg']")
   end
 end

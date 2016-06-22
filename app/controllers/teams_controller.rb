@@ -1,21 +1,23 @@
 class TeamsController < ApplicationController
   before_action :set_project
   before_action :set_team, except: [:new, :create, :leave_team]
-  # before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, only: [:show]
 
   def new
     @team = @project.teams.build
   end
 
   def create
-    @team = @project.teams.build(team_params)
-    if @team.save
-      current_user.teams << @team
-      flash[:notice] = 'Team created successfully'
-      redirect_to project_path(@project)
-    else
-      flash[:notice] = 'Team not created, it needs a title and a description first'
-      redirect_to request.referer
+    if current_user
+      @team = @project.teams.build(team_params)
+      if @team.save
+        current_user.teams << @team
+        flash[:notice] = 'Team created successfully'
+        redirect_to project_path(@project)
+      else
+        flash[:notice] = 'Team not created, it needs a title and a description first'
+        redirect_to request.referer
+      end
     end
   end
 
@@ -53,8 +55,10 @@ class TeamsController < ApplicationController
   end
 
   def update
-    @team.update(team_params)
-    redirect_to project_team_path(@project, @team)
+    if Team.includes(:users).where(users: { id: current_user.id } ).any?
+      @team.update(team_params)
+      redirect_to project_team_path(@project, @team)
+    end
   end
 
 

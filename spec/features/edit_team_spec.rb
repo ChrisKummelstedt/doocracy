@@ -13,4 +13,14 @@ feature "Edit a Team" do
     expect(page).to have_content("Coding Team2")
     expect(page).to have_content("Code Stuff2")
   end
+
+  scenario "Can't edit a team if your not part of the team" do
+    create_project
+    create_team
+    click_link("Logout")
+    visit("/")
+    click_link("awesome project title")
+    first('.table').click_link("Coding Team")
+    expect(page).to have_content("You need to sign in or sign up before continuing.")
+  end
 end
