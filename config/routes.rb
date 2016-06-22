@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :itemtags
   resources :inventories do
     resources :items
   end

@@ -74,7 +74,7 @@ class ItemsController < ApplicationController
     @item = @inventory.items.find(params[:id])
     @item.update(item_params)
     params[:tags].split(",").each do |tag|
-      @item.tags << tag.strip.capitalize
+      Itemtag.new(tag.strip.capitalize)
     end
     respond_to do |format|
       if @item.update_attributes(item_params)
