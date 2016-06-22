@@ -19,6 +19,10 @@
         <div class="form-group ">
           <%= f.input :total_budget, required: true, label: false, placeholder: '0' %>
         </div>
+        <h3>4. Where will your project be based?</h3>
+        <div class="form-group-project text-center">
+          <%= f.input :address, required: true, label: false, placeholder: 'Street Name, City, Country' %>
+        </div><br><br>
         <div class="row">
           <div class="col-md-12 text-center">
             <%= f.error_notification %>

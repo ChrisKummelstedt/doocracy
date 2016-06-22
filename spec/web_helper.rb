@@ -30,11 +30,15 @@ def create_skill
 end
 
 def create_project
+	stub_request(:get, "http://maps.googleapis.com/maps/api/geocode/json?address=oxford%20street,%20london,%20england&language=en&sensor=false").
+          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+          to_return(:status => 200, :headers => {})
 	sign_up
 	click_link "create-a-new-project"
 	fill_in("project_title", with: "awesome project title")
 	fill_in("project_description", with: "Looks like an awesome")
 	fill_in("project_total_budget", with: 1000)
+	fill_in("project_address", with: "oxford street, london, england")
 	attach_file('Image', "spec/files/images/project-puzzle.jpg")
 	click_button "Create Project"
 end
