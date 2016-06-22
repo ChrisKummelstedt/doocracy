@@ -1,53 +1,51 @@
 
-  <h1>Inventory</h1>
+<h1>Inventory</h1>
 
-  <input type="hidden" id="inventoryID" value="<%= @inventory.id %>">
+<input type="hidden" id="inventoryID" value="<%= @inventory.id %>">
 
-  <p>
-    <b>Name: </b>
-    <%= @inventory.name %>
-  </p>
+<p>
+  <b>Name: </b>
+  <%= @inventory.name %>
+</p>
 
-  <p>
-    <b>Description: </b>
-    <%= @inventory.description %>
-  </p>
+<p>
+  <b>Description: </b>
+  <%= @inventory.description %>
+</p>
 
-  <div class="form-actions">
-    <%= link_to 'Back', inventories_path, :class => 'btn btn-mini'  %>
-    <%= link_to 'Edit inventory', edit_inventory_path(@inventory), :class => 'btn btn-mini' %>
-    <%= link_to 'Delete inventory', inventory_path(@inventory), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
-  </div>
+<div class="form-actions">
+  <%= link_to 'Back', inventories_path, :class => 'btn btn-mini'  %>
+  <%= link_to 'Edit inventory', edit_inventory_path(@inventory), :class => 'btn btn-mini' %>
+  <%= link_to 'Delete inventory', inventory_path(@inventory), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
+</div>
 
 <h2>Items</h2>
 
-
 <div class="row">
   <ul class="thumbnails files">
-<% unless @items.empty? %>
-  <% @items.each do |pic| %>
+    <% unless @items.empty? %>
+    <% @items.each do |pic| %>
     Title:<%= pic.title %><br>
     Description:<%= pic.description %>
-    <li class="span3" id="item_<%= pic.id %>">
-    <div class="thumbnail">
-      <%= image_tag pic.image.url(:medium) %>
-      <div class="caption">
-        <p style="text-align: center;">
-          <% @item = pic %>
-          <%= render 'items/form' %>
-        <%= link_to "Edit item", inventory_item_path(@inventory, pic) %>
+    Tags:<%= raw pic.tag_list.map { |t| link_to t, inventory_tag_path(@inventory.id, t) }.join(', ') %>
 
-        <%=
-          link_to "Delete item", inventory_item_path(@inventory, pic),
+    <li class="span3" id="item_<%= pic.id %>">
+      <div class="thumbnail">
+        <%= image_tag pic.image.url(:medium) %>
+        <div class="caption">
+          <p style="text-align: center;">
+            <% @item = pic %>
+            <%= render 'items/form' %>
+            <%=
+            link_to "Delete item", inventory_item_path(@inventory, pic),
             :data => { :confirm => "Are you sure?" },
             :method => :delete
-          %>
-
-        </p>
+            %>
+          </p>
+        </div>
       </div>
-    </div>
     </li>
-  <% end %>
-<% end %>
-</ul>
+    <% end %>
+    <% end %>
+  </ul>
 </div>

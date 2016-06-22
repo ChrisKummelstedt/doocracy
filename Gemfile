@@ -30,8 +30,10 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
 gem 'aws-sdk'
 gem 'aws-sdk-v1'
-gem 'awesomplete'
-
+gem 'acts-as-taggable-on'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-chosen'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

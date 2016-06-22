@@ -14,11 +14,32 @@ class InventoriesController < ApplicationController
   # GET /inventories/1.json
   def show
     @inventory = Inventory.find(params[:id])
-    @items = @inventory.items
-    tag_method
+
+    if params[:tag]
+      @items = @inventory.items.tagged_with(params[:tag])
+    else
+      @items = @inventory.items
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @inventory }
+    end
+  end
+
+  def filter
+    p @inventory = Inventory.find(params[:inventory_id])
+
+    if params[:tag]
+      p @items = @inventory.items.tagged_with(params[:tag])
+    else
+      @items = @inventory.items
+    end
+
+
+    respond_to do |format|
+      format.html # show.html.erb
+      p format.json { render json: @inventory }
     end
   end
 
@@ -102,15 +123,4 @@ class InventoriesController < ApplicationController
     params.require(:inventory).permit(:description, :name, :items)
   end
 
-  def tag_method
-    @inventory = Inventory.find(params[:id])
-    @items = @inventory.items
-    @tags = []
-    @items.each do |item|
-      item.tags.each do |tag|
-        @tags << tag
-      end
-    end
-    @tags.uniq!.delete(nil)
-  end
 end

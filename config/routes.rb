@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-
-  resources :itemtags
   resources :inventories do
     resources :items
+    resources :tags, except: :show
+    get 'tags/:tag', to: 'inventories#filter'
   end
   devise_for :users, :controllers => { registrations: 'registrations' }
 

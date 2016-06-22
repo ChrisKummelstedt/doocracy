@@ -2,9 +2,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-
     @inventory = Inventory.find(params[:inventory_id])
-
     @items = @inventory.items
 
     respond_to do |format|
@@ -69,13 +67,10 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.json
   def update
-    p params
     @inventory = Inventory.find(params[:inventory_id])
     @item = @inventory.items.find(params[:id])
     @item.update(item_params)
-    params[:tags].split(",").each do |tag|
-      Itemtag.new(tag.strip.capitalize)
-    end
+
     respond_to do |format|
       if @item.update_attributes(item_params)
         format.html { redirect_to inventory_path(@inventory), notice: 'Item was successfully updated.' }
@@ -116,6 +111,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:title, :description, :inventory_id, :image)
+    params.require(:item).permit(:title, :description, :inventory_id, :image, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
   end
 end
