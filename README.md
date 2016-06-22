@@ -42,6 +42,10 @@ After installation run rspec.
 
 **Nick Richards**
 
+### Heroku
+
+http://doocracy.herokuapp.com/
+
 
 
 
