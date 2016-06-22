@@ -12,7 +12,6 @@ class ProjectsController < ApplicationController
   def mine
     @my_projects = current_user.projects
     @my_teams = current_user.teams
-    # @project = Project.find_by_team_id(@my_teams.id)
   end
 
   def edit
@@ -49,6 +48,9 @@ class ProjectsController < ApplicationController
 
   def user_projects_path
     @projects = current_user.projects(project_params)
+  end
+
+  def about
   end
 
   private
