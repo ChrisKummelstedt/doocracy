@@ -1,5 +1,13 @@
 
 <h1>Inventory</h1>
+<script>
+  $(document).on('page:change', function () {
+    $('.tag-collection-form').chosen({
+      allow_single_deselect: true,
+      width: '100%'
+    })
+  });
+</script
 
 <input type="hidden" id="inventoryID" value="<%= @inventory.id %>">
 

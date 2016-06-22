@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :tags, except: :show
     get 'tags/:tag', to: 'inventories#filter'
   end
+
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   root 'projects#index'

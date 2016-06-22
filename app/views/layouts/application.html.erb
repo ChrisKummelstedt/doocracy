@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <title>CampMvp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 
@@ -48,16 +51,6 @@
   <%= yield %>
 
 
-
-
-  <script>
-  $(document).on('ready page:load', function () {
-    $('.tag-collection-form').chosen({
-      allow_single_deselect: true,
-      width: '100%'
-    })
-  });
-  </script>
 
 
 </body>
