@@ -4,11 +4,14 @@
 $(document).ready(function() {
   $('input.taggable').each(function() {
     $(this).select2({
-      tags: $(this).data('tags'),
+
+      tags, true,
       tokenSeparators: [',', ' ']
       });
     });
 });
+
+
 </script>
 
 <input type="hidden" id="inventoryID" value="<%= @inventory.id %>">
