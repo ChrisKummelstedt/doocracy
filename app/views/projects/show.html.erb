@@ -130,7 +130,11 @@
 </br>
 </br>
 </div>
-
+<div align="center">
+  <h3> <%= @project.title.split.map(&:capitalize).join(' ') %>'s Location</h3>
+  <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@project.latitude},#{@project.longitude}&markers=#{@project.latitude},#{@project.longitude}&zoom=15&size=640x400&key=AIzaSyCZ4K0_zcXxMjm6RwvYCczETWkr0CELFy4",
+                class: 'img-fluid img-rounded', alt: "#{@project.title} on the map"%>
+</div><br><br>
 </div>
 </div>
 
@@ -226,6 +230,7 @@ $(function () {
 });
 });
 </script>
+
 <h2> Budget Items </h2>
 <div class="panel panel-default">
   <div class="panel-body">

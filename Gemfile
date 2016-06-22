@@ -3,6 +3,7 @@ gem 'devise'
 gem 'kaminari', '~> 0.16.3'
 gem 'simple_form'
 gem "highcharts-rails"
+gem 'geocoder'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
