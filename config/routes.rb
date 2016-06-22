@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :inventories
   devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
   match "/my-projects" => "projects#mine", :via => :get, :as => :my_projects
+  match "/about" => "projects#about", :via => :get, :as => :about
 
   get ':user_name', to: 'profiles#show', as: :profile
   get ':user_name/edit', to: 'profiles#edit', as: :edit_profile
