@@ -28,10 +28,10 @@ class InventoriesController < ApplicationController
   end
 
   def filter
-    p @inventory = Inventory.find(params[:inventory_id])
+    @inventory = Inventory.find(params[:inventory_id])
 
     if params[:tag]
-      p @items = @inventory.items.tagged_with(params[:tag])
+      @items = @inventory.items.tagged_with(params[:tag])
     else
       @items = @inventory.items
     end
@@ -39,7 +39,7 @@ class InventoriesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      p format.json { render json: @inventory }
+      format.json { render json: @inventory }
     end
   end
 
