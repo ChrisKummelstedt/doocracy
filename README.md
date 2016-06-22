@@ -15,6 +15,7 @@ By minimising the need for a central bureaucrat to make and approve decisions re
 
 ### Getting Started
 
+```
 Clone this repo to your local machine (git clone https://github.com/ChrisKummelstedt/Camp_MVP.git).
 
 Run **bundle install** to install gems.
@@ -24,6 +25,8 @@ Run **rake db:migrate** to set up migrations in development and test environment
 Run rails s to start your local server.
 
 Visit **localhost:3000/**
+
+```
 
 ### Running the tests
 
