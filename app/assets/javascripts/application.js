@@ -13,8 +13,8 @@
 
 //= require jquery
 //= require turbolinks
+//= require select2
 //= require jquery_ujs
-//= require chosen
 //= require bootstrap-sprockets
 //= require_tree .
 //= require highcharts

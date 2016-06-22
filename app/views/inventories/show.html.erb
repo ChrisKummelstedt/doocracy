@@ -1,13 +1,15 @@
 
 <h1>Inventory</h1>
 <script>
-  $(document).on('page:change', function () {
-    $('.tag-collection-form').chosen({
-      allow_single_deselect: true,
-      width: '100%'
-    })
-  });
-</script
+$(document).ready(function() {
+  $('input.taggable').each(function() {
+    $(this).select2({
+      tags: $(this).data('tags'),
+      tokenSeparators: [',', ' ']
+      });
+    });
+});
+</script>
 
 <input type="hidden" id="inventoryID" value="<%= @inventory.id %>">
 

@@ -5,8 +5,8 @@
     <%= f.input :title %>
     <%= f.input :description %>
     <%= f.label :tag_list, 'Tags (separated with comas)' %>
-    <%= f.collection_select :tag_ids, Tag.order(:name), :id, :name, {}, {multiple: true, :class => 'tag-collection-form'}%>
-  </div>
+    <%= f.input :tag_list, as: :string, input_html: { class: 'taggable', :'data-tags' => Item.tag_counts.map{ |tag| tag.name }.to_json } %>
+      </div>
 
   <div class="form-actions">
     <%= f.button :submit %>

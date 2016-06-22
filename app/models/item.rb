@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
   belongs_to :inventory
 
-  acts_as_taggable
+  acts_as_taggable_on :tags
 
 
   has_attached_file :image,
