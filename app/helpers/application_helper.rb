@@ -7,7 +7,7 @@ module ApplicationHelper
     image_tag 'default-avatar.jpg', id: 'image-preview',
     class: 'img-responsive img-circle profile-image'
   end
-  
+
   def alert_for(flash_type)
     {
         :success => 'alert-success',

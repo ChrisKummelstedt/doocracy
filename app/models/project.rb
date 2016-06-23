@@ -10,4 +10,9 @@ class Project < ActiveRecord::Base
   has_attached_file :image, styles: { large: "500x500>", medium: "300x300>", thumb: "100x100>" }
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
+
+def self.search(search)
+  where("title ILIKE ? OR description ILIKE ? OR address ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
+end
+
 end
