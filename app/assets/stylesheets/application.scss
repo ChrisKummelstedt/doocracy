@@ -94,6 +94,11 @@ body {
   color: #125688;
 }
 
+.project-image {
+  margin: 20px auto;
+  height: 152px;
+  width: 152px;
+}
 
 .project-index-container {
   width: 680px;
@@ -111,6 +116,24 @@ body {
   border-width: 1px;
   margin-bottom: 20px;
 }
+
+/* ## TEAM ## */
+
+#add_item {
+  margin-top: 16px;
+}
+
+.team-budget-total {
+  float:right;
+  margin-right: 40px;
+  display:block;
+  clear:both;
+}
+.team-budget-add {
+  display:block;
+  clear:both;
+}
+
 
 /* ## PROFILE CUSTOMISATIONS ## */
 

@@ -1,21 +1,42 @@
-<h2><%= link_to @team.project.title, project_path(@project, @team) %></h2>
-<h2><%= @team.title %></h2>
-<p><%= @team.description %></p>
-<% @users.each do |user| %>
-  <p><%= user.user_name %></p>
-<% end %>
-<% if !Team.includes(:users).where(users: { id: current_user.id } ).any? %>
-  <form method="get" action= "/projects/<%= @project.id %>/teams/<%= @team.id %>/join_team">
-    <input type="hidden" name="id" value="<%= @team.id %>" >
-    <input type="hidden" name="project_id" value="<%= @project.id %>">
-    <input type="submit" value="Join Team" id="Join Team" class="btn-success btn-block" >
-  </form>
-<% else %>
-  <%= button_to "Leave Team", project_team_leave_team_path(@project, @team), method: :delete, class: 'btn-danger btn-block', data: { confirm: "Are you sure?" } %>
-  <%= render "budgets/index" %>
-  <%= link_to "Edit", edit_project_team_path(@project, @team) %>
-<% end %>
+<div class="page-container">
+  <div class="page-wrapper">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="img-circle">
+              <%= image_tag @project.image.url(:circle), :class => "img-responsive img-circle profile-image" %>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <h2><%= link_to @team.project.title, project_path(@project, @team) %></h2>
+            <h2><%= @team.title %></h2>
+            <p><%= @team.description %></p>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3>Team Members</h3>
+            <% @users.each do |user| %>
+            <p><%= link_to user.user_name, profile_path(user.user_name) %></p>
+            <% end %>
+          </div>
+        </div>
 
+      </div>
+    </div>
 
+    <%= render "budgets/index" %>
 
-
+    <% if !Team.includes(:users).where(users: { id: current_user.id } ).any? %>
+    <form method="get" action= "/projects/<%= @project.id %>/teams/<%= @team.id %>/join_team">
+      <input type="hidden" name="id" value="<%= @team.id %>" >
+      <input type="hidden" name="project_id" value="<%= @project.id %>">
+      <input type="submit" value="Join Team" id="Join Team" class="btn-success btn-block" >
+    </form>
+    <% else %>
+    <%= button_to "Leave Team", project_team_leave_team_path(@project, @team), method: :delete, class: 'btn-danger btn-block', data: { confirm: "Are you sure?" } %>
+    <%= button_to "Edit Team", edit_project_team_path(@project, @team), method: :get, class: 'btn-success btn-block' %>
+    <% end %>
+  </div>
+</div>
