@@ -1,8 +1,14 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
+
   def index
     @projects = Project.all
+    if params[:search]
+      @projects = Project.search(params[:search]).order("created_at DESC")
+    else
+      @projects = Project.all.order('created_at DESC')
+    end
   end
 
   def show
@@ -56,7 +62,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title, :description, :total_budget, :image, :address)
+    params.require(:project).permit(:title, :description, :total_budget, :image, :address, :search)
   end
 
 

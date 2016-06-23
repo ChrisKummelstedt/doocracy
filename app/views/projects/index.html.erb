@@ -1,11 +1,18 @@
 <div class="page-container">
   <div class="page-wrapper">
 
- <div class="jumbotron" id="index-jumbo">
-   <h3>Do/ocracy: minimum viable product.</h3>
-   <p>Do/ocracy is a a web app that help people organise Burning Man camps.</p>
- </div>
+    <div class="jumbotron" id="index-jumbo">
+      <h3>Do/ocracy: minimum viable product.</h3>
+      <p>Do/ocracy is a a web app that help people organise Burning Man camps.</p>
+    </div>
+    <div align="left">
+      <%= form_tag(root_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search projects" %>
+      <%= submit_tag "Search" %>
+      <% end %>
+    </div>
 
+    <% if @projects.present? %>
     <% @projects.each do |project| %>
 
     <div class="project-index-container">
@@ -19,11 +26,14 @@
           <div class="col-md-8">
             <h3><%= link_to project.title, project_path(project) %></h3>
             <p><%= project.description %></p>
+            <p><%= project.address %></p>
           </div>
         </div>
       </div>
     </div>
     <% end %>
-
+    <% else %>
+    <p>There are no projects containing the term(s) <%= params[:search] %>.</p>
+    <% end %>
   </div>
 </div>
