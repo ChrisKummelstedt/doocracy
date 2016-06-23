@@ -13,6 +13,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @usercount = user_count
   end
 
   def mine
@@ -60,6 +61,16 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def user_count
+    usercount = []
+    @project.teams.each do |team|
+      team.users.each do |team_member|
+        usercount << team_member.user_name
+      end
+    end
+    usercount.uniq.size
+  end
 
   def project_params
     params.require(:project).permit(:title, :description, :total_budget, :image, :address, :search)
