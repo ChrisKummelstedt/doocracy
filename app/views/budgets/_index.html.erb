@@ -1,32 +1,29 @@
-<h1>My Estimated Budget </h1>
-<% if @budgets.any? %>
-<h3>Total Budget: <b id="budget_total"><%=@budget.sum(@budgets) %></b></h3>
-<% else %>
-<h3>Total Budget: <b id="budget_total">0.0</b></h3>
-<% end %>
 
-<%= form_for [@project, @team, @budget], remote: true do |f| %>
-
-  <div class="form-group">
-    <%= f.label :budget_item %>
-    <%= f.text_field :budget_item, required: true %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3>Team Budget </h3>
+    <table class="table table-striped">
+      <tbody class="budget_items">
+        <%= render @budgets %>
+      </tbody>
+    </table>
+    <div class="team-budget-total">
+      <% if @budgets.any? %>
+      <h5>Total Budget: <b id="budget_total"><%=@budget.sum(@budgets) %></b></h5>
+      <% else %>
+      <h5>Total Budget: <b id="budget_total">0.0</b></h5>
+      <% end %>
+    </div>
+    <div class="team-budget-add">
+    <div class="row">
+      <%= form_for [@project, @team, @budget], remote: true do |f| %>
+      <div class="col-md-3"><%= f.label :budget_item %>: <%= f.text_field :budget_item, required: true %></div>
+      <div class="col-md-3"><%= f.label :quantity %>: <%= f.number_field :quantity, required: true %></div>
+      <div class="col-md-3"><%= f.label :cost_per_item %>: <%= f.number_field :cost_per_item, required: true, step: "any" %></div>
+      <div class="col-md-3"><center><%= button_tag "", type: 'submit', class: "btn btn-default glyphicon glyphicon-plus-sign", id: "add_item" %></center></div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :quantity %>
-    <%= f.number_field :quantity, required: true %>
   </div>
-
-  <div class="form-group">
-    <%= f.label :cost_per_item %>
-    <%= f.number_field :cost_per_item, required: true, step: "any" %>
-  </div>
-
-  <div class="form-group" id="add_item">
-  <%= f.submit "Create Budget Item"%>
-  </div>
-<% end %>
-
-<ul class="budget_items">
-  <%= render @budgets %>
-</ul>
+</div>

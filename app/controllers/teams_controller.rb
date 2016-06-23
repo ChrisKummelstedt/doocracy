@@ -52,6 +52,7 @@ class TeamsController < ApplicationController
   end
 
   def edit
+    
   end
 
   def update

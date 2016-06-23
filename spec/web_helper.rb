@@ -54,7 +54,7 @@ def create_team_budget
 	fill_in("Budget item", with: 'Hammer')
 	fill_in("Quantity", with: '10')
 	fill_in("Cost per item", with: '10')
-	click_button "Create Budget Item"
+	click_button "add_item"
 end
 
 def remove_uploaded_file
