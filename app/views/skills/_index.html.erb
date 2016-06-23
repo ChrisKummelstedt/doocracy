@@ -6,8 +6,9 @@
 
 <div class="table table-striped">
   <tbody>
-    <%= form_for [@user, @skill], remote:true do |f| %>
     <tr>
+    <%= form_for [@user, @skill], remote:true do |f| %>
+
     <td><%= f.text_field :skill, placeholder: "Skill" %></td>
     <td><%= f.select :skilllevel, ['Beginner', 'Intermediate', 'Advanced'], id: "skilllevel" %></td>
     <td><%= f.text_field :description, placeholder: "Describe" %></td>
