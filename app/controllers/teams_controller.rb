@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
         redirect_to project_path(@project)
       else
         flash[:notice] = 'Team not created, it needs a title and a description first'
-        redirect_to request.referer
+        render :action=>'new'
       end
     end
   end
@@ -38,9 +38,8 @@ class TeamsController < ApplicationController
   end
 
   def leave_team
-    @team = Team.find params[:team_id]
-    current_user.team_ids = nil
-    current_user.save
+    @team = Team.find(params[:team_id])
+    current_user.teams.delete(@team)
     flash[:notice] = "Successfully Left Team"
     redirect_to project_team_path(@project, @team)
   end
@@ -52,7 +51,7 @@ class TeamsController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def update
@@ -66,7 +65,7 @@ class TeamsController < ApplicationController
   private
 
   def check_membership
-    Team.includes(:users).where(users: { id: current_user.id } ).any?
+    Team.find(params[:id]).users.include?(current_user)
   end
 
   def set_project

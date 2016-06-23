@@ -28,7 +28,7 @@
 
     <%= render "budgets/index" %>
 
-    <% if !Team.includes(:users).where(users: { id: current_user.id } ).any? %>
+    <% if !@team.users.include?(current_user) %>
     <form method="get" action= "/projects/<%= @project.id %>/teams/<%= @team.id %>/join_team">
       <input type="hidden" name="id" value="<%= @team.id %>" >
       <input type="hidden" name="project_id" value="<%= @project.id %>">

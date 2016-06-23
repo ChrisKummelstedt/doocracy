@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
       redirect_to project_path(@project)
     else
       flash[:notice] = "Your project has not been created, you left something blank."
-      redirect_to request.referer
+      render :action=>'new'
     end
   end
 
