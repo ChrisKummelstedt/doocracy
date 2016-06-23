@@ -6,8 +6,8 @@
       <p>Do/ocracy is a a web app that help people organise Burning Man camps.</p>
     </div>
     <div align="left">
-      <%= form_tag(root_path, :method => "get", id: "search-form") do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search projects" %>
+      <%= form_tag(root_path, :method => "get", id: "search-form", class: "search") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search projects", size: "40" %>
       <%= submit_tag "Search" %>
       <% end %>
     </div>
@@ -33,7 +33,9 @@
     </div>
     <% end %>
     <% else %>
+    <div align="left">
     <p>There are no projects containing the term(s) <%= params[:search] %>.</p>
     <% end %>
+  </div>
   </div>
 </div>
