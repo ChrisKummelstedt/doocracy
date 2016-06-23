@@ -2,13 +2,13 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
 
-def index
-  @projects = Project.all
-  if params[:search]
-    @projects = Project.search(params[:search]).order("created_at DESC")
-  else
-    @projects = Project.all.order('created_at DESC')
-  end
+  def index
+    @projects = Project.all
+    if params[:search]
+      @projects = Project.search(params[:search]).order("created_at DESC")
+    else
+      @projects = Project.all.order('created_at DESC')
+    end
   end
 
   def show
