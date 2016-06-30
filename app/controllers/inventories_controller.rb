@@ -1,4 +1,6 @@
 class InventoriesController < ApplicationController
+  before_action :authenticate_user!
+
   # GET /inventories
   # GET /inventories.json
   def index
@@ -14,12 +16,15 @@ class InventoriesController < ApplicationController
   # GET /inventories/1.json
   def show
     @inventory = Inventory.find(params[:id])
-
+    @owner = User.find(@inventory.user_id).user_name
     if params[:tag]
       @items = @inventory.items.tagged_with(params[:tag])
+      @itemhash = inventory_array(@items)
     else
       @items = @inventory.items
+      @itemhash = inventory_array(@items)
     end
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,7 +34,6 @@ class InventoriesController < ApplicationController
 
   def filter
     @inventory = Inventory.find(params[:inventory_id])
-
     if params[:tag]
       @items = @inventory.items.tagged_with(params[:tag])
     else
@@ -57,12 +61,14 @@ class InventoriesController < ApplicationController
   # GET /inventories/1/edit
   def edit
     @inventory = Inventory.find(params[:id])
+    @items = @inventory.items
+    @owner = User.find(@inventory.user_id)
   end
 
   # POST /inventories
   # POST /inventories.json
   def create
-    @inventory = Inventory.new(inventory_params)
+    @inventory = current_user.inventories.build(inventory_params)
 
     respond_to do |format|
       if @inventory.save
@@ -81,6 +87,7 @@ class InventoriesController < ApplicationController
         format.json { render json: @inventory.errors, status: :unprocessable_entity }
       end
     end
+    @inventory.save
   end
 
   # PUT /inventories/1
@@ -119,8 +126,19 @@ class InventoriesController < ApplicationController
 
   private
 
+  def inventory_array(items)
+    inventoryitems = []
+    items.each do |item|
+      item.tag_list.each do |tag|
+        inventoryitems << tag
+      end
+    end
+    Hash[inventoryitems.group_by{|i| i }.map{|k,v| [k.capitalize,v.size]}]
+  end
+
+
   def inventory_params
-    params.require(:inventory).permit(:description, :name, :items)
+    params.require(:inventory).permit(:description, :name, :items, :user_id)
   end
 
 end

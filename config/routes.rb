@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   resources :inventories do
-    resources :items
+    resources :items do
+      get 'claim' => 'items#claim'
+      get 'unclaim' => 'items#unclaim'
+    end
     resources :tags, except: :show
     get 'tags/:tag', to: 'inventories#filter'
   end

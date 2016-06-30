@@ -99,7 +99,6 @@ class ItemsController < ApplicationController
   def make_default
     @item = Item.find(params[:id])
     @inventory = Inventory.find(params[:inventory_id])
-
     @inventory.cover = @item.id
     @inventory.save
 
@@ -108,9 +107,26 @@ class ItemsController < ApplicationController
     end
   end
 
+  def claim
+    @item = Item.find(params[:id])
+    @item.owner << current_user
+    @item.save
+    flash[:notice] = "Awesome! Consider it's yours!"
+    redirect_to(:back)
+  end
+
+  def unclaim
+    @item = Item.find(params[:id])
+    @item.owner.delete(current_user)
+    @item.save
+    flash[:notice] = "The item is no longer yours"
+    redirect_to(:back)
+  end
+
+
   private
 
   def item_params
-    params.require(:item).permit(:title, :description, :inventory_id, :image, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
+    params.require(:item).permit(:title, :description, :inventory_id, :image, :tag_list, :tag, { tag_ids: [] }, :tag_ids, :owner)
   end
 end

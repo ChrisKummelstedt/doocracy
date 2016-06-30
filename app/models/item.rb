@@ -1,5 +1,6 @@
 class Item < ActiveRecord::Base
   belongs_to :inventory
+  serialize :owner
 
   acts_as_taggable_on :tags
 

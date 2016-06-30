@@ -1,55 +1,76 @@
+<div class="page-container">
+  <div class="page-wrapper">
 
-  <h1>Inventory</h1>
+    <div class="jumbotron" id="index-jumbo">
 
-  <input type="hidden" id="inventoryID" value="<%= @inventory.id %>">
+      <div>
+        <div class="floatright">
+          <div class="form-actions">
+            <%= link_to "Back to inventory", inventory_path(@inventory), :class => 'btn btn-mini' %>
+          </div>
+        </div>
+      </div>
 
-  <p>
-    <b>Name: </b>
-    <%= @inventory.name %>
-  </p>
+      <h3><%= @inventory.name %></h3>
+      <p><%= @inventory.description %></p>
+      <p><%= @inventory.name %> is currently managed by <%= @owner %></p>
+    </div>
 
-  <p>
-    <b>Description: </b>
-    <%= @inventory.description %>
-  </p>
+    <% unless @items.empty? %>
+    <% @items.each do |pic| %>
 
-  <div class="form-actions">
-    <%= link_to 'Back', inventories_path, :class => 'btn btn-mini'  %>
-    <%= link_to 'Edit inventory', edit_inventory_path(@inventory), :class => 'btn btn-mini' %>
-    <%= link_to 'Delete inventory', inventory_path(@inventory), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
-  </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"><b><%= pic.title %></b></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
+            <%= image_tag pic.image.url(:medium) %>
+          </div>
+          <div class="col-md-6">
+            <% unless pic.description = "" %>
+            <p><b>Description</b>: <%= pic.description %></p>
+            <% end %>
 
-<h2>Items</h2>
+            <% if pic.owner %>
+            <P><b>Owner(s)</b>:
+              <% pic.owner.each do |owner| %>
+              <%= link_to owner.user_name, profile_path(owner.user_name) %>
+              <% end %>
+            </P>
+            <% end %>
+
+            <% if pic.owner.include? current_user %>
+            <form method="get" action= "/inventories/<%= @inventory.id %>/items/<%= pic.id %>/unclaim">
+              <input type="hidden" name="id" value="<%= pic.id %>" >
+              <input type="hidden" name="project_id" value="<%= @inventory.id %>">
+              <input type="submit" value="Unclaim" class="button" >
+            </form>
+            <% else %>
+            <form method="get" action= "/inventories/<%= @inventory.id %>/items/<%= pic.id %>/claim">
+              <input type="hidden" name="id" value="<%= pic.id %>" >
+              <input type="hidden" name="project_id" value="<%= @inventory.id %>">
+              <input type="submit" value="Claim <%= pic.title %>" class="button" >
+            </form>
+            <% end %>
 
 
-<div class="row">
-  <ul class="thumbnails files">
-<% unless @items.empty? %>
-  <% @items.each do |pic| %>
-    Title:<%= pic.title %><br>
-    Description:<%= pic.description %>
-    Tags:<%= raw pic.tag_list.map { |t| link_to t, inventory_tag_path(@inventory.id, t) }.join(', ') %>
 
-    <li class="span3" id="item_<%= pic.id %>">
-    <div class="thumbnail">
-      <%= image_tag pic.image.url(:medium) %>
-      <div class="caption">
-        <p style="text-align: center;">
-          <% @item = pic %>
-          <%= render 'items/form' %>
-        <%= link_to "Edit item", inventory_item_path(@inventory, pic) %>
-
-        <%=
-          link_to "Delete item", inventory_item_path(@inventory, pic),
-            :data => { :confirm => "Are you sure?" },
-            :method => :delete
-          %>
-
-        </p>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        &nbsp
       </div>
     </div>
-    </li>
-  <% end %>
-<% end %>
-</ul>
+
+
+
+
+
+
+    <% end %>
+    <% end %>
+
+
+  </div>
 </div>
