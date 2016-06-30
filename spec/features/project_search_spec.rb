@@ -7,7 +7,7 @@ feature "Search for projects" do
     create_project
     click_link("Logout")
     create_project_2
-    click_link("Do/ocracy")
+    click_link("Doocracy")
     fill_in("search", with: "new")
     click_button("Search")
     expect(page).to have_content("new project title")
