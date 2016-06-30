@@ -2,7 +2,11 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'kaminari', '~> 0.16.3'
 gem 'simple_form'
+gem "highcharts-rails"
+gem 'geocoder'
+
 gem 'highcharts-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
@@ -28,10 +32,17 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
-gem 'aws-sdk'
+
+gem 'aws-sdk', '>= 2.0.34'
+gem 'omniauth-facebook'
+
+#lets get it there
+
+gem 'omniauth-github'
 gem 'aws-sdk-v1'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'select2-rails'
+
 
 
 # Use ActiveModel has_secure_password
@@ -58,6 +69,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'dotenv-rails', '~> 2.1.1'
+end
+
+group :production, :development do
+  gem 'rails_12factor'
 end
 
 group :development do

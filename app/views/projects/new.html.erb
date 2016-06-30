@@ -6,19 +6,23 @@
     </div>
 
       <div class="image-wrap">
-        <%= simple_form_for @project, html: { multipart: true } do |f| %>
+        <%= simple_form_for @project, html: { multipart: true, :autocomplete => "on" } do |f| %>
         <h3>1. What is this glory called?</h3>
         <div class="form-group-project text-center">
-          <%= f.input :title,  label: false, placeholder: 'What is it called?' %>
+          <%= f.text_field :title, required: true, label: false, placeholder: 'What is it called?' %>
         </div>
         <h3>2. Tell us more!</h3>
         <div class="form-group-project text-center">
-          <%= f.input :description, label: false, placeholder: 'Describe this awesomness' %>
+          <%= f.text_field :description, required: true, label: false, placeholder: 'Describe this awesomness' %>
         </div>
-        <h3>3. Do you have a vauge sense of the budget yet?</h3>
+        <h3>3. Do you have a vague sense of the budget yet?</h3>
         <div class="form-group ">
-          <%= f.input :total_budget, label: false, placeholder: '0' %>
+          <%= f.text_field :total_budget, required: true, label: false, placeholder: '0' %>
         </div>
+        <h3>4. Where will your project be based?</h3>
+        <div class="form-group-project text-center">
+          <%= f.input :address, required: true, label: false, placeholder: 'Street Name, City, Country' %>
+        </div><br><br>
         <div class="row">
           <div class="col-md-12 text-center">
             <%= f.error_notification %>

@@ -1,7 +1,7 @@
-<li id="<%= budget.id %>">
-  <%= budget.budget_item %>
-  <%= budget.quantity %>
-  <%= budget.cost_per_item %>
-  Total cost: <%= budget.quantity * budget.cost_per_item %>
-  <%= link_to "delete budget item", project_team_budget_path(@project, @team, budget), method: 'delete', remote: true %>
-</li>
+<tr id="<%= budget.id %>">
+    <td><%= budget.budget_item %></td>
+    <td><%= budget.quantity %></td>
+    <td><%= budget.cost_per_item %></td>
+    <td>Total cost: <%= budget.quantity * budget.cost_per_item %></td>
+    <td><%= link_to "<span class='glyphicon glyphicon-minus-sign'></span>".html_safe, project_team_budget_path(@project, @team, budget), method: 'delete', remote: true, :id=> "delete_item" %></td>
+</tr>

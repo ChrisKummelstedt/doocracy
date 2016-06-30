@@ -9,15 +9,15 @@
       <%= simple_form_for [@project, @team] do |f| %>
       <h3>1. What is this team called?</h3>
       <div class="form-group-project text-center">
-        <%= f.input :title,  label: false, placeholder: 'What is it called?' %>
+        <%= f.input :title, required: true,  label: false, placeholder: 'What is it called?' %>
       </div>
       <h3>2. Tell us more!</h3>
       <div class="form-group-project text-center">
-        <%= f.input :description, label: false, placeholder: 'Describe this awesomness' %>
+        <%= f.input :description, required: true,  label: false, placeholder: 'Describe this awesomness' %>
       </div>
 
       <div class="form-group text-center">
-        <%= f.button :submit, class: 'btn-success btn-block' %>
+        <%= f.button :submit, required: true,  class: 'btn-success btn-block' %>
       </div>
       <% end %>
     </div>

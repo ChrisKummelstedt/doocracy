@@ -18,6 +18,9 @@
         <%= f.button :submit, class: 'btn-success btn-block' %>
       </div>
       <% end %>
+      <div class="form-group text-center">
+        <%= button_to "Delete", project_team_path(@project, @team), method: :delete, class: 'btn-danger btn-block', data: { confirm: "Are you sure?" } %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,21 +1,23 @@
 class TeamsController < ApplicationController
   before_action :set_project
-  before_action :set_team, except: [:new, :create]
-  # before_action :authenticate_user!, except: [:index]
+  before_action :set_team, except: [:new, :create, :leave_team]
+  before_action :authenticate_user!, only: [:show]
 
   def new
     @team = @project.teams.build
   end
 
   def create
-    @team = @project.teams.build(team_params)
-    current_user.teams << @team
-    if @team.save
-      flash[:notice] = 'Team created successfully'
-      redirect_to project_path(@project)
-    else
-      flash[:notice] = 'Team not created'
-      redirect_to request.referer
+    if current_user
+      @team = @project.teams.build(team_params)
+      if @team.save
+        current_user.teams << @team
+        flash[:notice] = 'Team created successfully'
+        redirect_to project_path(@project)
+      else
+        flash[:notice] = 'Team not created, it needs a title and a description first'
+        render :action=>'new'
+      end
     end
   end
 
@@ -26,8 +28,19 @@ class TeamsController < ApplicationController
   end
 
   def join_team
-    @team.users << current_user
-    flash[:notice] = "Successfully Join Team"
+    if check_membership
+      flash[:alert] = "Already on team"
+    else
+      @team.users << current_user
+      flash[:notice] = "Successfully Join Team"
+    end
+    redirect_to project_team_path(@project, @team)
+  end
+
+  def leave_team
+    @team = Team.find(params[:team_id])
+    current_user.teams.delete(@team)
+    flash[:notice] = "Successfully Left Team"
     redirect_to project_team_path(@project, @team)
   end
 
@@ -38,15 +51,22 @@ class TeamsController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
-    @team.update(team_params)
-    redirect_to project_team_path(@project, @team)
+    if Team.includes(:users).where(users: { id: current_user.id } ).any?
+      @team.update(team_params)
+      redirect_to project_team_path(@project, @team)
+    end
   end
 
 
   private
+
+  def check_membership
+    Team.find(params[:id]).users.include?(current_user)
+  end
 
   def set_project
     @project = Project.find(params[:project_id])

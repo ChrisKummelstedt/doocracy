@@ -3,13 +3,13 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
-  validates :user_name, presence: true, length: { minimum: 4, maximum: 16 }
-
+  validates :user_name, presence: true, length: { minimum: 4, maximum: 30 }
+  devise :omniauthable, :omniauth_providers => [:facebook]
   has_many :projects
   has_many :inventories 
 
 
-  validates_uniqueness_of :user_name
+  validates_uniqueness_of :email
 
   has_and_belongs_to_many :skills
 
@@ -17,4 +17,13 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, styles: { medium: '152x152#' }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.user_name = auth.info.name   # assuming the user model has a name
+      # user.image = auth.info.image # assuming the user model has an image
+    end
+  end
 end

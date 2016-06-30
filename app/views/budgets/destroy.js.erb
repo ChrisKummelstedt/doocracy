@@ -1,6 +1,6 @@
-$("li#<%= @budget.id %>").slideUp();
+$("tr#<%= @budget.id %>").slideUp();
 <% if @budgets.any? %>
-  $('#budget_total').text("<%= @budgets.first.sum(@budgets) %>");
+  $('#budget_total').text("<%= @budget.sum(@budgets) %>");
 <% else %>
   $('#budget_total').text("0.0");
 <% end %>

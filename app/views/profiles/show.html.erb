@@ -16,7 +16,7 @@
             </h3>
             <span>
               <% if @user == current_user %>
-              <%= link_to 'Edit Profile', edit_profile_path(@user.user_name), class: 'btn edit-button', id: 'edit-profile' %>
+              <%= link_to 'Edit Profile', "/#{@user.user_name}/edit", class: 'btn edit-button', id: 'edit-profile' %>
               <% end %>
             </span>
           </div>
@@ -52,7 +52,7 @@
 
 
     <% if @projects.size == 0 %>
-    <h3> <%= @user.user_name %> is not yet member of any team or project </h3>
+    <h3> <%= @user.user_name %> is not yet a member of any team or project </h3>
 
     <% else %>
     <h3>Projects</h3>

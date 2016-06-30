@@ -19,10 +19,10 @@ feature "sign-up" do
     end
 
     scenario "sign-up with long a user name" do
-      sign_up("peeeeeeeeeeeeweeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+      sign_up("peeeeeeeeeeeeweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
       expect(page).not_to have_link "Logout"
       expect(page).to have_link "Login"
-      expect(page).to have_content "is too long (maximum is 16 characters)"
+      expect(page).to have_content "is too long (maximum is 30 characters)"
     end
 
     scenario "sign-up without supplying a user name" do

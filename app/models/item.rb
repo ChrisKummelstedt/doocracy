@@ -1,4 +1,5 @@
 class Item < ActiveRecord::Base
+  validates :title, :description, :inventory_id, presence: true  
   belongs_to :inventory
   serialize :owner
 

@@ -13,6 +13,5 @@ feature "Edit a project" do
     click_button "Update Project"
     expect(page).to have_content("awesome project title edited")
     expect(page).to have_content("Looks like an awesome edited")
-    expect(page).to have_css("img[src*='project-puzzle.jpg']")
   end
 end

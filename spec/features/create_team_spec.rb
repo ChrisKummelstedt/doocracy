@@ -8,4 +8,12 @@ feature "Create a Team" do
     expect(page).to have_content("Coding Team")
     expect(page).to have_content("Code Stuff")
   end
+
+  scenario "Creating a team incorrectly" do
+   create_project
+   click_link "Create a Team"
+   click_button "Create Team"
+   expect(page).to have_content("Team not created")
+ end
+ 
 end
