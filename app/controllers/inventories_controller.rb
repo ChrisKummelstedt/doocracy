@@ -138,7 +138,7 @@ class InventoriesController < ApplicationController
 
 
   def inventory_params
-    params.require(:inventory).permit(:description, :name, :items, :user_id)
+    params.require(:inventory).permit(:description, :name, :items)
   end
 
 end
