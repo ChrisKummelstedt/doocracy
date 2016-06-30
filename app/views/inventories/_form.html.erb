@@ -2,13 +2,15 @@
   <div class="input-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'text_field', :required true %>
+      <%= f.text_field :name, :class => 'text_field' %>
     </div>
   </div>
   <div class="input-group">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
+
       <%= f.text_field :description, :class => 'text_field', :id => 'description' %>
+
     </div>
   </div>
 
@@ -16,11 +18,11 @@
     <%= f.label "Add Items", :class => 'control-label' %>
     <div class="controls">
 
+
     </br>
  <%= file_field_tag "images[]", type: :file, multiple: true %>
  </br>
 
-      <%= file_field_tag "images[]", type: :file, multiple: true %>
     </div>
   </div>
 

@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
-  root 'projects#index'
-  resources :items
-  resources :inventories
-  devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
-=======
+
 
   resources :inventories do
     resources :items do
@@ -19,7 +14,6 @@ Rails.application.routes.draw do
 
   root 'projects#index'
 
->>>>>>> 55-inventory
   match "/my-projects" => "projects#mine", :via => :get, :as => :my_projects
   match "/about" => "projects#about", :via => :get, :as => :about
 

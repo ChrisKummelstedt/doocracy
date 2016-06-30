@@ -2,13 +2,19 @@
   <%= f.error_notification %>
 
 
+
   <div class="item-form">
     <b>Title:</b>
+
+    <%= f.input :title, :required true %>
+    <%= f.input :description, :required true %>
+
     <%= f.input :title %>
     <b>Description:</b>
     <%= f.input :description %>
     <b>Tags:</b>
     <%= f.input :tag_list, as: :string, input_html: { class: 'taggable', :'data-tags' => Item.tag_counts.map{ |tag| tag.name }.to_json } %>
+
   </div>
   <br>
   <div class="form-actions">
