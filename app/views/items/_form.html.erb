@@ -1,9 +1,16 @@
-<%= simple_form_for(@item) do |f| %>
+<%= simple_form_for [@inventory, @item] do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
+<<<<<<< HEAD
     <%= f.input :title, :required true %>
     <%= f.input :description, :required true %>
+=======
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.label :tag_list, 'Tags (separated with comas)' %>
+    <%= f.input :tag_list, as: :string, input_html: { class: 'taggable', :'data-tags' => Item.tag_counts.map{ |tag| tag.name }.to_json } %>
+>>>>>>> 55-inventory
   </div>
 
   <div class="form-actions">

@@ -9,12 +9,19 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
+
+
 //= require jquery
 //= require turbolinks
+<<<<<<< HEAD
 //= require bootstrap-sprockets
 //= require jquery_ujs
 
+=======
+//= require select2-full
+//= require jquery_ujs
+//= require bootstrap-sprockets
+>>>>>>> 55-inventory
 //= require_tree .
 //= require highcharts
 //= require highcharts/highcharts-more

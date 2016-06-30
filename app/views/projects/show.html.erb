@@ -186,6 +186,7 @@
 
 <script>
 $(function () {
+<<<<<<< HEAD
   $('#piechart').highcharts({
     chart: {
       plotBackgroundColor: null,
@@ -222,9 +223,48 @@ $(function () {
     ]
   }]
 });
+=======
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Project budget breakdown between teams'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: "Team name",
+            colorByPoint: true,
+            data: [   <% @project.teams.each do |team| %> {
+                name: "<%=team.title%>",
+                y: 20
+            }, <%end%>
+            ]
+        }]
+    });
+>>>>>>> 55-inventory
 });
 
 $(function () {
+<<<<<<< HEAD
   $('#barchart').highcharts({
     chart: {
       type: 'column'
@@ -245,6 +285,64 @@ $(function () {
         style: {
           fontWeight: 'bold',
           color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+=======
+    $('#container2').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Project budget vs team budgets'
+        },
+        xAxis: {
+            categories: ['Team budgets', 'Project budget']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Estimated budgets'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        series: [ <% @project.teams.each do |team| %> {
+            name: "<%=team.title%>",
+            data: [<%= team.team_budget%>,0]
+        }, <%end%> {
+            name: "<%=@project.title%>",
+            data: [0, <%= @project.total_budget%>]
+>>>>>>> 55-inventory
         }
       }
     },

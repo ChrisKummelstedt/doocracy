@@ -1,19 +1,64 @@
-<p id="notice"><%= notice %></p>
+
+<h1>Inventory</h1>
+<script>
+$(document).ready(function() {
+  $('input.taggable').each(function() {
+    $(this).select2({
+
+      tags, true,
+      tokenSeparators: [',', ' ']
+      });
+    });
+});
+
+
+</script>
+
+<input type="hidden" id="inventoryID" value="<%= @inventory.id %>">
 
 <p>
-  <strong>Name:</strong>
+  <b>Name: </b>
   <%= @inventory.name %>
 </p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @inventory.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
+  <b>Description: </b>
   <%= @inventory.description %>
 </p>
 
-<%= link_to 'Edit', edit_inventory_path(@inventory) %> |
-<%= link_to 'Back', inventories_path %>
+<div class="form-actions">
+  <%= link_to 'Back', inventories_path, :class => 'btn btn-mini'  %>
+  <%= link_to 'Edit inventory', edit_inventory_path(@inventory), :class => 'btn btn-mini' %>
+  <%= link_to 'Delete inventory', inventory_path(@inventory), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
+</div>
+
+<h2>Items</h2>
+
+<div class="row">
+  <ul class="thumbnails files">
+    <% unless @items.empty? %>
+    <% @items.each do |pic| %>
+    Title:<%= pic.title %><br>
+    Description:<%= pic.description %>
+    Tags:<%= raw pic.tag_list.map { |t| link_to t, inventory_tag_path(@inventory.id, t) }.join(', ') %>
+
+    <li class="span3" id="item_<%= pic.id %>">
+      <div class="thumbnail">
+        <%= image_tag pic.image.url(:medium) %>
+        <div class="caption">
+          <p style="text-align: center;">
+            <% @item = pic %>
+            <%= render 'items/form' %>
+            <%=
+            link_to "Delete item", inventory_item_path(@inventory, pic),
+            :data => { :confirm => "Are you sure?" },
+            :method => :delete
+            %>
+          </p>
+        </div>
+      </div>
+    </li>
+    <% end %>
+    <% end %>
+  </ul>
+</div>
