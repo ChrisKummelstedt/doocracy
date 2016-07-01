@@ -27,6 +27,7 @@
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
           <li><%= link_to "<span class='glyphicon glyphicon-flag'></span>".html_safe, new_project_path, :title => "Create a new project", :id => 'create-a-new-project' %> </li>
+          <li><%= link_to "<span class='glyphicon glyphicon-th-large'></span>".html_safe, inventories_path, :title => "Inventories", :id => 'view-inventories' %> </li>
           <li><%= link_to "<span class='glyphicon glyphicon-home'></span>".html_safe, my_projects_path, :title => "My projects", :id => 'my-projects'  %> </li>
           <li><%= link_to "<span class='glyphicon glyphicon-user'></span>".html_safe, profile_path(current_user.user_name), :title => "My profile", :id => 'my-profile'  %> </li>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
