@@ -1,0 +1,76 @@
+<div class="page-container">
+  <div class="page-wrapper">
+
+    <div class="jumbotron" id="index-jumbo">
+
+      <div>
+        <div class="floatright">
+          <div class="form-actions">
+            <%= link_to "Back to inventory", inventory_path(@inventory), :class => 'btn btn-mini' %>
+          </div>
+        </div>
+      </div>
+
+      <h3><%= @inventory.name %></h3>
+      <p><%= @inventory.description %></p>
+      <p><%= @inventory.name %> is currently managed by <%= @owner %></p>
+    </div>
+
+    <% unless @items.empty? %>
+    <% @items.each do |pic| %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><b><%= pic.title %></b></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
+            <%= image_tag pic.image.url(:medium) %>
+          </div>
+          <div class="col-md-6">
+            <% unless pic.description = "" %>
+            <p><b>Description</b>: <%= pic.description %></p>
+            <% end %>
+
+            <% if pic.owner %>
+            <P><b>Owner(s)</b>:
+              <% pic.owner.each do |owner| %>
+              <%= link_to owner.user_name, profile_path(owner.user_name) %>
+              <% end %>
+            </P>
+            <% end %>
+
+            <% if pic.owner.include? current_user %>
+            <form method="get" action= "/inventories/<%= @inventory.id %>/items/<%= pic.id %>/unclaim">
+              <input type="hidden" name="id" value="<%= pic.id %>" >
+              <input type="hidden" name="project_id" value="<%= @inventory.id %>">
+              <input type="submit" value="Unclaim" class="button" >
+            </form>
+            <% else %>
+            <form method="get" action= "/inventories/<%= @inventory.id %>/items/<%= pic.id %>/claim">
+              <input type="hidden" name="id" value="<%= pic.id %>" >
+              <input type="hidden" name="project_id" value="<%= @inventory.id %>">
+              <input type="submit" value="Claim <%= pic.title %>" class="button" >
+            </form>
+            <% end %>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        &nbsp
+      </div>
+    </div>
+
+
+
+
+
+
+    <% end %>
+    <% end %>
+
+
+  </div>
+</div>

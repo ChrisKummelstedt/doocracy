@@ -1,11 +1,21 @@
 Rails.application.routes.draw do
+
   root 'projects#index'
-  resources :items
-  resources :inventories
+
+  resources :inventories do
+    resources :items do
+      get 'claim' => 'items#claim'
+      get 'unclaim' => 'items#unclaim'
+    end
+    resources :tags, except: :show
+    get 'tags/:tag', to: 'inventories#filter'
+  end
+
   devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
+  
+
   match "/my-projects" => "projects#mine", :via => :get, :as => :my_projects
   match "/about" => "projects#about", :via => :get, :as => :about
-
   get ':user_name', to: 'profiles#show', as: :profile
   get ':user_name/edit', to: 'profiles#edit', as: :edit_profile
   patch ':user_name/edit', to: 'profiles#update', as: :update_profile

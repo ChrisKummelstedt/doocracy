@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   validates :user_name, presence: true, length: { minimum: 4, maximum: 30 }
   devise :omniauthable, :omniauth_providers => [:facebook]
   has_many :projects
+  has_many :inventories 
 
 
   validates_uniqueness_of :email

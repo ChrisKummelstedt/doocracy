@@ -1,8 +1,20 @@
 class Item < ActiveRecord::Base
   validates :title, :description, :inventory_id, presence: true  
   belongs_to :inventory
+  serialize :owner
 
-  has_attached_file :image, styles: { large: "500x500>", medium: "300x300>", thumb: "100x100>" }
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  acts_as_taggable_on :tags
+
+
+  has_attached_file :image,
+                    styles: { large: "500x500>", medium: "300x300>", thumb: "100x100>" },
+                    :storage => :s3,
+                    :s3_credentials => {
+                      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+                      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+                    },
+                    :path => '/:class/:attachment/:id_partition/:style/:filename',
+                    :url => ":s3_domain_url"
+    do_not_validate_attachment_file_type :image
 
 end

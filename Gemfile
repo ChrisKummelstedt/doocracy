@@ -4,6 +4,9 @@ gem 'kaminari', '~> 0.16.3'
 gem 'simple_form'
 gem "highcharts-rails"
 gem 'geocoder'
+
+gem 'highcharts-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
@@ -29,12 +32,17 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
+
 gem 'aws-sdk', '>= 2.0.34'
 gem 'omniauth-facebook'
 
 #lets get it there
 
 gem 'omniauth-github'
+gem 'aws-sdk-v1'
+gem 'acts-as-taggable-on', '~> 3.4'
+gem 'select2-rails'
+
 
 
 # Use ActiveModel has_secure_password

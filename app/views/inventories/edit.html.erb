@@ -1,6 +1,64 @@
-<h1>Editing Inventory</h1>
+<div class="page-container">
+  <div class="page-wrapper">
+    <div class="jumbotron" id="index-jumbo">
+      <h3>Edit and tag things in <%= @inventory.name %></h3>
+      <p><%= @inventory.description %></p>
+    </div>
 
-<%= render 'form' %>
+    <div class="panel panel-default">
+    <div class="panel-heading"><h3>Basic Information</h3></div>
+    <div class="panel-body">
+        <div class="pull-right">
+          <%= link_to "<span class='glyphicon glyphicon-home'></span>".html_safe, inventory_path(@inventory), :class => 'btn btn-mini' %>
+          <% if current_user == @owner %>
+          <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, inventory_path(@inventory), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
+          <% end %>
+        </div>
+        <%= render 'form' %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+    <div class="panel-heading"><h3>All Items in Storage</h3></div>
+    <div class="panel-body">
+      <% unless @items.empty? %>
+          <% @items.each do |pic| %>
 
-<%= link_to 'Show', @inventory %> |
-<%= link_to 'Back', inventories_path %>
+          <div class="panel panel-default">
+            <div class="panel-heading"><b><%= pic.title %></b></div>
+            <div class="panel-body">
+            <div class="row">
+             <div class="col-md-6">
+              <%= image_tag pic.image.url(:medium) %>
+            </div>
+            <div class="col-md-6">
+              <div>
+              <div class="floatright">
+                <div class="form-actions">
+                  <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe,  inventory_item_path(@inventory, pic), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
+                </div>
+              </div>
+              </div>
+              <div class ="row">
+              </br>
+
+                <% @item = pic %>
+                <%= render 'items/form' %>
+
+              </div>
+            </div>
+            </div>
+            </div>
+            <div class="panel-footer">
+              &nbsp
+            </div>
+          </div>
+
+
+          <% end %>
+          <% end %>
+
+    </div>
+
+
+  </div>
+</div>

@@ -1,59 +1,112 @@
 class InventoriesController < ApplicationController
-  before_action :set_inventory, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /inventories
   # GET /inventories.json
   def index
     @inventories = Inventory.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @inventories }
+    end
   end
 
   # GET /inventories/1
   # GET /inventories/1.json
   def show
+    @inventory = Inventory.find(params[:id])
+    @owner = User.find(@inventory.user_id).user_name
+    if params[:tag]
+      @items = @inventory.items.tagged_with(params[:tag])
+      @itemhash = inventory_array(@items)
+    else
+      @items = @inventory.items
+      @itemhash = inventory_array(@items)
+    end
+
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @inventory }
+    end
+  end
+
+  def filter
+    @inventory = Inventory.find(params[:inventory_id])
+    if params[:tag]
+      @items = @inventory.items.tagged_with(params[:tag])
+    else
+      @items = @inventory.items
+    end
+
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @inventory }
+    end
   end
 
   # GET /inventories/new
+  # GET /inventories/new.json
   def new
     @inventory = Inventory.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @inventory }
+    end
   end
 
   # GET /inventories/1/edit
   def edit
+    @inventory = Inventory.find(params[:id])
+    @items = @inventory.items
+    @owner = User.find(@inventory.user_id)
   end
 
   # POST /inventories
   # POST /inventories.json
   def create
-    @inventory = Inventory.new(inventory_params)
+    @inventory = current_user.inventories.build(inventory_params)
 
     respond_to do |format|
       if @inventory.save
 
-        if params[:items]
-          #===== The magic is here ;)
-          params[:items].each { |image|
+        if params[:images]
+          # The magic is here ;)
+          params[:images].each { |image|
             @inventory.items.create(image: image)
           }
         end
 
-        format.html { redirect_to @inventory, notice: 'Gallery was successfully created.' }
+        format.html { redirect_to @inventory, notice: 'Inventory was successfully created.' }
         format.json { render json: @inventory, status: :created, location: @inventory }
       else
         format.html { render action: "new" }
         format.json { render json: @inventory.errors, status: :unprocessable_entity }
       end
     end
+    @inventory.save
   end
 
-  # PATCH/PUT /inventories/1
-  # PATCH/PUT /inventories/1.json
+  # PUT /inventories/1
+  # PUT /inventories/1.json
   def update
+    @inventory = Inventory.find(params[:id])
+
     respond_to do |format|
-      if @inventory.update(inventory_params)
+      if @inventory.update_attributes(inventory_params)
+        if params[:images]
+          # The magic is here ;)
+          params[:images].each { |image|
+            @inventory.items.create(image: image)
+          }
+        end
         format.html { redirect_to @inventory, notice: 'Inventory was successfully updated.' }
-        format.json { render :show, status: :ok, location: @inventory }
+        format.json { head :no_content }
       else
-        format.html { render :edit }
+        format.html { render action: "edit" }
         format.json { render json: @inventory.errors, status: :unprocessable_entity }
       end
     end
@@ -62,21 +115,30 @@ class InventoriesController < ApplicationController
   # DELETE /inventories/1
   # DELETE /inventories/1.json
   def destroy
+    @inventory = Inventory.find(params[:id])
     @inventory.destroy
+
     respond_to do |format|
-      format.html { redirect_to inventories_url, notice: 'Inventory was successfully destroyed.' }
+      format.html { redirect_to inventories_url }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_inventory
-      @inventory = Inventory.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def inventory_params
-      params.require(:inventory).permit(:name, :title, :description, :image)
+  def inventory_array(items)
+    inventoryitems = []
+    items.each do |item|
+      item.tag_list.each do |tag|
+        inventoryitems << tag
+      end
     end
+    Hash[inventoryitems.group_by{|i| i }.map{|k,v| [k.capitalize,v.size]}]
+  end
+
+
+  def inventory_params
+    params.require(:inventory).permit(:description, :name, :items)
+  end
+
 end

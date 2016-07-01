@@ -15,3 +15,4 @@
 /coverage
 /public/system/projects/images/
 /db/schema.rb
+/config/environments/development.rb

@@ -1,19 +1,51 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @inventory.name %>
-</p>
+<div class="page-container">
+  <div class="page-wrapper">
+    <div class="jumbotron" id="index-jumbo">
+      <h3><%= @inventory.name %></h3>
+      <p><%= @inventory.description %></p>
+    </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @inventory.title %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @inventory.description %>
-</p>
+    <div>
+    <div class="floatright">
+      <div class="form-actions">
+        <%= link_to "<span class='glyphicon glyphicon-tags'></span>".html_safe, edit_inventory_path(@inventory), :class => 'btn btn-mini' %>
+      </div>
+    </div>
+    </div>
+    <p><%= @inventory.name.capitalize %> is being admined by <%= link_to @owner, profile_path(@owner) %></p>
+    </p>
 
-<%= link_to 'Edit', edit_inventory_path(@inventory) %> |
-<%= link_to 'Back', inventories_path %>
+
+    <table class="table table-hover">
+   <thead>
+     <tr>
+       <th>Item</th>
+       <th>In storage</th>
+     </tr>
+   </thead>
+   <tbody>
+      <% @itemhash.each do |key, value| %>
+      <tr>
+        <td><%= link_to key, inventory_tag_path(@inventory.id, key) %></td>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+
+
+
+
+  </div>
+</div>
+
+<!-- <script>
+$(document).ready(function() {
+$("input.taggable").select2({
+tags: true,
+tokenSeparators: [',', ' ']
+});
+});
+</script> -->
