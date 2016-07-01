@@ -1,31 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="page-container">
+  <div class="page-wrapper">
+    <div class="jumbotron" id="index-jumbo">
+      <h3>Inventories galore!</h3>
+      <p>These are inventories tied to projects on do/ocracy. Join in the communal fun.</p>
+    </div>
+    <%= button_to 'New Inventory', new_inventory_path, class: 'btn-success btn-block', method: :get %>
 
-<h1>Listing Inventories</h1>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Inventory</th>
+            <th>Description</th>
+            <th>Admin</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @inventories.each do |inventory| %>
+          <tr>
+            <td><%= link_to inventory.name, inventory %></td>
+            <td><%= inventory.description %></td>
+            <td><%  admin = User.find(inventory.user_id).user_name %> <%= link_to admin, profile_path(admin) %></td>
+          </tr>
+              <% end %>
+        </tbody>
+      </table>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @inventories.each do |inventory| %>
-      <tr>
-        <td><%= inventory.name %></td>
-        <td><%= inventory.title %></td>
-        <td><%= inventory.description %></td>
-        <td><%= link_to 'Show', inventory %></td>
-        <td><%= link_to 'Edit', edit_inventory_path(inventory) %></td>
-        <td><%= link_to 'Destroy', inventory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Inventory', new_inventory_path %>
+        </div>
+      </div>
