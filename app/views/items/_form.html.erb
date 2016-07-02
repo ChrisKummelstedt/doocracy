@@ -1,8 +1,5 @@
 <%= simple_form_for [@inventory, @item] do |f| %>
   <%= f.error_notification %>
-
-
-
   <div class="item-form">
     <b>Title:</b>
     <%= f.input :description %>
@@ -16,3 +13,4 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+  
