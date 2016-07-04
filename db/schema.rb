@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630163914) do
+ActiveRecord::Schema.define(version: 20160704134111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,22 +47,10 @@ ActiveRecord::Schema.define(version: 20160630163914) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.string   "share",              default: "--- []\n"
     t.string   "owner",              default: "--- []\n"
   end
 
   add_index "items", ["inventory_id"], name: "index_items_on_inventory_id", using: :btree
-
-  create_table "itemtags", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "itemtags_items", id: false, force: :cascade do |t|
-    t.integer "itemtag_id"
-    t.integer "item_id"
-  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -141,6 +129,18 @@ ActiveRecord::Schema.define(version: 20160630163914) do
     t.integer "user_id"
   end
 
+  create_table "todos", force: :cascade do |t|
+    t.string   "description"
+    t.string   "priority"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "team_id"
+    t.boolean  "completed",   default: false, null: false
+    t.integer  "user_id"
+  end
+
+  add_index "todos", ["team_id"], name: "index_todos_on_team_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -171,4 +171,5 @@ ActiveRecord::Schema.define(version: 20160630163914) do
   add_foreign_key "items", "inventories"
   add_foreign_key "projects", "users"
   add_foreign_key "teams", "projects"
+  add_foreign_key "todos", "teams"
 end

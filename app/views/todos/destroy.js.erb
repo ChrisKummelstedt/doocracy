@@ -1,0 +1,2 @@
+$("div#<%= @todo.id %>").slideUp("normal", function() { $(this).remove(); } );
+$('#done').text("<%= @completedtodos.size %>");

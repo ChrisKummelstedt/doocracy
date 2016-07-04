@@ -1,0 +1,41 @@
+<div id="<%= todo.id %>" class="panel panel-default">
+  <div class="panel-body">
+    <% if todo.completed %>
+    <%= link_to "<span class='glyphicon glyphicon-check'></span>".html_safe, project_team_todo_path(@project, @team, todo), method: 'patch', remote: true, :id=> "patch" %>
+    <% else %>
+    <%= link_to "<span class='glyphicon glyphicon-unchecked'></span>".html_safe, project_team_todo_path(@project, @team, todo), method: 'patch', remote: true, :id=> "patch" %>
+    <% end %>
+
+    <% if todo.completed %>
+    <span class="completed-todo"><%= todo.description %></span><% unless todo.user_id == nil %><i> - completed by <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %>
+    <% else %>
+    <span><%= todo.description %></span>
+    <% end %>
+
+    <% if todo.completed %>
+      <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, project_team_todo_path(@project, @team, todo), method: 'delete', remote: true, :class => "floatright", :id=> "delete" %>
+    <% else %>
+    <% unless todo.user_id == nil %>
+      <span class='glyphicon glyphicon-user floatright'></span>
+      <span class='floatright'><%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %>&nbsp</span>
+    <% end %>
+
+    <% if todo.user_id == current_user.id %>
+    <p><form method="get" class="floatright" action= "/projects/<%= @project.id %>/teams/<%= @team.id %>/todos/<%= todo.id %>/unclaim">
+      <input type="hidden" name="id" value="<%= todo.id %>" >
+      <input type="hidden" name="team_id" value="<%= @team.id %>">
+      <input type="hidden" name="project_id" value="<%= @project.id %>">
+      <input type="submit" value="Unclaim" class="button" >
+    </form><p>
+    <% elsif todo.user_id == nil %>
+    <form method="get" class="floatright" action= "/projects/<%= @project.id %>/teams/<%= @team.id %>/todos/<%= todo.id %>/claim">
+      <input type="hidden" name="id" value="<%= todo.id %>" >
+      <input type="hidden" name="team_id" value="<%= @team.id %>">
+      <input type="hidden" name="project_id" value="<%= @project.id %>">
+      <button type="submit" class="glyphicon glyphicon-user nobg">
+      </button></form>
+    <% end %>
+    <% end %>
+
+    </div>
+  </div>

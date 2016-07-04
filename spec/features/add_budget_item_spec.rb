@@ -26,7 +26,6 @@ feature "Budget item" do
     click_button "add_item"
     click_link("delete_item")
     expect(page).not_to have_content("Hammer")
-    expect(page).not_to have_content(1)
     expect(page).not_to have_content(3.0)
   end
 
