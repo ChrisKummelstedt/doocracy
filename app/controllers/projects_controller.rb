@@ -14,6 +14,11 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @usercount = user_count
+    @completed_todo = completed_todo
+    @not_completed_todo = not_completed_todo
+    unless @completed_todo.size == 0 || @not_completed_todo.size == 0 
+      @progress = (((@completed_todo.size.to_f)/((@not_completed_todo.size.to_f)+(@completed_todo.size.to_f)))*100).round
+    end
   end
 
   def mine
@@ -61,6 +66,26 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def completed_todo
+    completed = []
+    @project.teams.each do |team|
+      team.todos.each do |todo|
+        completed << todo if todo.completed
+      end
+    end
+    completed
+  end
+
+  def not_completed_todo
+    not_completed = []
+    @project.teams.each do |team|
+      team.todos.each do |todo|
+        not_completed << todo unless todo.completed
+      end
+    end
+    not_completed
+  end
 
   def user_count
     usercount = []

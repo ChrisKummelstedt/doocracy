@@ -21,6 +21,7 @@
       <li><a href="#teams">Teams</a></li>
       <li><a href="#budgetoverview">Budget Overview</a></li>
       <li><a href="#budgetdetail">Budget Details</a></li>
+      <% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %><li><a href="#progress">Progress</a></li><% end %>
     </ul>
 
     <div class="tab-content">
@@ -173,10 +174,61 @@
 </div>
 
 </div>
+
+<% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %>
+<div id="progress" class="tab-pane fade">
+</br>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="panel panel-default">
+      <div class="panel-body">
+    <div class="col-md-9">
+      <h3>Completed and pending action points</h3>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%= @progress %>%;">
+          <%= @progress %>%
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h4><span class="glyphicon glyphicon-check"></span> <%= @completed_todo.size %></h4>
+          <h4><span class="glyphicon glyphicon-unchecked"></span> <%= @not_completed_todo.size %></h4>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+
+    <h3>What is left to do?</h3>
+
+
+    <table class="table table-hover">
+      <tbody>
+        <% @not_completed_todo.each do |todo| %>
+        <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
+          <% end %>
+        </td></tr>
+      </tbody>
+    </table>
+    <h3>Already done</h3>
+    <table class="table table-hover">
+      <tbody>
+        <% @completed_todo.each do |todo| %>
+        <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
+          <% end %>
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </div>
+<% end %>
+</div>
+</div>
+
 
 <script>
 $(function () {
