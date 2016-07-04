@@ -1,0 +1,9 @@
+<% if @todo.completed %>
+$("div#<%= @todo.id %>").slideUp("normal", function() { $(this).remove(); } );
+$('.todo_items_completed').append("<%= j render partial: 'todo', locals: {todo: @todo} %>");
+<% else %>
+$("div#<%= @todo.id %>").slideUp("normal", function() { $(this).remove(); } );
+$('.todo_items').append("<%= j render partial: 'todo', locals: {todo: @todo} %>");
+<% end %>
+$('#done').text("<%= @completedtodos.size %>");
+$('#not-done').text("<%= @todos.size %>");

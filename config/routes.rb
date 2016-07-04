@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
-  
+
 
   match "/my-projects" => "projects#mine", :via => :get, :as => :my_projects
   match "/about" => "projects#about", :via => :get, :as => :about
@@ -26,6 +26,10 @@ Rails.application.routes.draw do
       get 'join_team' => 'teams#join_team'
       delete 'leave_team' => 'teams#leave_team'
       resources :budgets
+      resources :todos do
+        get 'claim' => 'todos#claim'
+        get 'unclaim' => 'todos#unclaim'
+      end
     end
   end
 

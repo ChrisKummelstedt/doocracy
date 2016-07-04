@@ -17,7 +17,29 @@
 
  */
 
+.nobg
+{
+-webkit-appearance: none;
+outline: none;
+border: 0;
+background: transparent;
+}
 
+
+#add-item-field.form-control {
+  width: 92%;
+  height: 40px;
+  display: inline-block;
+
+}
+
+div.todo_items_completed div.panel div.panel-body {
+  background-color: f9f9f9;
+}
+
+span.completed-todo {
+  text-decoration: line-through;
+}
 
 
 div.item-form label {

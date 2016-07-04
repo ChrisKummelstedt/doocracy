@@ -25,6 +25,9 @@ class TeamsController < ApplicationController
     @users = @team.users.all
     @budget = @team.budgets.new
     @budgets = @team.budgets.all
+    @todo = @team.todos.new
+    @todos = @team.todos.where(:completed => false)
+    @completedtodos = @team.todos.where(:completed => true)
   end
 
   def join_team
