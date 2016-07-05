@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'projects#index'
 
   resources :inventories do
+    get 'label' => 'inventories#label'
     resources :items do
       get 'claim' => 'items#claim'
       get 'unclaim' => 'items#unclaim'

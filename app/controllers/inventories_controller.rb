@@ -17,6 +17,9 @@ class InventoriesController < ApplicationController
   def show
     @inventory = Inventory.find(params[:id])
     @owner = User.find(@inventory.user_id).user_name
+    if  @inventory.items.all.select{|a| a.tags.count == 0 }.size > 0 
+      @togglecycle = true
+    end
     if params[:tag]
       @items = @inventory.items.tagged_with(params[:tag])
       @itemhash = inventory_array(@items)
@@ -24,8 +27,6 @@ class InventoriesController < ApplicationController
       @items = @inventory.items
       @itemhash = inventory_array(@items)
     end
-
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @inventory }
@@ -39,8 +40,18 @@ class InventoriesController < ApplicationController
     else
       @items = @inventory.items
     end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @inventory }
+    end
+  end
 
-
+  def label
+    @inventory = Inventory.find(params[:inventory_id])
+    @items = @inventory.items.all.select{|a| a.tags.count == 0 }
+    if @items.first
+      @item = @items.first
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @inventory }
