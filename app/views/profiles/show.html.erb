@@ -1,74 +1,96 @@
 <div class="page-container">
   <div class="page-wrapper">
+    <div class="panel panel-default">
+      <div class="panel-body">
 
-
-    <div class="posts-wrapper">
-      <div class="row profile-header">
-        <div class="col-md-6">
-          <div class="img-circle">
-            <%= profile_avatar_select(@user) %>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="user-name-and-follow">
-            <h3 class="profile-user-name">
-              <%= @user.user_name %>
-            </h3>
-            <span>
-              <% if @user == current_user %>
-              <%= link_to 'Edit Profile', "/#{@user.user_name}/edit", class: 'btn edit-button', id: 'edit-profile' %>
-              <% end %>
-            </span>
-          </div>
-          <p class="profile-bio">
-            <%= @user.bio %>
-          </p>
-          <div class="user-statistics">
-            <p>
-              <%= pluralize @user.projects.count, 'project' %>
-            </p>
+        <div class="panel panel-default">
+          <div class="panel-body">
+          <div class="row profile-header">
+            <div class="col-md-6">
+              <div class="img-circle">
+                <%= profile_avatar_select(@user) %>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="user-name-and-follow">
+                <h3 class="profile-user-name">
+                  <%= @user.user_name %>
+                </h3>
+                <span>
+                  <% if @user == current_user %>
+                  <%= link_to 'Edit Profile', "/#{@user.user_name}/edit", class: 'btn edit-button', id: 'edit-profile' %>
+                  <% end %>
+                </span>
+              </div>
+              <p class="profile-bio">
+                <%= @user.bio %>
+              </p>
+              <div class="user-statistics">
+                <p>
+                  <%= pluralize @user.projects.count, 'project' %>
+                </p>
+                <% if @user.email %>
+                <p><span class="glyphicon glyphicon-envelope"></span> <%= @user.email %> </p>
+                <% end %>
+                <% if @user.phone_number %>
+                <p><span class="glyphicon glyphicon-phone"></span> <%= @user.phone_number %> </p>
+                <% end %>
+                <% if @user.skype %>
+                <p><span class="glyphicon glyphicon-phone"></span>Skype: <%= @user.skype %> </p>
+                <% end %>
+                <% if @user.city || @user.country %>
+                <p><span class="glyphicon glyphicon-home"></span> <%= @user.city %> <% unless @user.city == "" || @user.country == "" %> <%=  " | " %> <% end %> <%= @user.country %> </p>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <% if @skills.size == 0 %>
+            <h3> <%= @user.user_name %> has not registered any skills yet </h3>
+            <% else %>
+            <h3>Skills</h3>
+            <table class="table table-striped">
+              <tbody>
+                <% @skills.each do |skill| %>
+                <tr>
+                  <td><%=skill.skill %></td>
+                  <td><%=skill.skilllevel  %></td>
+                  <td><%=skill.description %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <% if @projects.size == 0 %>
+            <h3> <%= @user.user_name %> is not yet a member of any team or project </h3>
+
+            <% else %>
+            <h3>Projects</h3>
+            <table class="table table-striped">
+              <tbody>
+                <% @projects.each do |project| %>
+                <tr>
+                  <td><%= link_to project.title, project_path(project) %></td>
+                  <td><%= project.description %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <% end %>
+          </div>
+        </div>
+
+
+
+      </div>
     </div>
-
-
-    <% if @skills.size == 0 %>
-    <h3> <%= @user.user_name %> has not registered any skills yet </h3>
-    <% else %>
-    <h3>Skills</h3>
-    <table class="table table-striped">
-      <tbody>
-        <% @skills.each do |skill| %>
-        <tr>
-          <td><%=skill.skill %></td>
-          <td><%=skill.skilllevel  %></td>
-          <td><%=skill.description %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% end %>
-
-
-    <% if @projects.size == 0 %>
-    <h3> <%= @user.user_name %> is not yet a member of any team or project </h3>
-
-    <% else %>
-    <h3>Projects</h3>
-    <table class="table table-striped">
-      <tbody>
-        <% @projects.each do |project| %>
-        <tr>
-          <td><%= link_to project.title, project_path(project) %></td>
-          <td><%= project.description %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% end %>
-
-
-
   </div>
-</div>

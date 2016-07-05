@@ -2,13 +2,16 @@
   <div class="page-wrapper">
 
 
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Focus areas / skills</h3>
+        <p>If you register some skills here, people in projects you are on will be able to use them to your shared advantage.</p>
+        <%= render "skills/index" %>
+      </div>
+    </div>
 
-    <h3>Focus areas / skills</h3>
-    <p>If you register some skills here, people in projects you are on will be able to use them to your shared advantage.</p>
-
-    <%= render "skills/index" %>
-
-
+    <div class="panel panel-default">
+      <div class="panel-body">
         <h3>Profile</h3>
         <%= form_for @user, url: {action: "update"}, html: { multipart: true } do |f| %>
         <div class="row">
@@ -18,31 +21,51 @@
               <div class="img-circle">
                 <%= profile_avatar_select(@user) %>
               </div>
-
               <%= f.file_field :avatar, onChange: 'loadFile(event)' %>
-
             </div>
           </div>
-
-
           <div class="col-md-8">
             <div class="form-group text-center">
               <h4>Update your bio:</h4>
               <%= f.text_area :bio, label: false, rows: 8, cols: 50; %>
             </div>
           </div>
-
         </div>
+      </div>
+    </div>
 
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group text-center">
-              <%= f.submit "Update Profile", class: 'btn btn-success', id:'profile-edit-button' %>
-            </div>
-            <% end %>
-            <p><%= link_to "Edit password and username", edit_user_registration_path, class: 'btn btn-success', id: "fullbutton" %></p>
-          </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Contact Information</h3>
+        <div class="form-group">
+          <h4>Phone</h4>
+          <%= f.text_field :phone_number %>
         </div>
+        <div class="form-group">
+          <h4>Skype</h4>
+          <%= f.text_field :skype %>
+        </div>
+        <div class="form-group">
+          <h4>City</h4>
+          <%= f.text_field :city %>
+        </div>
+        <div class="form-group">
+          <h4>Country</h4>
+          <%= f.text_field :country %>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group text-center">
+          <%= f.submit "Update Profile", class: 'btn btn-success', id:'profile-edit-button' %>
+        </div>
+        <% end %>
+        <p><%= link_to "Edit password and username", edit_user_registration_path, class: 'btn btn-success', id: "fullbutton" %></p>
+      </div>
+    </div>
 
 
   </div>
