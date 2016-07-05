@@ -2,14 +2,23 @@
   <div class="page-wrapper">
 
 
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="jumbotron" id="index-jumbo">
+          <h3>Focus areas / skills</h3>
+          <p>If you register some skills here, people in projects you are on will be able to use them to your shared advantage.</p>
+        </div>
+        <%= render "skills/index" %>
+      </div>
+    </div>
 
-    <h3>Focus areas / skills</h3>
-    <p>If you register some skills here, people in projects you are on will be able to use them to your shared advantage.</p>
 
-    <%= render "skills/index" %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="jumbotron" id="index-jumbo">
+          <h3>Profile</h3>
+        </div>
 
-
-        <h3>Profile</h3>
         <%= form_for @user, url: {action: "update"}, html: { multipart: true } do |f| %>
         <div class="row">
           <div class="col-md-4">
@@ -34,6 +43,28 @@
 
         </div>
 
+        <div class="jumbotron" id="index-jumbo">
+          <h3>Contact Information</h3>
+        </div>
+
+        <div class="form-group">
+          <h4>Phone</h4>
+          <%= f.text_field :phone_number %>
+        </div>
+        <div class="form-group">
+          <h4>Skype</h4>
+          <%= f.text_field :skype %>
+        </div>
+        <div class="form-group">
+          <h4>City</h4>
+          <%= f.text_field :city %>
+        </div>
+        <div class="form-group">
+          <h4>Country</h4>
+          <%= f.text_field :country %>
+        </div>
+
+
         <div class="row">
           <div class="col-md-12">
             <div class="form-group text-center">
@@ -43,7 +74,8 @@
             <p><%= link_to "Edit password and username", edit_user_registration_path, class: 'btn btn-success', id: "fullbutton" %></p>
           </div>
         </div>
-
+      </div>
+    </div>
 
   </div>
 </div>
