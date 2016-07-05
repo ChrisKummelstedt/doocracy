@@ -12,8 +12,10 @@ Rails.application.routes.draw do
     get 'tags/:tag', to: 'inventories#filter'
   end
 
-  devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
-
+  devise_for :users, :controllers => {
+    :registrations => 'users/registrations',
+    :omniauth_callbacks => 'users/omniauth_callbacks'
+  }
 
   match "/my-projects" => "projects#mine", :via => :get, :as => :my_projects
   match "/about" => "projects#about", :via => :get, :as => :about
