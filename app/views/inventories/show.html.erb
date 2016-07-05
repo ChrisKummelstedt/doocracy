@@ -6,11 +6,13 @@
       <p><%= @inventory.description %></p>
     </div>
 
-
     <div>
     <div class="floatright">
       <div class="form-actions">
-        <%= link_to "<span class='glyphicon glyphicon-tags'></span>".html_safe, edit_inventory_path(@inventory), :class => 'btn btn-mini' %>
+        <%= link_to "<span class='glyphicon glyphicon-wrench'></span>".html_safe, edit_inventory_path(@inventory), :class => 'btn btn-mini' %>
+        <% if @togglecycle %>
+        <%= link_to "<span class='glyphicon glyphicon-tags'></span>".html_safe, inventory_label_path(@inventory), :class => 'btn btn-mini' %>
+        <% end %>
       </div>
     </div>
     </div>

@@ -38,7 +38,6 @@ class ItemsController < ApplicationController
   # GET /items/1/edit
   def edit
     @inventory = Inventory.find(params[:inventory_id])
-
     @item = @inventory.items.find(params[:id])
     # @item = Item.find(params[:id])
   end
@@ -73,7 +72,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.update_attributes(item_params)
-        format.html { redirect_to inventory_path(@inventory), notice: 'Item was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
