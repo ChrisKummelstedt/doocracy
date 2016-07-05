@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   before_action :set_user
 
   def show
+    @user ||= current_user
     @projects = @user.projects
     @skills = @user.skills.all
   end
