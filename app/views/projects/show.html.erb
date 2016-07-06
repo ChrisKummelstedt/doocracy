@@ -17,132 +17,136 @@
       </div>
     </div>
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#about">About</a></li>
+      <li class="active"><a href="#about">Project</a></li>
       <li><a href="#teams">Teams</a></li>
       <li><a href="#budgetoverview">Budget Overview</a></li>
       <li><a href="#budgetdetail">Budget Details</a></li>
       <li><a href="#progress">Progress</a></li>
     </ul>
-
     <div class="tab-content">
       <div id="about" class="tab-pane fade in active">
-      </br>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="col-md-9">
-            <p><%= @project.description %></p>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="col-md-9">
+              <% if @project.description %>
+              <p><b>In essence:</b></p>
+              <% end %>
+              <p><%= @project.description %></p>
+              <% if @project.inventories %>
+              <p><b>Resources for the project can be found in:</b></p>
+              <% @project.inventories.each do |inventory| %>
+              <P><%= link_to "<span class='glyphicon glyphicon-th-large'></span>".html_safe + " " + inventory.name, inventory_path(inventory) %></p>
+                <% end %>
+                <% end %>
+              </div>
+              <div class="col-md-3">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <h4><span class="glyphicon glyphicon-piggy-bank"></span> <%= @project.total_budget %> $</h4>
+                    <h4><span class="glyphicon glyphicon-heart"></span> <%= @project.teams.size %> teams</h4>
+                    <h4><span class="glyphicon glyphicon-user"></span> <%= @usercount %> people</h4>
+                  </div>
+                </div>
+              </div>
+
+              <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@project.latitude},#{@project.longitude}&markers=#{@project.latitude},#{@project.longitude}&zoom=15&size=640x400&key=AIzaSyCZ4K0_zcXxMjm6RwvYCczETWkr0CELFy4",
+              class: 'img-fluid img-rounded', alt: "#{@project.title} on the map"%>
+            </div>
           </div>
 
-          <div class="col-md-3">
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <h4><span class="glyphicon glyphicon-piggy-bank"></span> <%= @project.total_budget %> $</h4>
-                <h4><span class="glyphicon glyphicon-heart"></span> <%= @project.teams.size %> teams</h4>
-                <h4><span class="glyphicon glyphicon-user"></span> <%= @usercount %> people</h4>
+        </div>
+        <div id="teams" class="tab-pane fade">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3>  <%= @project.title %> Teams</h3>
+              <p><b>Team overview</b></p>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <table class="table table-striped">
+                    <tbody>
+                      <% @project.teams.each do |team| %>
+                      <tr>
+                        <td> <%= link_to team.title, project_team_path(@project, team) %> </td>
+                        <td> <%= team.users.all.size %> </td>
+                        <td> <%= team.description %> </td>
+                        <td> <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, project_team_path(@project, team) %></td>
+                      </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                  <% if current_user%>
+                  <%= link_to "Add team <span class='glyphicon glyphicon-plus-sign'></span>".html_safe, new_project_team_path(@project),  id: "Create a Team" %>
+                  <%end%>
+                </div>
+              </div>
+
+              <p><b>Skills in the project</b></p>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <% skillarray = [] %>
+                  <% @project.teams.each do |team| %>
+                  <% team.users.each do |member| %>
+                  <% member.skills.each do |talent| %>
+                  <% skillarray << talent.skill.strip %>
+                  <% end %>
+                  <% end %>
+                  <% end %>
+                  <%= skillarray.uniq.join(", ") %>
+                </div>
+              </div>
+
+              <p><b>Team members</b></p>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <table class="table table-striped">
+                    <tbody>
+
+                      <% @project.teams.each do |team| %>
+                      <% teamarray = [] %>
+                      <tr>
+                        <td> <%= team.title %></td>
+                        <td>
+                          <% team.users.each do |team_member| %>
+                          <% teamarray << team_member.user_name %>
+                          <% end %>
+                          <%= teamarray.uniq.join(", ") %>
+                        </td>
+                      </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
 
-          <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@project.latitude},#{@project.longitude}&markers=#{@project.latitude},#{@project.longitude}&zoom=15&size=640x400&key=AIzaSyCZ4K0_zcXxMjm6RwvYCczETWkr0CELFy4",
-          class: 'img-fluid img-rounded', alt: "#{@project.title} on the map"%>
         </div>
-      </div>
-
-    </div>
-    <div id="teams" class="tab-pane fade">
-    </br>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h3>  <%= @project.title %> Teams</h3>
-        <p><b>Team overview</b></p>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <table class="table table-striped">
-              <tbody>
-                <% @project.teams.each do |team| %>
-                <tr>
-                  <td> <%= link_to team.title, project_team_path(@project, team) %> </td>
-                  <td> <%= team.users.all.size %> </td>
-                  <td> <%= team.description %> </td>
-                  <td> <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, project_team_path(@project, team) %></td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <% if current_user%>
-            <%= link_to "Add team <span class='glyphicon glyphicon-plus-sign'></span>".html_safe, new_project_team_path(@project),  id: "Create a Team" %>
-            <%end%>
+        <div id="budgetoverview" class="tab-pane fade">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3> <%= @project.title.split.map(&:capitalize).join(' ') %> Budget</h3>
+              <p><b>Planned budget compared to current budget</b></p>
+              <p><%= @project.title %> is configured to display a suggested budget of <%= @project.total_budget %>. This value is compared below to give us a chance to see how the sum of all team budgets compare to the total budget anticipated for the project.</p>
+            </br>
+          </br>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="barchart" style="min-width: 620px; height: 400px; max-width: 620px; margin: 0 auto"></div>
+            </br>
           </div>
         </div>
-
-        <p><b>Skills in the project</b></p>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <% skillarray = [] %>
-            <% @project.teams.each do |team| %>
-            <% team.users.each do |member| %>
-            <% member.skills.each do |talent| %>
-            <% skillarray << talent.skill.strip %>
-            <% end %>
-            <% end %>
-            <% end %>
-            <%= skillarray.uniq.join(", ") %>
-          </div>
-        </div>
-
-        <p><b>Team members</b></p>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <table class="table table-striped">
-              <tbody>
-
-                <% @project.teams.each do |team| %>
-                <% teamarray = [] %>
-                <tr>
-                  <td> <%= team.title %></td>
-                  <td>
-                    <% team.users.each do |team_member| %>
-                    <% teamarray << team_member.user_name %>
-                    <% end %>
-                    <%= teamarray.uniq.join(", ") %>
-                  </td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
+        <p>The suggested total budget for <%= @project.title %> is <%= @project.total_budget %>. The sum of budget items from all teams is currently <%=@project.teams.sum(:team_budget) %>. This means that we are currently at <b><%= ((@project.teams.sum(:team_budget))/(@project.total_budget)) * 100 %>% </b> of the suggested total.</p>
+        <p><b>Budget breakdown by team</b></p>
+        <p><%= @project.title %> has <%= @project.teams.size %> teams. The total for all teams amount to <%= @project.total_budget %>.
+        </br>
+      </br>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div id="piechart" style="min-width: 620px; height: 400px; max-width: 620px; margin: 0 auto"></div>
         </div>
       </div>
     </div>
-
   </div>
-  <div id="budgetoverview" class="tab-pane fade">
-  </br>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <h3> <%= @project.title.split.map(&:capitalize).join(' ') %> Budget</h3>
-      <p><b>Planned budget compared to current budget</b></p>
-      <p><%= @project.title %> is configured to display a suggested budget of <%= @project.total_budget %>. This value is compared below to give us a chance to see how the sum of all team budgets compare to the total budget anticipated for the project.</p>
-    </br>
-  </br>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div id="barchart" style="min-width: 620px; height: 400px; max-width: 620px; margin: 0 auto"></div>
-    </br>
-  </div>
-</div>
-<p>The suggested total budget for <%= @project.title %> is <%= @project.total_budget %>. The sum of budget items from all teams is currently <%=@project.teams.sum(:team_budget) %>. This means that we are currently at <b><%= ((@project.teams.sum(:team_budget))/(@project.total_budget)) * 100 %>% </b> of the suggested total.</p>
-<p><b>Budget breakdown by team</b></p>
-<p><%= @project.title %> has <%= @project.teams.size %> teams. The total for all teams amount to <%= @project.total_budget %>.
-</br>
-</br>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div id="piechart" style="min-width: 620px; height: 400px; max-width: 620px; margin: 0 auto"></div>
-  </div>
-</div>
-</div>
-</div>
 </div>
 <div id="budgetdetail" class="tab-pane fade">
 </br>
@@ -176,64 +180,59 @@
 </div>
 
 <div id="progress" class="tab-pane fade">
-</br>
-<% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="col-md-9">
-          <h3>Completed and pending action points</h3>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%= @progress %>%;">
-              <%= @progress %>%
+  <% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="col-md-9">
+            <h3>Completed and pending action points</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%= @progress %>%;">
+                <%= @progress %>%
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-3">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <h4><span class="glyphicon glyphicon-check"></span> <%= @completed_todo.size %></h4>
-              <h4><span class="glyphicon glyphicon-unchecked"></span> <%= @not_completed_todo.size %></h4>
+          <div class="col-md-3">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h4><span class="glyphicon glyphicon-check"></span> <%= @completed_todo.size %></h4>
+                <h4><span class="glyphicon glyphicon-unchecked"></span> <%= @not_completed_todo.size %></h4>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <h3>What is left to do?</h3>
+      <table class="table table-hover">
+        <tbody>
+          <% @not_completed_todo.each do |todo| %>
+          <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
+            <% end %>
+          </td></tr>
+        </tbody>
+      </table>
+      <h3>Already done</h3>
+      <table class="table table-hover">
+        <tbody>
+          <% @completed_todo.each do |todo| %>
+          <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
+            <% end %>
+          </td></tr>
+        </tbody>
+      </table>
     </div>
-
-
-    <h3>What is left to do?</h3>
-
-
-    <table class="table table-hover">
-      <tbody>
-        <% @not_completed_todo.each do |todo| %>
-        <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
-          <% end %>
-        </td></tr>
-      </tbody>
-    </table>
-    <h3>Already done</h3>
-    <table class="table table-hover">
-      <tbody>
-        <% @completed_todo.each do |todo| %>
-        <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
-          <% end %>
-        </td></tr>
-      </tbody>
-    </table>
   </div>
 </div>
-</div>
-    <% else %>
-    <div class="panel panel-default">
-      <div class="panel-body">
+<% else %>
+<div class="panel panel-default">
+  <div class="panel-body">
     <h3>This page is all ready to serve up a juicy overview</h3>
     <p>To populate the page, start creating teams and adding to do list items to the project.</p>
   </div>
 </div>
-    <% end %>
-  </div>
+<% end %>
+</div>
 </div>
 
 

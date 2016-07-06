@@ -22,6 +22,10 @@
         <h3>4. Where will your project be based?</h3>
         <div class="form-group-project text-center">
           <%= f.input :address, required: true, label: false, placeholder: 'Street Name, City, Country' %>
+        </div>
+        <h3>5. Any associated inventories?</h3>
+        <div class="form-group ">
+          <%= f.association :inventories, as: :check_boxes %>
         </div><br><br>
         <div class="row">
           <div class="col-md-12 text-center">
