@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
 
   def mine
     @my_projects = current_user.projects
-    @my_teams = current_user.teams
+    @commitments = Todo.where(user_id: current_user.id)
   end
 
   def edit

@@ -32,7 +32,7 @@
               <p><b>In essence:</b></p>
               <% end %>
               <p><%= @project.description %></p>
-              <% if @project.inventories %>
+              <% unless @project.inventories == [] %>
               <p><b>Resources for the project can be found in:</b></p>
               <% @project.inventories.each do |inventory| %>
               <P><%= link_to "<span class='glyphicon glyphicon-th-large'></span>".html_safe + " " + inventory.name, inventory_path(inventory) %></p>
