@@ -16,14 +16,14 @@ class ProjectsController < ApplicationController
     @usercount = user_count
     @completed_todo = completed_todo
     @not_completed_todo = not_completed_todo
-    unless @completed_todo.size == 0 || @not_completed_todo.size == 0 
+    unless @completed_todo.size == 0 || @not_completed_todo.size == 0
       @progress = (((@completed_todo.size.to_f)/((@not_completed_todo.size.to_f)+(@completed_todo.size.to_f)))*100).round
     end
   end
 
   def mine
     @my_projects = current_user.projects
-    @my_teams = current_user.teams
+    @commitments = Todo.where(user_id: current_user.id)
   end
 
   def edit
@@ -32,8 +32,18 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    @project.update(project_params)
-    redirect_to project_path(@project)
+    if params[:inventory_ids]
+      :inventory_ids.each do |inventory|
+        i = Inventory.find_by_id(params[inventory])
+        @project.inventories << i
+        @project.save
+      end
+      @project.update(project_params)
+      redirect_to project_path(@project)
+    else
+      @project.update(project_params)
+      redirect_to project_path(@project)
+    end
   end
 
   def destroy
@@ -49,6 +59,13 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(project_params)
+    if params[:inventory_ids]
+      :inventory_ids.each do |inventory|
+        i = Inventory.find_by_id(params[inventory])
+        @project.inventories << i
+        @project.save
+      end
+    end
     if @project.save
       flash[:notice] = "Your project has been created."
       redirect_to project_path(@project)
@@ -98,7 +115,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :total_budget, :image, :address, :search)
+    params.require(:project).permit(:title, :description, :total_budget, :image, :address, :search, {:inventory_ids => []})
   end
 
 
