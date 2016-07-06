@@ -21,7 +21,7 @@
       <li><a href="#teams">Teams</a></li>
       <li><a href="#budgetoverview">Budget Overview</a></li>
       <li><a href="#budgetdetail">Budget Details</a></li>
-      <% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %><li><a href="#progress">Progress</a></li><% end %>
+      <li><a href="#progress">Progress</a></li>
     </ul>
 
     <div class="tab-content">
@@ -175,9 +175,9 @@
 
 </div>
 
-<% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %>
 <div id="progress" class="tab-pane fade">
 </br>
+<% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %>
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="panel panel-default">
@@ -225,8 +225,15 @@
   </div>
 </div>
 </div>
-<% end %>
+    <% else %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+    <h3>This page is all ready to serve up a juicy overview</h3>
+    <p>To populate the page, start creating teams and adding to do list items to the project.</p>
+  </div>
 </div>
+    <% end %>
+  </div>
 </div>
 
 
