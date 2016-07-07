@@ -69,6 +69,7 @@ class ItemsController < ApplicationController
     @inventory = Inventory.find(params[:inventory_id])
     @item = @inventory.items.find(params[:id])
     @item.update(item_params)
+    @item.save
 
     respond_to do |format|
       if @item.update_attributes(item_params)
