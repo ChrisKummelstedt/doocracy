@@ -4,6 +4,7 @@
     <div class="jumbotron" id="index-jumbo">
       <h3>Cycle through items in <%= @inventory.name %></h3>
       <p>Awesomeness! Thanks for tagging</p>
+      <P><%= link_to ">> Back to inventory", inventory_path(@inventory)%></p>
     </div>
     <div class="panel panel-default">
       <div class="panel-heading"><h3>What is this?</h3></div>

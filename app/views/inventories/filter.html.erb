@@ -1,18 +1,9 @@
 <div class="page-container">
   <div class="page-wrapper">
-
     <div class="jumbotron" id="index-jumbo">
-
-      <div>
-        <div class="floatright">
-          <div class="form-actions">
-            <%= link_to "Back to inventory", inventory_path(@inventory), :class => 'btn btn-mini' %>
-          </div>
-        </div>
-      </div>
-
-      <h3><%= @inventory.name %></h3>
+      <h3><%= @tag + " in " + @inventory.name %></h3>
       <p><%= @inventory.description %></p>
+      <p><%= link_to ">> Back to inventory", inventory_path(@inventory) %></p>
     </div>
 
     <% unless @items.empty? %>
@@ -26,11 +17,19 @@
             <%= image_tag pic.image.url(:medium) %>
           </div>
           <div class="col-md-6">
-            <% unless pic.description = "" %>
+            <% unless pic.description == "" %>
             <p><b>Description</b>: <%= pic.description %></p>
             <% end %>
 
-            <% if pic.owner %>
+            <% unless pic.tags == [] %>
+            <p><b>Tagged as</b>:
+              <% pic.tags.each do |tag| %>
+              <%= tag.name %>
+              <% end %>
+            </p>
+            <% end %>
+
+            <% unless pic.owner == [] %>
             <P><b>Owner(s)</b>:
               <% pic.owner.each do |owner| %>
               <%= link_to owner.user_name, profile_path(owner.user_name) %>

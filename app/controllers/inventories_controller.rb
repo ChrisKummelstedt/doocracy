@@ -17,7 +17,7 @@ class InventoriesController < ApplicationController
   def show
     @inventory = Inventory.find(params[:id])
     @owner = User.find(@inventory.user_id).user_name
-    if  @inventory.items.all.select{|a| a.tags.count == 0 }.size > 0 
+    if  @inventory.items.all.select{|a| a.tags.count == 0 }.size > 0
       @togglecycle = true
     end
     if params[:tag]
@@ -35,8 +35,9 @@ class InventoriesController < ApplicationController
 
   def filter
     @inventory = Inventory.find(params[:inventory_id])
+    @tag = params[:tag]
     if params[:tag]
-      @items = @inventory.items.tagged_with(params[:tag])
+      @items = @inventory.items.tagged_with(@tag)
     else
       @items = @inventory.items
     end
