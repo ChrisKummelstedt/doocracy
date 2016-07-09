@@ -36,10 +36,12 @@
             <% end %>
           </div>
         </div>
-        <% end %>
-        <% end %>
       </div>
     </div>
+    <% end %>
+    <% end %>
+
+    <% unless @commitments = [] %>
     <div class="panel panel-default">
       <div class="panel-body">
         <h3>Commitments</h3>
@@ -69,35 +71,35 @@
     </div>
 
 
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h3>Commitment History</h3>
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Commitment</th>
-                  <th>Project / Team</th>
-                </tr>
-              </thead>
-              <tbody>
-                <%= @commitements %>
-                <% @commitments.each do |commit| %>
-                <% if commit.completed == true %>
-                <tr>
-                  <td><span class="completed-todo"><%= commit.description %></span></td>
-                  <% team = Team.find(commit.team_id) %>
-                  <% project = Project.find(team.project.id) %>
-                  <td><span class="completed-todo"><%= link_to project.title, project_path(project.id) %> - <%= link_to team.title, project_team_path(project.id, team.id) %></span></td>
-                </tr>
-                <% end %>
-                <% end %>
-              </tbody>
-            </table>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Commitment History</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Commitment</th>
+              <th>Project / Team</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= @commitements %>
+            <% @commitments.each do |commit| %>
+            <% if commit.completed == true %>
+            <tr>
+              <td><span class="completed-todo"><%= commit.description %></span></td>
+              <% team = Team.find(commit.team_id) %>
+              <% project = Project.find(team.project.id) %>
+              <td><span class="completed-todo"><%= link_to project.title, project_path(project.id) %> - <%= link_to team.title, project_team_path(project.id, team.id) %></span></td>
+            </tr>
+            <% end %>
+            <% end %>
+          </tbody>
+        </table>
 
-          </div>
-        </div>
-
+      </div>
     </div>
+
+    <% end %>
+
   </div>
-</div>
 </div>

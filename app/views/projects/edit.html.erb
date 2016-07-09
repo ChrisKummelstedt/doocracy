@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="page-wrapper">
     <div class="jumbotron" id="index-jumbo">
-      <h3>Edit <%= @project.title %></h3>
+      <h3>Configure <%= @project.title %></h3>
       <p></p>
     </div>
 
@@ -13,11 +13,11 @@
       </div>
 
       <h3>Image</h3>
-        <center>
-          <div class="form-group">
-            <%= f.input :image %>
-          </div>
-        </center>
+      <center>
+        <div class="form-group">
+          <%= f.input :image %>
+        </div>
+      </center>
       <h3>Description</h3>
       <div class="form-group-project text-center">
         <%= f.input :description, label: false, placeholder: 'Describe this awesomness' %>
@@ -26,11 +26,21 @@
       <div class="form-group ">
         <%= f.input :total_budget, label: false, placeholder: '0' %>
       </div>
+      <h3>Total revenue</h3>
+      <div class="form-group ">
+        <%= f.input :revenue, label: false, placeholder: '0' %>
+      </div>
       <h3>Address</h3>
       <div class="form-group-project text-center">
         <%= f.input :address, required: true, label: false, placeholder: 'Street Name, City, Country' %>
       </div>
+      <h3>CFOs</h3>
+      <p>Who should have admin priviledges for reciepts?</p>
+      <div class="form-group-project">
+        <%= f.input :controller, as: :check_boxes, collection: @controller_list %>
+      </div>
       <h3>Associated inventories</h3>
+      <p>Which inventories belong to this project?</p>
       <div class="form-group ">
         <%= f.association :inventories, as: :check_boxes %>
       </div>
@@ -40,13 +50,13 @@
         </div>
       </div>
 
-        <div class="form-group text-center">
-          <%= f.button :submit, class: 'btn-success btn-block' %>
-        </div>
+      <div class="form-group text-center">
+        <%= f.button :submit, class: 'btn-success btn-block' %>
+      </div>
 
-        <% end %>
-        <div class="form-group text-center">
-          <%= button_to "Delete", project_path(@project), method: :delete, class: 'btn-danger btn-block', data: { confirm: "Are you sure?" } %>
-        </div>
+      <% end %>
+      <div class="form-group text-center">
+        <%= button_to "Delete", project_path(@project), method: :delete, class: 'btn-danger btn-block', data: { confirm: "Are you sure?" } %>
+      </div>
     </div>
   </div>

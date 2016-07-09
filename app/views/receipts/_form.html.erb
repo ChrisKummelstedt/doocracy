@@ -1,0 +1,13 @@
+<%= simple_form_for [@binder, @receipt] do |f| %>
+  <%= f.error_notification %>
+  <div class="receipt-form">
+    <b>Title:</b>
+    <%= f.input :name %>
+    <b>Tags:</b>
+    <%= f.input :tag_list, as: :string, input_html: { class: 'taggable', :'data-tags' => Receipt.tag_counts.map{ |tag| tag.name }.to_json } %>
+  </div>
+  <br>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

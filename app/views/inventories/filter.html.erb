@@ -47,7 +47,7 @@
             <form method="get" action= "/inventories/<%= @inventory.id %>/items/<%= pic.id %>/claim">
               <input type="hidden" name="id" value="<%= pic.id %>" >
               <input type="hidden" name="project_id" value="<%= @inventory.id %>">
-              <input type="submit" value="Claim <%= pic.title %>" class="button" >
+              <input type="submit" value="Claim <%= @tag %>" class="button" >
             </form>
             <% end %>
 

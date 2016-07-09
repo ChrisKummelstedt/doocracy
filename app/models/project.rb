@@ -6,6 +6,8 @@ class Project < ActiveRecord::Base
   has_many :teams, dependent: :destroy
   has_many :stacks
   has_many :inventories, through: :stacks
+  serialize :controller
+
 
   geocoded_by :address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
@@ -13,8 +15,8 @@ class Project < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
 
-def self.search(search)
-  where("title ILIKE ? OR description ILIKE ? OR address ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
-end
+  def self.search(search)
+    where("title ILIKE ? OR description ILIKE ? OR address ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
+  end
 
 end

@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706112557) do
+ActiveRecord::Schema.define(version: 20160709122518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "Inventories_Projects", id: false, force: :cascade do |t|
-    t.integer "project_id",   null: false
-    t.integer "inventory_id", null: false
+  create_table "binders", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   create_table "budgets", force: :cascade do |t|
@@ -61,8 +63,8 @@ ActiveRecord::Schema.define(version: 20160706112557) do
     t.string   "title"
     t.text     "description"
     t.integer  "total_budget"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.integer  "user_id"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -71,9 +73,40 @@ ActiveRecord::Schema.define(version: 20160706112557) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
+    t.string   "controller",         default: "--- []\n"
+    t.integer  "revenue"
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "receipts", force: :cascade do |t|
+    t.string   "name"
+    t.date     "date"
+    t.integer  "amount"
+    t.boolean  "booked"
+    t.datetime "bookeddate"
+    t.boolean  "approved"
+    t.integer  "approvedby"
+    t.datetime "approveddate"
+    t.boolean  "paid"
+    t.integer  "paidby"
+    t.date     "paiddate"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "binder_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.string   "notapproved"
+    t.integer  "umbrella"
+  end
+
+  add_index "receipts", ["binder_id"], name: "index_receipts_on_binder_id", using: :btree
+  add_index "receipts", ["team_id"], name: "index_receipts_on_team_id", using: :btree
+  add_index "receipts", ["user_id"], name: "index_receipts_on_user_id", using: :btree
 
   create_table "skilllists", force: :cascade do |t|
     t.string   "skill"
@@ -178,6 +211,7 @@ ActiveRecord::Schema.define(version: 20160706112557) do
     t.string   "skype"
     t.string   "city"
     t.string   "country"
+    t.string   "paypal"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -186,6 +220,9 @@ ActiveRecord::Schema.define(version: 20160706112557) do
   add_foreign_key "budgets", "teams"
   add_foreign_key "items", "inventories"
   add_foreign_key "projects", "users"
+  add_foreign_key "receipts", "binders"
+  add_foreign_key "receipts", "teams"
+  add_foreign_key "receipts", "users"
   add_foreign_key "teams", "projects"
   add_foreign_key "todos", "teams"
 end

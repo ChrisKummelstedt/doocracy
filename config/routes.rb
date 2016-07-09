@@ -12,6 +12,17 @@ Rails.application.routes.draw do
     get 'tags/:tag', to: 'inventories#filter'
   end
 
+  resources :binders do
+    get 'label' => 'binders#label'
+    resources :receipts do
+      get 'claim' => 'receipts#claim'
+      get 'unclaim' => 'receipts#unclaim'
+    end
+    resources :tags, except: :show
+    get 'tags/:tag', to: 'binders#filter'
+  end
+
+
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :omniauth_callbacks => 'users/omniauth_callbacks'
@@ -25,6 +36,10 @@ Rails.application.routes.draw do
 
 
   resources :projects do
+    get 'receipts' => 'projects#receipts'
+    get 'cycle' => 'projects#cycle'
+    get 'paymentsfile' => 'projects#paymentsfile'
+    get 'markaspaid' => 'projects#markaspaid' 
     resources :teams do
       get 'join_team' => 'teams#join_team'
       delete 'leave_team' => 'teams#leave_team'

@@ -1,0 +1,17 @@
+<%= form_for @binder, :html => { :class => 'form-horizontal', multipart: true } do |f| %>
+
+  <div class="input-group">
+    <div class="controls">
+    </br>
+ <%= file_field_tag "images[]", type: :file, multiple: true %>
+ </br>
+
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Upload receipts", :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                inventories_path, :class => 'btn btn-mini' %>
+                </br>
+  </div>
+<% end %>

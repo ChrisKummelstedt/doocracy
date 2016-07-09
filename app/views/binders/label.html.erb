@@ -1,0 +1,47 @@
+<div class="page-container">
+  <div class="page-wrapper">
+    <% if !@receipts.empty? %>
+    <div class="jumbotron" id="index-jumbo">
+      <h3>Great!</h3>
+      <p>You will now be shown all receipts that have not yet been recorded.</p>
+      <p>Once recorded they will be available for payment.</p>
+      <P><%= link_to ">> Back to binder", binder_path(@binder)%></p>
+      </div>
+      <div class="panel-body">
+        <div class="panel panel-default">
+          <div class="panel-heading"><b><%= @receipt.name %></b></div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <%= image_tag @receipt.image.url(:medium) %>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <div class="floatright">
+                    <div class="form-actions">
+                      <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe,  binder_receipt_path(@binder, @receipt), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
+                    </div>
+                  </div>
+                </div>
+                <div class ="row">
+                </br>
+                <%= render 'receipts/cycleform' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          &nbsp
+        </div>
+      </div>
+    </div>
+    <% else %>
+    <div class="jumbotron" id="index-jumbo">
+      <h3>Muchos Gracias!</h3>
+      <p>No more untagged receipts in <%= @binder.name %>!</p>
+      <P><%= link_to ">> Back to binder", binder_path(@binder)%></p>
+
+      </div>
+      <% end %>
+    </div>
+  </div>

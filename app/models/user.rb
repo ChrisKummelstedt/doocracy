@@ -7,14 +7,12 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook]
   has_many :projects
   has_many :inventories
+  has_one :binder
+  has_many :receipts
   has_many :todos
-
-  validates_uniqueness_of :email
-
+  validates_uniqueness_of :email, :user_name
   has_and_belongs_to_many :skills
-
   has_and_belongs_to_many :teams
-
   has_attached_file :avatar, styles: { medium: '152x152#' }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
@@ -25,5 +23,13 @@ class User < ActiveRecord::Base
       user.user_name = auth.info.name   # assuming the user model has a name
       # user.image = auth.info.image # assuming the user model has an image
     end
+  end
+
+  after_create :create_binder
+
+  private
+
+  def create_designer
+      Binder.create(user_id: self.id)
   end
 end

@@ -1,0 +1,5 @@
+<%- headers = ['Name', 'Email', 'User ID'] -%>
+<%= CSV.generate_line headers %>
+<%- @payments.each do |receipt| -%>
+<%= CSV.generate_line([receipt.name, receipt.amount, receipt.binder.user.paypal]) -%>
+<%- end -%>

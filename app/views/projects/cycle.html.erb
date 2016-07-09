@@ -1,0 +1,38 @@
+<div class="page-container">
+  <div class="page-wrapper">
+    <% if @notapproved %>
+    <div class="jumbotron" id="index-jumbo">
+      <h3>Great!</h3>
+      <p>You will now be shown all receipts that have not yet been approved.</p>
+      <p>Once approved they will be available for payment.</p>
+      <P><%= link_to ">> Back to project receipts", project_receipts_path(@project)%></p>
+      </div>
+      <div class="panel-body">
+        <div class="panel panel-default">
+          <div class="panel-heading"><b><%= @notapproved.name %></b></div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <%= image_tag @notapproved.image.url(:medium) %>
+              </div>
+              <div class="col-md-6">
+                <% @binder = @notapproved.binder %>
+                <% @receipt = @notapproved %>
+                <%= render 'receipts/cycleapprovalform' %>
+              </div>
+            </div>
+          </div>
+        <div class="panel-footer">
+          &nbsp
+        </div>
+      </div>
+    </div>
+    <% else %>
+    <div class="jumbotron" id="index-jumbo">
+      <h3>Muchos Gracias!</h3>
+      <p>No more unapproved receipts in <%= @project.title %>!</p>
+      <P><%= link_to ">> Back to project receipts", project_receipts_path(@project)%></p>
+      </div>
+      <% end %>
+    </div>
+  </div>
