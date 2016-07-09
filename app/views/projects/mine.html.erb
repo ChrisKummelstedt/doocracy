@@ -28,7 +28,7 @@
             <% end %>
             <div class="panel panel-default">
               <div class="panel-body">
-                <h4><%= link_to team.title, project_team_path(team) %> - <%= team.description %></h4>
+                <h4><%= link_to team.title, project_team_path(team.project, team) %> - <%= team.description %></h4>
               </div>
             </div>
             <% toggle = 1 %>
