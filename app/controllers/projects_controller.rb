@@ -84,7 +84,7 @@ class ProjectsController < ApplicationController
   end
 
   def mine
-    @my_projects = current_user.projects
+    @my_projects = my_project_list
     @commitments = Todo.where(user_id: current_user.id)
   end
 
@@ -126,6 +126,15 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def my_project_list
+    @teams = user.teams
+    projects = []
+    @teams.each do |team|
+      projects << team.project
+    end
+    projects
+  end
 
   def receiptstotal
     @receiptstotal = 0
