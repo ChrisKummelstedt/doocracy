@@ -64,7 +64,7 @@ class ProjectsController < ApplicationController
         @project.inventories << i
       end
     end
-    
+
     @project.save
     @adminteam = @project.teams.create(title: "Admin Team", description: "Overview and accounting")
     @adminteam.users << current_user
@@ -215,7 +215,7 @@ class ProjectsController < ApplicationController
         controller_list << [member.user_name, member.user_name]
       end
     end
-    controller_list
+    controller_list.uniq
   end
 
   def completed_todo
