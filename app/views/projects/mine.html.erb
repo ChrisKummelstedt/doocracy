@@ -2,7 +2,7 @@
   <div class="page-wrapper">
 
 
-    <% if current_user.projects.size == 0 %>
+    <% if @my_projects.size == 0 %>
     <div class="jumbotron" id="index-jumbo">
       <h3> <%= current_user.user_name %>'s projects</h3>
       <p>You have not yet joined or added any projects. Click on the flag in the nav bar to get started!</p>
@@ -10,7 +10,7 @@
     <% else %>
     <div class="jumbotron" id="index-jumbo">
       <h3><%= current_user.user_name %></h3>
-      <p>This is an overview of your commitments.</p>
+      <p>This is an overview of your memberships.</p>
     </div>
     <div class="panel panel-default">
       <div class="panel-body">
@@ -18,7 +18,7 @@
         <% @my_projects.each do |project| %>
         <div class="panel panel-default">
           <div class="panel-body">
-            <h3><%= link_to "<span class='glyphicon glyphicon-flag'></span>".html_safe + " " + project.title, project_path(project) %> <%= link_to "<span class='glyphicon glyphicon-edit floatright'></span>".html_safe, edit_project_path(project), :id => 'edit'%></h3>
+            <h3><%= link_to project.title, project_path(project) %></h3>
             <% toggle = 0 %>
             <% project.teams.each do |team| %>
             <% if team.users.include? current_user %>
@@ -28,7 +28,7 @@
             <% end %>
             <div class="panel panel-default">
               <div class="panel-body">
-                <h4<%= link_to "<span class='glyphicon glyphicon-user'></span>".html_safe + " " + team.title, project_path(Project.find(team.project_id)) %> - <%= team.description %></h4>
+                <h4><%= link_to team.title, project_path(Project.find(team.project_id)) %> - <%= team.description %></h4>
               </div>
             </div>
             <% toggle = 1 %>

@@ -64,7 +64,6 @@ class ProjectsController < ApplicationController
         @project.inventories << i
       end
     end
-
     @project.save
     @adminteam = @project.teams.create(title: "Admin Team", description: "Overview and accounting")
     @adminteam.users << current_user
@@ -128,7 +127,7 @@ class ProjectsController < ApplicationController
   private
 
   def my_project_list
-    @teams = user.teams
+    @teams = current_user.teams
     projects = []
     @teams.each do |team|
       projects << team.project
