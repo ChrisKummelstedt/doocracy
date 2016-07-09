@@ -132,7 +132,7 @@ class ProjectsController < ApplicationController
     @teams.each do |team|
       projects << team.project
     end
-    projects
+    projects.uniq
   end
 
   def receiptstotal
