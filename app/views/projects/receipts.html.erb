@@ -1,0 +1,110 @@
+<div class="page-container">
+  <div class="page-wrapper">
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3><%= link_to ">> Back to #{@project.title}", project_path(@project) %></h3>
+        <h3>What is this?</h3>
+        <p><b>This is where you get your money back for purchases made on behalf of teams that you are on.</b></p>
+        <p> First you upload them, then you click the green button that appears under "booked reciepts". After you have a booked a reciept it get pushed for approval to the project administrator or someone they designated as a fellow reciepts controller. Once approved receiepts are added to a list of outgoing payment. When processed your money is sent over via PayPal.</p>
+      </div>
+    </div>
+
+<% if @notapproved.size > 0 %>
+<div class="panel panel-default">
+  <div class="panel-heading"><h3>Approve Receipts</h3></div>
+  <div class="panel-body">
+    <h4>Awesome!</h4>
+    <p>You have <%= @notapproved.size %> receipt(s) that need to be booked before they can be paid.</p>
+    <h3><%= link_to "Approve receipts", project_cycle_path(@project), :class => 'btn btn-success' %></h3>
+  </div>
+</div>
+<% else %>
+<div class="panel panel-default">
+  <div class="panel-heading"><h3>Approve Receipts</h3></div>
+  <div class="panel-body">
+    <p>No receipts that need to be booked.</p>
+  </div>
+</div>
+<% end %>
+
+<% if @notpaid.size > 0 %>
+<div class="panel panel-default">
+  <div class="panel-heading"><h3>Receipts pending paypment</h3></div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Team</th>
+          <th>Approved date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notpaid.each do |r| %>
+        <tr>
+          <td><%= r.name %></td>
+          <td><%= r.date %></td>
+          <td><%= r.amount %></td>
+          <td><%= Team.find(r.team).title %> / <%= User.find(r.user_id).username %></td>
+          <td><%= r.approveddate.strftime("%F") %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'Download CSV list', project_paymentsfile_path(@project, format: :csv), :class => "btn btn-success" %>
+    <%= link_to 'Mark all as paid', project_markaspaid_path(@project), :class => "btn btn-success" %>
+  </div>
+</div>
+<% else %>
+<div class="panel panel-default">
+  <div class="panel-heading"><h3>Receipts pending payment</h3></div>
+  <div class="panel-body">
+    <p>No receipts pending payment.</p>
+  </div>
+</div>
+<% end %>
+
+<% if @paid.size > 0 %>
+<div class="panel panel-default">
+  <div class="panel-heading"><h3>Payment History</h3></div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Team / User</th>
+          <th>Paid date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @paid.each do |r| %>
+        <% team = Team.find(r.team) %>
+        <% owner = User.find(r.binder.user).user_name %>
+        <tr>
+          <td><%= r.name %></td>
+          <td><%= r.date %></td>
+          <td><%= r.amount %></td>
+          <td><%= link_to team.title, project_team_path(@project, team) %> / <%= link_to owner, profile_path(owner) %></td>
+          <td><%= r.paiddate.strftime("%F") %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% else %>
+<div class="panel panel-default">
+  <div class="panel-heading"><h3>Receipts pending payment</h3></div>
+  <div class="panel-body">
+    <p>No receipts pending payment.</p>
+  </div>
+</div>
+<% end %>
+
+</div>
+</div>

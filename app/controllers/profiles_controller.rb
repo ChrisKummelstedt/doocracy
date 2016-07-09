@@ -29,7 +29,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:user).permit(:avatar, :bio, :skype, :phone_number, :city, :country)
+    params.require(:user).permit(:avatar, :bio, :skype, :paypal, :phone_number, :city, :country)
   end
 
   def owned_profile

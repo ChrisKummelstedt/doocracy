@@ -1,0 +1,50 @@
+<div class="page-container">
+  <div class="page-wrapper">
+    <div class="jumbotron" id="index-jumbo">
+      <h3><%= current_user.user_name + ":" + @tag  %></h3>
+      <p><%= link_to ">> Back to binder", binder_path(@binder) %></p>
+    </div>
+
+    <% unless @receipts.empty? %>
+    <% @receipts.each do |pic| %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><b><%= pic.name %></b></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
+            <%= image_tag pic.image.url(:medium) %>
+          </div>
+          <div class="col-md-6">
+
+            <% unless pic.tags == [] %>
+            <p><b>Tagged as</b>:
+              <% pic.tags.each do |tag| %>
+              <%= tag.name %>
+              <% end %>
+            </p>
+            <% end %>
+
+      
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        &nbsp
+      </div>
+    </div>
+
+
+
+
+
+
+    <% end %>
+    <% end %>
+
+
+  </div>
+</div>

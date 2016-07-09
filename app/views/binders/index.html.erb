@@ -1,0 +1,28 @@
+<div class="page-container">
+  <div class="page-wrapper">
+    <div class="jumbotron" id="index-jumbo">
+      <h3>Inventories galore!</h3>
+      <p>These are binders tied to projects on do/ocracy. Join in the communal fun.</p>
+    </div>
+    <%= button_to 'New Binder', new_binder_path, class: 'btn-success btn-block', method: :get %>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Inventory</th>
+            <th>Description</th>
+            <th>Admin</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @binders.each do |binder| %>
+          <tr>
+            <td><%= link_to binder.name, binder %></td>
+            <td><%  admin = User.find(binder.user_id).user_name %> <%= link_to admin, profile_path(admin) %></td>
+          </tr>
+              <% end %>
+        </tbody>
+      </table>
+
+        </div>
+      </div>

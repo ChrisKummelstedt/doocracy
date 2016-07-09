@@ -1,9 +1,7 @@
 <div class="page-container">
   <div class="page-wrapper">
     <div class="jumbotron" id="index-jumbo">
-      <h3>Edit and tag things in <%= @inventory.name %></h3>
-      <p><%= @inventory.description %></p>
-      <P><%= link_to ">> Back to inventory", inventory_path(@inventory)%></p>
+      <P><%= link_to ">> Back to binder", binder_path(@binder)%></p>
     </div>
 
     <div class="panel panel-default">
@@ -11,7 +9,7 @@
     <div class="panel-body">
         <div class="pull-right">
           <% if current_user == @owner %>
-          <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, inventory_path(@inventory), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
+          <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, binder_path(@binder), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
           <% end %>
         </div>
         <%= render 'form' %>
@@ -20,11 +18,11 @@
     <div class="panel panel-default">
     <div class="panel-heading"><h3>All Items in Storage</h3></div>
     <div class="panel-body">
-      <% unless @items.empty? %>
-          <% @items.each do |pic| %>
+      <% unless @receipts.empty? %>
+          <% @receipts.each do |pic| %>
 
           <div class="panel panel-default">
-            <div class="panel-heading"><b><%= pic.name %></b></div>
+            <div class="panel-heading"><b><%= pic.booked %></b></div>
             <div class="panel-body">
             <div class="row">
              <div class="col-md-6">
@@ -34,15 +32,15 @@
               <div>
               <div class="floatright">
                 <div class="form-actions">
-                  <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe,  inventory_item_path(@inventory, pic), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
+                  <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe,  binder_receipt_path(@binder, pic), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
                 </div>
               </div>
               </div>
               <div class ="row">
               </br>
 
-                <% @item = pic %>
-                <%= render 'items/form' %>
+                <% @receipt = pic %>
+                <%= render 'receipts/cycleform' %>
 
               </div>
             </div>

@@ -1,0 +1,29 @@
+<%= simple_form_for [@binder, @receipt] do |f| %>
+  <%= f.error_notification %>
+  <div class="item-form">
+    <div class="form-group ">
+      <h4>What was this for?</h4>
+      <%= f.input :name %>
+      <h4>When was this paid for?</h4>
+      <%= f.input :date, as: :date, html5: true %>
+      <h4>How much was it?</h4>
+      <%= f.input :amount, as: :integer %>
+      <h4>Which team budget?</h4>
+      <div class="form-group ">
+      <%= f.association :team, :as => :collection_select, collection: current_user.teams, :input_html => {:class => "input-small"} %>
+      </div>
+    <h4>Looks good?</h4>
+    <div class="form-group ">
+    <p>Yes, look awesome! &nbsp<%=   f.input_field :approved, as: :boolean, boolean_style: :inline %><p>
+    </div>
+    <h4>Looks naughty?</h4>
+    <p>What is wrong with it?</p>
+    <div class="form-group ">
+    <p><%= f.input :notapproved %><p>
+    </div>
+  </div>
+  <br>
+  <div class="form-actions">
+    <%= f.button :submit, "Book", :class => "btn btn-success"%>
+  </div>
+<% end %>

@@ -28,6 +28,8 @@ class TeamsController < ApplicationController
     @todo = @team.todos.new
     @todos = @team.todos.where(:completed => false)
     @completedtodos = @team.todos.where(:completed => true)
+    @receipts = @team.receipts.all
+    @receiptstotal = receiptstotal
   end
 
   def join_team
@@ -66,6 +68,15 @@ class TeamsController < ApplicationController
 
 
   private
+
+  def receiptstotal
+    @receipts = @team.receipts.all
+    @receiptstotal = 0
+    @receipts.each do |receipt|
+      @receiptstotal += receipt.amount
+    end
+    @receiptstotal
+  end
 
   def check_membership
     Team.find(params[:id]).users.include?(current_user)

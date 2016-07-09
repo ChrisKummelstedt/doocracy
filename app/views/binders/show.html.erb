@@ -1,0 +1,156 @@
+<div class="page-container">
+  <div class="page-wrapper">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h1>Receipts binder</h1>
+        <h3>What is this?</h3>
+        <p><b>This is where you get your money back for purchases made on behalf of teams that you are on.</b></p>
+        <p> First you upload them, then you click the green button that appears under "booked reciepts". After you have a booked a reciept it get pushed for approval to the project administrator or someone they designated as a fellow reciepts controller. Once approved, receiepts are added to a list of outgoing payment. When processed your money is sent over via PayPal.</p>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Add Receipts</h3></div>
+      <div class="panel-body">
+        <%= render 'form' %>
+      </div>
+    </div>
+
+    <% if @unbooked.size > 0 %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Book Receipts</h3></div>
+      <div class="panel-body">
+        <h4>Awesome!</h4>
+        <p>You have <%= @unbooked.size %> receipt(s) that need to be booked before they can be paid.</p>
+        <h3><%= link_to "Book receipts", binder_label_path(@binder), :class => 'btn btn-success' %></h3>
+      </div>
+    </div>
+    <% else %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Book Receipts</h3></div>
+      <div class="panel-body">
+        <p>No receipts that need to be booked.</p>
+      </div>
+    </div>
+    <% end %>
+
+    <% if @booked.size > 0 %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Receipts pending approval (<%= @bookedsum %>)</h3></div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Team</th>
+              <th>Booked date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @booked.each do |r| %>
+            <tr>
+              <td><%= r.name %></td>
+              <td><%= r.date %></td>
+              <td><%= r.amount %></td>
+              <td><%= Team.find(r.team).title %></td>
+              <td><%= r.bookeddate.strftime("%F") %></td>
+              <td><%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_binder_receipt_path(@binder, r) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <% else %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Receipts pending approval</h3></div>
+      <div class="panel-body">
+        <p>No receipts pending approval.</p>
+      </div>
+    </div>
+    <% end %>
+
+    <% if @approved.size > 0 %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Receipts pending payment (<%= @approvedsum %>)</h3></div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Team</th>
+              <th>Approved on</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @approved.each do |r| %>
+            <tr>
+              <td><%= r.name %></td>
+              <td><%= r.date %></td>
+              <td><%= r.amount %></td>
+              <td><%= Team.find(r.team_id).title %></td>
+              <td><%= r.approveddate.strftime("%F") %> - <% user = User.find(r.approvedby).user_name %><%= link_to user, profile_path(user) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <% else %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Receipts pending payment</h3></div>
+      <div class="panel-body">
+        <p>No receipts pending payment.</p>
+      </div>
+    </div>
+    <% end %>
+
+    <% if @paid.size > 0 %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Payment history</h3></div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Team</th>
+              <th>Approved on</th>
+              <th>Paid on</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @paid.each do |r| %>
+            <tr>
+              <td><%= r.name %></td>
+              <td><%= r.date %></td>
+              <td><%= r.amount %></td>
+              <td><%= Team.find(r.team_id).title %></td>
+              <td><%= r.approveddate.strftime("%F") %></td>
+              <td><%= r.paiddate.strftime("%F") %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <% else %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Receipts that have already been processed.</h3></div>
+      <div class="panel-body">
+        <p>No payment history.</p>
+      </div>
+    </div>
+    <% end %>
+
+
+
+
+
+  </div>
+</div>
