@@ -67,7 +67,7 @@
                     <thead>
                       <tr>
                         <th>Name</th>
-                        <th>Team size (optimal size)</th>
+                        <th>Team size/Optimal size</th>
                         <th>Description</th>
                       </tr>
                     </thead>
@@ -183,17 +183,22 @@
           <th>Item</th>
           <th>Quantity</th>
           <th>Cost Per Item</th>
+          <th>Total</th>
         </thead>
         <tbody>
+          <%= teamtotal = 0 %>
           <% team.budgets.each do |item| %>
           <tr>
             <td class="colA"><%=item.budget_item.capitalize %></td>
             <td class="colB"><%=item.quantity %></td>
             <td class="colC"><%=item.cost_per_item %></td>
+            <td class="colD"><%=itemtotal = (item.quantity * item.cost_per_item)%></td>
           </tr>
+            <% teamtotal += itemtotal %>
           <% end %>
         </tbody>
       </table>
+      <h4 class="floatright">Sum: <%= teamtotal %>&nbsp</h4>
       <% end %>
     </div>
   </div>
