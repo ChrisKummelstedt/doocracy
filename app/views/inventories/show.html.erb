@@ -9,9 +9,10 @@
     <div>
     <div class="floatright">
       <div class="form-actions">
-        <%= link_to "<span class='glyphicon glyphicon-wrench'></span>".html_safe, edit_inventory_path(@inventory), :class => 'btn btn-mini' %>
+        <%= link_to 'show all', edit_inventory_path(@inventory), :class => 'btn btn-mini side-padding-reset' %>
         <% if @togglecycle %>
-        <%= link_to "<span class='glyphicon glyphicon-tags'></span>".html_safe, inventory_label_path(@inventory), :class => 'btn btn-mini' %>
+        |
+        <%= link_to 'show untagged',inventory_label_path(@inventory), :class => 'btn btn-mini side-padding-reset' %>
         <% end %>
       </div>
     </div>
