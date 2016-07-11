@@ -4,10 +4,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <h3><%= link_to ">> Back to #{@project.title}", project_path(@project) %></h3>
-        <h3>What is this?</h3>
-        <p><b>This is where you get your money back for purchases made on behalf of teams that you are on.</b></p>
-        <p> First you upload them, then you click the green button that appears under "booked reciepts". After you have a booked a reciept it get pushed for approval to the project administrator or someone they designated as a fellow reciepts controller. Once approved receiepts are added to a list of outgoing payment. When processed your money is sent over via PayPal.</p>
-      </div>
+        <h3>Financial Admin</h3>
     </div>
 
 <% if @notapproved.size > 0 %>
