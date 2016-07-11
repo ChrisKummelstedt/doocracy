@@ -91,9 +91,9 @@ class ProjectsController < ApplicationController
   end
 
   def receipts
-    @notapproved = not_approved_project_receipts
-    @notpaid = not_paid_project_receipts
-    @paid = paid_project_receipts
+    @notapproved =  Receipt.where(:booked => true, :approved => nil, :umbrella => @project.id)
+    @notpaid =  Receipt.where(:booked => true, :approved => true, :paid => nil, :umbrella => @project.id)
+    @paid = Receipt.where(:booked => true, :approved => true, :paid => true, :umbrella => @project.id)
   end
 
   def cycle

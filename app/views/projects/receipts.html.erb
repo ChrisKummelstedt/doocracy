@@ -46,7 +46,7 @@
           <td><%= r.name %></td>
           <td><%= r.date %></td>
           <td><%= r.amount %></td>
-          <td><%= Team.find(r.team).title %> / <%= User.find(r.user_id).username %></td>
+          <td><%= Team.find(r.team).title %> / <%= r.user %></td>
           <td><%= r.approveddate.strftime("%F") %></td>
         </tr>
         <% end %>
