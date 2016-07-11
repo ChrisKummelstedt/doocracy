@@ -202,9 +202,13 @@ class ProjectsController < ApplicationController
   end
 
   def cfo_show
-    @project = Project.find(params[:id])
-    @cfos = @project.controller
-    @cfos.include? current_user.user_name
+    if current_user
+      @project = Project.find(params[:id])
+      @cfos = @project.controller
+      return @cfos.include? current_user.user_name
+    else
+      return false
+    end
   end
 
   def cfo_for_project
