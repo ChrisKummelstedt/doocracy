@@ -6,15 +6,15 @@
           <div class="row">
             <div class="col-md-4">
               <div class="img-circle">
-                <%= image_tag @project.image.url(:circle), :class => "img-responsive img-circle profile-image" %>
+                <%= image_tag @project.image.url(:circle), :class => "profile-image img-responsive img-circle " %>
               </div>
             </div>
             <div class="col-md-8">
               <% if @cfo %>
               <h3><%= link_to "<span class='glyphicon glyphicon-edit floatright'></span>".html_safe, edit_project_path(@project) %></h3>
               <h3><span class="floatright"> &nbsp|&nbsp</span><%= link_to "<span class='glyphicon glyphicon-piggy-bank floatright'></span>".html_safe, project_receipts_path(@project) %></h3>
-              <h3><%= @project.title %></h3>
               <% end %>
+              <h3><%= @project.title %></h3>
             </div>
           </div>
         </div>
@@ -63,12 +63,19 @@
               <p><b>Team overview</b></p>
               <div class="panel panel-default">
                 <div class="panel-body">
-                  <table class="table table-striped">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Team size (optimal size)</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
                     <tbody>
                       <% @project.teams.each do |team| %>
                       <tr>
                         <td> <%= link_to team.title, project_team_path(@project, team) %> </td>
-                        <td> <%= team.users.all.size %> </td>
+                        <td> <%= team.users.all.size %> <% if team.size %> (<%= team.size %>) <% end %> </td>
                         <td> <%= team.description %> </td>
                         <td> <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, project_team_path(@project, team) %></td>
                       </tr>
@@ -154,140 +161,140 @@
     <div class="panel-body">
       <div class="col-md-7">
         <h3>Budget details and receipts</h3>
-        </div>
-        <div class="col-md-5">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <h4><span class="glyphicon glyphicon-chevron-up"></span> Income: <%= @project.revenue %></h4>
-              <h4><span class="glyphicon glyphicon-chevron-down"></span> Expenditure: <%= @receiptstotal %></h4>
-              <h4><span class="glyphicon glyphicon-piggy-bank"></span> Budget: <%= @project.teams.sum(:team_budget) %></h4>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h2> Budget Items </h2>
-        <% @project.teams.each do |team| %>
-        <table class="table table-hover table-budget">
-          <h3><%= link_to team.title, project_team_path(@project, team) %></h3>
-          <thead>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Cost Per Item</th>
-          </thead>
-          <tbody>
-            <% team.budgets.each do |item| %>
-            <tr>
-              <td class="colA"><%=item.budget_item.capitalize %></td>
-              <td class="colB"><%=item.quantity %></td>
-              <td class="colC"><%=item.cost_per_item %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h3>Receipts</h3>
-        <% if @receipts.size > 0 %>
-
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Date</th>
-              <th>Amount</th>
-              <th>User</th>
-              <th>Paid out?</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @receipts.each do |r| %>
-            <% team = Team.find(r.team) %>
-            <% owner = User.find(r.binder.user).user_name %>
-            <tr>
-              <td><%= r.name %></td>
-              <td><%= r.date %></td>
-              <td><%= r.amount %></td>
-              <td><%= link_to owner, profile_path(owner) %></td>
-              <td><%= r.paid? ? "Paid #{r.paiddate.strftime("%F")}" : "No" %></td>
-            </tr>
-            <% end %>
-            <tr>
-              <td></td>
-              <td></td>
-              <td>Total: <%= @receiptstotal %></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <% else %>
-        <p>No receipts assigned to project.</p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div id="progress" class="tab-pane fade">
-    <% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %>
-    <div class="panel panel-default">
-      <div class="panel-body">
+      <div class="col-md-5">
         <div class="panel panel-default">
           <div class="panel-body">
-            <div class="col-md-9">
-              <h3>Completed and pending action points</h3>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%= @progress %>%;">
-                  <%= @progress %>%
-                </div>
+            <h4><span class="glyphicon glyphicon-chevron-up"></span> Income: <%= @project.revenue %></h4>
+            <h4><span class="glyphicon glyphicon-chevron-down"></span> Expenditure: <%= @receiptstotal %></h4>
+            <h4><span class="glyphicon glyphicon-piggy-bank"></span> Budget: <%= @project.teams.sum(:team_budget) %></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h2> Budget Items </h2>
+      <% @project.teams.each do |team| %>
+      <table class="table table-hover table-budget">
+        <h3><%= link_to team.title, project_team_path(@project, team) %></h3>
+        <thead>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Cost Per Item</th>
+        </thead>
+        <tbody>
+          <% team.budgets.each do |item| %>
+          <tr>
+            <td class="colA"><%=item.budget_item.capitalize %></td>
+            <td class="colB"><%=item.quantity %></td>
+            <td class="colC"><%=item.cost_per_item %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3>Receipts</h3>
+      <% if @receipts.size > 0 %>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>User</th>
+            <th>Paid out?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @receipts.each do |r| %>
+          <% team = Team.find(r.team) %>
+          <% owner = User.find(r.binder.user).user_name %>
+          <tr>
+            <td><%= r.name %></td>
+            <td><%= r.date %></td>
+            <td><%= r.amount %></td>
+            <td><%= link_to owner, profile_path(owner) %></td>
+            <td><%= r.paid? ? "Paid #{r.paiddate.strftime("%F")}" : "No" %></td>
+          </tr>
+          <% end %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Total: <%= @receiptstotal %></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <% else %>
+      <p>No receipts assigned to project.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="progress" class="tab-pane fade">
+  <% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="col-md-9">
+            <h3>Completed and pending action points</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%= @progress %>%;">
+                <%= @progress %>%
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <h4><span class="glyphicon glyphicon-check"></span> <%= @completed_todo.size %></h4>
-                  <h4><span class="glyphicon glyphicon-unchecked"></span> <%= @not_completed_todo.size %></h4>
-                </div>
+          </div>
+          <div class="col-md-3">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h4><span class="glyphicon glyphicon-check"></span> <%= @completed_todo.size %></h4>
+                <h4><span class="glyphicon glyphicon-unchecked"></span> <%= @not_completed_todo.size %></h4>
               </div>
             </div>
           </div>
         </div>
-        <h3>What is left to do?</h3>
-        <table class="table table-hover">
-          <tbody>
-            <% @not_completed_todo.each do |todo| %>
-            <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
-              <% end %>
-            </td></tr>
-          </tbody>
-        </table>
-        <h3>Already done</h3>
-        <table class="table table-hover">
-          <tbody>
-            <% @completed_todo.each do |todo| %>
-            <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
-              <% end %>
-            </td></tr>
-          </tbody>
-        </table>
       </div>
+      <h3>What is left to do?</h3>
+      <table class="table table-hover">
+        <tbody>
+          <% @not_completed_todo.each do |todo| %>
+          <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
+            <% end %>
+          </td></tr>
+        </tbody>
+      </table>
+      <h3>Already done</h3>
+      <table class="table table-hover">
+        <tbody>
+          <% @completed_todo.each do |todo| %>
+          <tr><td><%= link_to Team.find(todo.team_id).title, project_team_path(@project, Team.find(todo.team_id)) %> - <%=todo.description%> <% unless todo.user_id == nil %><i> - <%= link_to User.find(todo.user_id).user_name, profile_path(User.find(todo.user_id).user_name) %></i><% end %></td>
+            <% end %>
+          </td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <% else %>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <h3>This page is all ready to serve up a juicy overview</h3>
-      <p>To populate the page, start creating teams and adding to do list items to the project.</p>
-    </div>
+</div>
+<% else %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3>This page is all ready to serve up a juicy overview</h3>
+    <p>To populate the page, start creating teams and adding to do list items to the project.</p>
   </div>
-  <% end %>
+</div>
+<% end %>
 </div>
 </div>
 
