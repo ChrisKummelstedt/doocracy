@@ -1,18 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<div class="page-container">
-  <div class="page-wrapper">
-  <p>
-    <strong>Title:</strong>
-    <%= @item.title %>
-  </p>
+<p>
+  <strong>Title:</strong>
+  <%= @item.title %>
+</p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= @item.description %>
-  </p>
+<p>
+  <strong>Description:</strong>
+  <%= @item.description %>
+</p>
 
-  <%= link_to 'Edit', edit_inventory_item_path(@inventory, @item) %> |
-  <%= link_to 'Back', inventory_path(@inventory) %>
-  </div>
-</div>
+<%= link_to 'Edit', edit_inventory_item_path(@inventory, @item) %> |
+<%= link_to 'Back', inventory_path(@inventory) %>

@@ -55,9 +55,6 @@ ActiveRecord::Schema.define(version: 20160711135257) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "owner",              default: "--- []\n"
-    t.string   "borrowed_by",        default: "--- []\n"
-    t.string   "borrow_secret_key"
-    t.string   "borrow_status"
   end
 
   add_index "items", ["inventory_id"], name: "index_items_on_inventory_id", using: :btree

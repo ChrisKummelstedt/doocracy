@@ -17,6 +17,17 @@
             <%= image_tag pic.image.url(:medium) %>
           </div>
           <div class="col-md-6">
+            <% unless pic.description == "" %>
+            <p><b>Description</b>: <%= pic.description %></p>
+            <% end %>
+
+            <% unless pic.tags == [] %>
+            <p><b>Tagged as</b>:
+              <% pic.tags.each do |tag| %>
+              <%= tag.name %>
+              <% end %>
+            </p>
+            <% end %>
 
             <% unless pic.owner == [] %>
             <P><b>Owner(s)</b>:
@@ -26,11 +37,21 @@
             </P>
             <% end %>
 
-            <% @item = pic %>
-            <%= render 'items/form' %>
-            <hr>
+            <% if pic.owner.include? current_user %>
+            <form method="get" action= "/inventories/<%= @inventory.id %>/items/<%= pic.id %>/unclaim">
+              <input type="hidden" name="id" value="<%= pic.id %>" >
+              <input type="hidden" name="project_id" value="<%= @inventory.id %>">
+              <input type="submit" value="Unclaim" class="button" >
+            </form>
+            <% else %>
+            <form method="get" action= "/inventories/<%= @inventory.id %>/items/<%= pic.id %>/claim">
+              <input type="hidden" name="id" value="<%= pic.id %>" >
+              <input type="hidden" name="project_id" value="<%= @inventory.id %>">
+              <input type="submit" value="Claim <%= @tag %>" class="button" >
+            </form>
+            <% end %>
 
-            <%= render 'items/claim_borrow' %>
+
 
           </div>
         </div>
@@ -40,8 +61,14 @@
       </div>
     </div>
 
+
+
+
+
+
     <% end %>
     <% end %>
+
 
   </div>
 </div>

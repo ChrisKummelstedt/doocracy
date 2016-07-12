@@ -43,6 +43,8 @@ gem 'aws-sdk-v1'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'select2-rails'
 
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -66,7 +68,6 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'pry'
   gem 'dotenv-rails', '~> 2.1.1'
 end
 

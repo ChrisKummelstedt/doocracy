@@ -7,8 +7,6 @@ Rails.application.routes.draw do
     resources :items do
       get 'claim' => 'items#claim'
       get 'unclaim' => 'items#unclaim'
-      get 'borrow' => 'items#borrow'
-      get 'borrow_processing' => 'items#borrow_processing'
     end
     resources :tags, except: :show
     get 'tags/:tag', to: 'inventories#filter'
