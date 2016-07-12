@@ -1,0 +1,19 @@
+<% if @item.owner.include? current_user %>
+  <form method="get" style="display: inline-block" action= "/inventories/<%= @inventory.id %>/items/<%= @item.id %>/unclaim">
+    <input type="hidden" name="id" value="<%= @item.id %>" >
+    <input type="hidden" name="project_id" value="<%= @inventory.id %>">
+    <input type="submit" value="unclaim" class="button" >
+  </form>
+<% else %>
+  <form method="get" style="display: inline-block" action="/inventories/<%= @inventory.id %>/items/<%= @item.id %>/claim">
+    <input type="hidden" name="id" value="<%= @item.id %>" >
+    <input type="hidden" name="project_id" value="<%= @inventory.id %>">
+    <input type="submit" value="claim <%= @item.title %>" class="button" >
+  </form>
+
+  <form method="get" style="display: inline-block" action= "/inventories/<%= @inventory.id %>/items/<%= @item.id %>/borrow">
+    <%= submit_tag "#{@item.borrow_status || 'borrow'} #{@item.try(:borrowed_by).present? ? 'by ' + @item.borrowed_by.last.user_name.capitalize + ', ' : ''}#{@item.title}",
+                  disabled: !@item.borrow_status.nil?,
+                  data: { confirm: "message to owner: would be great if i could use your #{@item.title}" } %>
+  </form>
+<% end %>

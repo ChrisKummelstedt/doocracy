@@ -1,0 +1,12 @@
+<img src="<%=@item.image.url(:medium)%>">
+
+<p>
+  <%=@item.borrowed_by.last.user_name.capitalize %> wants to borrow your "<%=@item.title%>".
+</p>
+
+<p>
+  Would be great if I could use your "<%=@item.title%>".
+</p>
+
+<a href="<%=inventory_item_borrow_processing_url(@item.inventory.id, @item.id) + '?borrow_secret_key=' + @item.borrow_secret_key + '&answer_status=accept' %>">Accept</a>
+<a href="<%=inventory_item_borrow_processing_url(@item.inventory.id, @item.id) + '?borrow_secret_key=' + @item.borrow_secret_key + '&answer_status=deny' %>">Deny</a>

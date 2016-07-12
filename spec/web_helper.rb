@@ -74,3 +74,18 @@ end
 def remove_uploaded_file
 	FileUtils.rm_rf(Rails.root + "public/system")
 end
+
+def create_inventory_tagged_item
+  visit('/inventories/new')
+	fill_in("inventory_name", with: "Festival")
+	fill_in("description", with: "Lorem")
+  attach_file('images_', "spec/files/images/project-puzzle.jpg")
+  click_button "Create Inventory"
+
+  visit("/inventories/#{Inventory.last.id}/edit")
+	fill_in("item_title", with: "Tank")
+	fill_in("item_description", with: "This is Tank")
+	fill_in("item_tag_list", with: "tank")
+
+  click_button "Update Item"
+end

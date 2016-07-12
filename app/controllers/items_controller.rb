@@ -123,10 +123,58 @@ class ItemsController < ApplicationController
     redirect_to(:back)
   end
 
+  def borrow
+    item = Item.find(params[:item_id])
+
+    if item.borrow_secret_key.blank?
+      item.borrow(current_user)
+      if item.save
+        BorrowMailer.ask_owner(item).deliver_now
+        notice = "Request to owner has been sent"
+      else
+        notice = "Something went wrong"
+      end
+    else
+      notice = "The item already borrowed"
+    end
+
+    redirect_to(:back, notice: notice)
+  end
+
+  def borrow_processing
+    item = Item.find(params[:item_id])
+    secret_key = params.fetch(:borrow_secret_key, nil)
+    owner_answer = params.fetch(:answer_status, nil)
+
+    if secret_key.present? &&
+       owner_answer.present? &&
+       secret_key == item.borrow_secret_key
+      case params[:answer_status]
+      when 'accept'
+        BorrowMailer.recipient_access(item.borrowed_by.last.email).deliver_now
+        item.borrow_accept
+        item.save
+        notice = "The item has been approved"
+      when 'deny'
+        BorrowMailer.recipient_access(item.borrowed_by.last.email).deliver_now
+        item.borrow_deny
+        item.save
+        notice = "The item has been rejected"
+      end
+    else
+      notice = "Something went wrong"
+    end
+
+    redirect_to root_path, notice: notice
+  end
 
   private
 
   def item_params
-    params.require(:item).permit(:title, :description, :inventory_id, :image, :tag_list, :tag, { tag_ids: [] }, :tag_ids, :owner)
+    params.require(:item)
+          .permit(:title, :description, :inventory_id,
+                  :image, :tag_list, :tag, { tag_ids: [] },
+                  :tag_ids, :owner, :borrowed_by,
+                  :borrow_secret_key, :borrow_status )
   end
 end
