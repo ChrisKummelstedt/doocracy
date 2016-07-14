@@ -74,7 +74,7 @@ class InventoriesController < ApplicationController
   def edit
     @inventory = Inventory.find(params[:id])
     @items = @inventory.items
-    @owner = User.find(@inventory.user_id)
+    @owner = User.find(@inventory.user)
   end
 
   # POST /inventories
