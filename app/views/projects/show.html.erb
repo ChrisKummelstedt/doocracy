@@ -50,8 +50,19 @@
                 </div>
               </div>
 
+              <% unless @completed_todo.size == 0 || @not_completed_todo.size == 0 %>
+
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%= @progress %>%;">
+                  <%= @progress %>%
+                </div>
+              </div>
+
+              <% end %>
+
               <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@project.latitude},#{@project.longitude}&markers=#{@project.latitude},#{@project.longitude}&zoom=15&size=640x400&key=AIzaSyCZ4K0_zcXxMjm6RwvYCczETWkr0CELFy4",
               class: 'img-fluid img-rounded', alt: "#{@project.title} on the map"%>
+
             </div>
           </div>
 
