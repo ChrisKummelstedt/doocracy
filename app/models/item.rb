@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
 
 
   has_attached_file :image,
-                    styles: { large: "500x500>", medium: "300x300>", thumb: "100x100>" },
+                    styles: { medium: "400x400>" },
                     :storage => :s3,
                     :s3_credentials => {
                       :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
