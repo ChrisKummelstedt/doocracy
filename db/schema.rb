@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711135257) do
+ActiveRecord::Schema.define(version: 20160715194925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,9 @@ ActiveRecord::Schema.define(version: 20160711135257) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "owner",              default: "--- []\n"
+    t.string   "borrowed_by",        default: "--- []\n"
+    t.string   "borrow_secret_key"
+    t.string   "borrow_status"
   end
 
   add_index "items", ["inventory_id"], name: "index_items_on_inventory_id", using: :btree
@@ -75,6 +78,7 @@ ActiveRecord::Schema.define(version: 20160711135257) do
     t.string   "address"
     t.string   "controller",         default: "--- []\n"
     t.integer  "revenue"
+    t.string   "focus"
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree

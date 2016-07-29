@@ -261,7 +261,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :total_budget, :revenue, :image, :address, :search, {:inventory_ids => []}, {:controller => []})
+    params.require(:project).permit(:title, :description, :total_budget, :revenue, :image, :address, :search, :focus, {:inventory_ids => []}, {:controller => []})
   end
 
 
