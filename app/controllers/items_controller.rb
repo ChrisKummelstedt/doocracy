@@ -85,13 +85,13 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    #@inventory = Inventory.find(params[:inventory_id])
+    @inventory = Inventory.find(params[:inventory_id])
     #@item = @inventory.items.find(params[:id])
     @item = Item.find(params[:id])
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to inventory_label(@inventory) }
       format.js
     end
   end
