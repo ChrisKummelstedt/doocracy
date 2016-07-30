@@ -28,7 +28,7 @@
      </tr>
    </thead>
    <tbody>
-      <% @itemhash.each do |key, value| %>
+      <% @itemhash.sort.each do |key, value| %>
       <tr>
         <td><%= link_to key, inventory_tag_path(@inventory.id, key) %></td>
         <td><%= value %></td>

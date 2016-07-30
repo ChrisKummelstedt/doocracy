@@ -131,7 +131,7 @@ class InventoriesController < ApplicationController
     @inventory.destroy
 
     respond_to do |format|
-      format.html { redirect_to inventories_path }
+      format.html { redirect_to inventories_url }
       format.json { head :no_content }
     end
   end

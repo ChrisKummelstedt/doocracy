@@ -91,7 +91,7 @@ class ItemsController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to inventory_label_path(@inventory) }
+      format.html { redirect_to root_path }
       format.js
     end
   end
