@@ -127,7 +127,7 @@
           <tbody>
             <% @paid.each do |r| %>
             <tr>
-              <td><%= r.name %></td>
+              <td><%= link_to r.name, edit_binder_receipt_path(@binder, r) %></td>
               <td><%= r.date %></td>
               <td><%= r.amount %></td>
               <td><%= Team.find(r.team_id).title %></td>
