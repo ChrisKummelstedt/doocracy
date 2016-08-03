@@ -43,14 +43,30 @@
         </div>
 
         <div class="jumbotron" id="index-jumbo">
-          <h3>Paypal</h3>
+          <h3>Financial reimbursements</h3>
         </div>
         <div class="form-group">
-          <h4>Paypal email adress*</h4>
+          <h4>Bank IBAN</h4>
+          <%= f.text_field :iban %>
+          <br/>
+          <br/>
+          <h4>Bank Swift code</h4>
+          <%= f.text_field :swift %>
+          <br/>
+          <br/>
+          <h4>Swish</h4>
+          <%= f.text_field :swish  %>
+          <br/>
+          <br/>
+          <h4>Paypal email adress</h4>
           <%= f.text_field :paypal %>
           <br/>
           <br/>
-          <p>*This is important if you want to request payments based on receipts. This information is not available in any general views, it only gets used when formating a .csv document that handles masspayments on PayPal.</p>
+          <h4>Payment method of choice*</h4>
+          <%= f.select :choice, [ 'Paypal', 'Swish', 'Bank Transfer'], :prompt => 'Select One' %>
+          <br/>
+          <br/>
+          <p>*This is important if you want to request payments based on receipts. This information is not available in any general views, it only gets used when formating a .csv document that handles masspayments for Paypal and manual tracking for other options.</p>
           <br/>
         </div>
         <div class="jumbotron" id="index-jumbo">
