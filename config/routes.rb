@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :items do
       get 'claim' => 'items#claim'
       get 'unclaim' => 'items#unclaim'
+      post 'in_use' => 'items#in_use'
     end
     resources :tags, except: :show
     get 'tags/:tag', to: 'inventories#filter'

@@ -37,6 +37,14 @@
             </P>
             <% end %>
 
+            <% unless pic.in_use.blank? %>
+            <p><b>Will use on playa</b>:
+              <% pic.in_use.each do |user| %>
+                <%= link_to user.user_name, profile_path(user.user_name) %>
+              <% end %>
+            </p>
+            <% end %>
+
             <% if pic.owner.include? current_user %>
             <form method="get" action= "/inventories/<%= @inventory.id %>/items/<%= pic.id %>/unclaim">
               <input type="hidden" name="id" value="<%= pic.id %>" >
@@ -51,7 +59,11 @@
             </form>
             <% end %>
 
-
+            <%= form_tag("/inventories/#{@inventory.id}/items/#{pic.id}/in_use", method: 'post') do
+              hidden_field_tag(:id, pic.id)
+              hidden_field_tag(:project_id, @inventory.id)
+              submit_tag "#{pic.in_use.include?(current_user) ? 'I will not use' : 'I will use'}"
+            end %>
 
           </div>
         </div>

@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
   belongs_to :inventory
   serialize :owner
+  serialize :in_use
 
   acts_as_taggable_on :tags
 
@@ -16,4 +17,12 @@ class Item < ActiveRecord::Base
                     :url => ":s3_domain_url"
     do_not_validate_attachment_file_type :image
 
+  def in_use_action(submit_text, user)
+    case submit_text
+    when 'I will not use'
+      in_use.delete(user)
+    when 'I will use'
+      in_use << user
+    end
+  end
 end
