@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803104841) do
+ActiveRecord::Schema.define(version: 20160819112740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20160803104841) do
     t.string   "borrowed_by",        default: "--- []\n"
     t.string   "borrow_secret_key"
     t.string   "borrow_status"
+    t.string   "in_use",             default: "--- []\n"
   end
 
   add_index "items", ["inventory_id"], name: "index_items_on_inventory_id", using: :btree

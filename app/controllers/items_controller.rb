@@ -123,10 +123,16 @@ class ItemsController < ApplicationController
     redirect_to(:back)
   end
 
+  def in_use
+    @item = Item.find(params[:item_id])
+    @item.in_use_action(params[:commit], current_user)
+    @item.save
+    redirect_to(:back)
+  end
 
   private
 
   def item_params
-    params.require(:item).permit(:title, :description, :inventory_id, :image, :tag_list, :tag, { tag_ids: [] }, :tag_ids, :owner)
+    params.require(:item).permit(:title, :description, :inventory_id, :image, :tag_list, :tag, { tag_ids: [] }, :tag_ids, :owner, :in_use)
   end
 end
